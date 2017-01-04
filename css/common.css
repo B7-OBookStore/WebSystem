@@ -1,0 +1,188 @@
+/* 明朝体に設定 */
+* {
+	font-family:"Roboto Slab" , Garamond , "Times New Roman" , "游明朝" , "Yu Mincho" , "游明朝体" , "YuMincho" , "ヒラギノ明朝 Pro W3" , "Hiragino Mincho Pro" , "HiraMinProN-W3" , "HGS明朝E" , "ＭＳ Ｐ明朝" , "MS PMincho" , serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* 背景色を設定 */
+body {
+    background-color: #8B4513;
+}
+
+/* メインコンテンツを中央揃えに */
+#main {
+    max-width: 1000px;
+    min-height: calc(100vh - 240px);
+    margin: auto;
+}
+
+/* <section>を角丸のボックスに */
+section {
+    border-radius: 10px;
+	margin: 10px;
+	padding: 20px;
+    background-color: #FFFFFF;
+}
+
+.button {
+    text-align: center;
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    text-decoration: none;
+    border: solid 1px #FFFFFF;
+    color: #FFFFFF;
+	border-radius: 5px;
+    background-color: #8B4513;
+}
+
+.button:hover {
+    border: solid 1px #8B4513;
+    background-color: #FFFFFF;
+    color: #8B4513;
+}
+
+.button_c {
+    text-align: center;
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    text-decoration: none;
+    border: solid 1px #FFFFFF;
+    color: #FFFFFF;
+	border-radius: 5px;
+    background-color: #808080;
+}
+
+.button_c:hover {
+    border: solid 1px #808080;
+    background-color: #FFFFFF;
+    color: #808080;
+}
+
+/* --------------------------------------
+　本の詳細情報表示用
+--------------------------------------- */
+    .publishedDate {
+        margin-bottom: 5px;
+    }
+
+    .price {
+        margin: 10px;
+        font-size: 130%;
+        color: #8B4513;
+    }
+
+/* --------------------------------------
+　検索フォーム
+--------------------------------------- */
+    #search {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 5px;
+    }
+
+    #search input {
+	    border: solid 1px #FFFFFF;
+	
+	    padding: 10px;
+	    font-size: 120%;
+	    color: #696969;
+    }
+
+    #search input[type=search] {
+	    border-radius: 5px 0 0 5px;
+
+	    width: calc( 100% - 50px);
+	    height: 50px;
+    }
+
+    #search input[type=submit] {
+        cursor: pointer;
+
+	    width: 50px;
+	    height: 50px;
+
+        border-radius: 0 5px 5px 0;
+	    background-image: url(../img/search.png);
+	    background-position: center center;
+	    background-repeat: no-repeat;
+	    background-color: #8B4513;
+    }
+
+/* --------------------------------------
+　ヘッダー
+--------------------------------------- */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    
+        border-bottom: 10px solid #FFFFFF;
+	    padding: 20px;
+        margin-bottom: 10px;
+        background-color: #8B4513;
+    }
+
+    header * {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    header h1 {
+        flex-shrink: 0;
+        margin-right: 15px;
+    }
+
+    header span {
+        flex-grow: 1;
+        text-align: right;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+        @media screen and ( max-width:500px ){
+            header span {
+                visibility: hidden
+            }
+        }
+
+    #login {
+        flex-shrink: 0;
+	    border:solid 1px #FFFFFF;
+	    border-radius: 5px;
+	    margin-left: 15px;
+	    padding: 10px;
+    }
+
+    #login:hover {
+	    background-color: #FFFFFF;
+	    color: #8B4513;
+    }
+
+/* --------------------------------------
+　フッター
+--------------------------------------- */
+    footer {
+        display: flex;
+    
+	    padding: 10px;
+        height: 20px;
+    }
+
+    footer  * {
+        color: #FFFFFF;
+        text-decoration: none;
+    }
+
+    footer nav a {
+	    margin-left: 18px;
+    }
+
+    footer a:hover {
+	    text-decoration: underline;
+    }
