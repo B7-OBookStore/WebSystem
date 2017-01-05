@@ -1,47 +1,47 @@
 @import url("common.css");
 
-    #main {
-        display: flex;
-        align-content: flex-start;
-        align-items: flex-start;
-    }
+	#main {
+		display: flex;
+		align-content: flex-start;
+		align-items: flex-start;
+	}
 
-    #cart {
-        width: 100%;
-    }
+	#cart {
+		width: 100%;
+	}
 
-    #nav {
-        flex-shrink: 0;
-    }
+	#nav {
+		flex-shrink: 0;
+	}
 
-    /* 横幅が狭い時は縦並びにする */
-    @media screen and ( max-width:700px ){
-        #main {
-            flex-wrap: wrap;
-        }
-        #nav {
-            order: -1;
-            flex-shrink: 1;
-            width: 100%;
-        }
-        #nav a {
-            width: calc(100% - 30px);
-        }
-    }
+	/* 横幅が狭い時は縦並びにする */
+	@media screen and ( max-width:700px ){
+		#main {
+			flex-wrap: wrap;
+		}
+		#nav {
+			order: -1;
+			flex-shrink: 1;
+			width: 100%;
+		}
+		#nav a {
+			width: calc(100% - 30px);
+		}
+	}
 
-    section h2 {
-        margin-bottom: 10px;
-    }
+	section h2 {
+		margin-bottom: 10px;
+	}
 
-    section img {
-        margin-right: 10px;
-        float: left;
-    }
+	section img {
+		margin-right: 10px;
+		float: left;
+	}
 
-    section:after {
-        content: "";
-        clear: both;
-        height: 0;
-        display: block;
-        visibility: hidden;
-    }
+	section:after {
+		content: "";
+		clear: both;
+		height: 0;
+		display: block;
+		visibility: hidden;
+	}

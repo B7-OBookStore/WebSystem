@@ -1,13 +1,13 @@
 @import url("common.css");
 
 h1,h2 {
-    margin: 20px 0;
+	margin: 20px 0;
 }
 
 ol,ul,li,p {
-    margin: 5px 0 5px 20px;
+	margin: 5px 0 5px 20px;
 }
 
 .button {
-    width: calc(100% - 35px);
+	width: calc(100% - 35px);
 }

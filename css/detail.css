@@ -1,72 +1,72 @@
 @import url("common.css");
 
-    #container {
-        display: flex;
-        align-items: flex-start;
-    }
+	#container {
+		display: flex;
+		align-items: flex-start;
+	}
 
-    #container img {
-        flex-basis: 300px;
-        margin-right: 20px;
-    }
+	#container img {
+		flex-basis: 300px;
+		margin-right: 20px;
+	}
 
-    #add {
-        float: right;
-    }
+	#add {
+		float: right;
+	}
 
-    @media screen and ( max-width:700px ){
-        #container {
-            flex-wrap: wrap;
-        }
-        #container img {
-            flex-gain: 0;
-            margin: 0 auto 10px;
-        }
-        #add {
-            float: none;
-            margin-bottom: 15px;
-            width: calc(100% - 32px);
-        }
-    }
-    
-    #add:before {
-        content: url(../img/cart_w.png);
-    }
+	@media screen and ( max-width:700px ){
+		#container {
+			flex-wrap: wrap;
+		}
+		#container img {
+			flex-gain: 0;
+			margin: 0 auto 10px;
+		}
+		#add {
+			float: none;
+			margin-bottom: 15px;
+			width: calc(100% - 32px);
+		}
+	}
+	
+	#add:before {
+		content: url(../img/cart_w.png);
+	}
 
-    #add:hover:before {
-        content: url(../img/cart_b.png);
-    }
-    
-    #container div {
-        width: 100%;
-    }
+	#add:hover:before {
+		content: url(../img/cart_b.png);
+	}
+	
+	#container div {
+		width: 100%;
+	}
 
-    #container h2 {
-        margin-bottom: 5px;
-    }
+	#container h2 {
+		margin-bottom: 5px;
+	}
 
-    #container h3 {
-        margin-top: 15px;
-    }
+	#container h3 {
+		margin-top: 15px;
+	}
 
-    #container table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 5px;
-    }
+	#container table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 5px;
+	}
 
-    #container table tr th {
-        color: #FFFFFF;
-        background-color: #8B4513;
-    }
+	#container table tr th {
+		color: #FFFFFF;
+		background-color: #8B4513;
+	}
 
-    #container table tr * {
-        height: 30px;
-        text-align: center;
-        vertical-align: middle;
-        border: 1px solid #b9b9b9;
-    }
+	#container table tr * {
+		height: 30px;
+		text-align: center;
+		vertical-align: middle;
+		border: 1px solid #b9b9b9;
+	}
 
-    #info p {
-        margin: 10px;
-    }
+	#info p {
+		margin: 10px;
+	}

@@ -2,7 +2,7 @@
 $id = $_GET["id"];
 
 if ($id == NULL){
-    header( "Location: index.php" ) ;
+	header( "Location: index.php" ) ;
 	exit;
 }
 
@@ -14,15 +14,15 @@ $publishedDate = $results[volumeInfo][publishedDate];
 $imageLink = $results[volumeInfo][imageLinks][smallhumbnail];
 
 if ($results[saleInfo][listPrice][amount] == NULL) {
-    $listPrice = "(注文確定後にお知らせ)";
+	$listPrice = "(注文確定後にお知らせ)";
 } else {
-    $listPrice = $results[saleInfo][listPrice][amount];
+	$listPrice = $results[saleInfo][listPrice][amount];
 }
 
 if ($results[volumeInfo][imageLinks][thumbnail] == NULL){
-    $imageLink = "img/noimage.png";
+	$imageLink = "img/noimage.png";
 } else {
-    $imageLink = $results[volumeInfo][imageLinks][thumbnail];
+	$imageLink = $results[volumeInfo][imageLinks][thumbnail];
 }
 ?>
 
@@ -30,8 +30,8 @@ if ($results[volumeInfo][imageLinks][thumbnail] == NULL){
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="stylesheet" href="css/cart.css">
 	<link rel="icon" href="img/favicon.ico">
 	<title>O書店</title>
@@ -39,49 +39,49 @@ if ($results[volumeInfo][imageLinks][thumbnail] == NULL){
 
 <body>
 
-    <header>
-        <h1><a href="index.php">O書店</a></h1>
-		    <span>Web注文機能を使うためには、ログインしてください</span>
-		    <a id="login" href="">ログイン</a>
+	<header>
+		<h1><a href="index.php">O書店</a></h1>
+			<span>Web注文機能を使うためには、ログインしてください</span>
+			<a id="login" href="">ログイン</a>
 	</header>
 
-    <form id="search" method="get" action="search.php">
+	<form id="search" method="get" action="search.php">
 			<input name="q" type="search" placeholder="書籍を検索"><!--
-            --><input  type="submit" value="">
+			--><input  type="submit" value="">
 	</form>
 
-    <div id="main">
-        <div id="cart">
-            <section>
-                <h2>カートに追加しました</h2>
-                <img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
+	<div id="main">
+		<div id="cart">
+			<section>
+				<h2>カートに追加しました</h2>
+				<img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
 
-                <h3><?php echo $title ?></h3>
-                
-                <p class="publishedDate"><?php echo $publishedDate ?></p>
-                <p><?php echo $authors ?></p>
-                <p class="price">￥ <?php echo $listPrice ?></p>
-            </section>
+				<h3><?php echo $title ?></h3>
+				
+				<p class="publishedDate"><?php echo $publishedDate ?></p>
+				<p><?php echo $authors ?></p>
+				<p class="price">￥ <?php echo $listPrice ?></p>
+			</section>
 
-            <section>
-                <h2>カートに入っている商品</h2>
-                <img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
+			<section>
+				<h2>カートに入っている商品</h2>
+				<img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
 
-                <h3><?php echo $title ?></h3>
-                
-                <p class="publishedDate"><?php echo $publishedDate ?></p>
-                <p><?php echo $authors ?></p>
-                <p class="price">￥ <?php echo $listPrice ?></p>
-            </section>
-        </div>
+				<h3><?php echo $title ?></h3>
+				
+				<p class="publishedDate"><?php echo $publishedDate ?></p>
+				<p><?php echo $authors ?></p>
+				<p class="price">￥ <?php echo $listPrice ?></p>
+			</section>
+		</div>
 
-        <section id="nav">
-            <p><a class="button" href="order.php?id=<?php echo $id ?>">注文を確定する</a></p>
-            <p><a class="button_c" href="">買い物を続ける</a></p>
-        </section>
-    </div>
+		<section id="nav">
+			<p><a class="button" href="order.php?id=<?php echo $id ?>">注文を確定する</a></p>
+			<p><a class="button_c" href="">買い物を続ける</a></p>
+		</section>
+	</div>
 
-    <footer>
+	<footer>
 		<a href="">規約</a>
 		<a href="">プライバシー</a>
 		<a href="">店舗</a>

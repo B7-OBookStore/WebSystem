@@ -5,8 +5,8 @@
 }
 
 header {
-    background: none;
-    border: none;
+	background: none;
+	border: none;
 }
 
 body {
@@ -25,18 +25,18 @@ h1 {
 #main {
 	/* 中央寄せに設定 */
 	max-width: 600px;
-    min-height: calc(100vh - 410px);
+	min-height: calc(100vh - 410px);
 	display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
 	
 	/* 文字揃えを設定 */
 	text-align: center;
 }
 
 #main div {
-    width: 100%;
+	width: 100%;
 }
 
 #main form {
@@ -44,42 +44,42 @@ h1 {
 }
 
 footer {
-    padding: 10px;
-    width: calc(100% - 40px);
-    height: auto;
-    
-    display: block;
+	padding: 10px;
+	width: calc(100% - 40px);
+	height: auto;
+	
+	display: block;
 }
 
 #pickedbooks {
-    padding: 10px 0 0 5px;
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
-    scrollbar-face-color:#8B4513;
-    width: 100%;
-    background-color: rgba(135, 102, 78, 0.5);
+	padding: 10px 0 0 5px;
+	display: flex;
+	flex-direction: row;
+	overflow-x: scroll;
+	scrollbar-face-color:#8B4513;
+	width: 100%;
+	background-color: rgba(135, 102, 78, 0.5);
 }
 
 .book {
-    padding: 0 5px;
-    display: flex;
-    flex-direction: column;
+	padding: 0 5px;
+	display: flex;
+	flex-direction: column;
 }
 
 .book img {
-    margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 
 
 #pickedbooks::-webkit-scrollbar {
-    height: 10px;    
+	height: 10px;	 
 }
 
 #pickedbooks::-webkit-scrollbar-track {
-    background: #dddddd;
+	background: #dddddd;
 }
 #pickedbooks::-webkit-scrollbar-thumb {
-    background: #8B4513;
+	background: #8B4513;
 }
