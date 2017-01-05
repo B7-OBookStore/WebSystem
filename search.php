@@ -107,7 +107,7 @@
 						<p><?php echo $authors ?></p>
 
 						<?php if ($listPrice !== NULL) {
-							echo "<p class=\"price\">￥ $listPrice</p>";
+							echo "<p class='price'>￥ $listPrice</p>";
 						}?>
 					</div>
 				</section>

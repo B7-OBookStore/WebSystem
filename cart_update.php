@@ -7,12 +7,26 @@
 	}
 
 	/* 本の情報を取得 */
-	$json = file_get_contents("https://www.googleapis.com/books/v1/volumes/".$id);
+	$json = file_get_contents("https://www.googleapis.com/books/v1/volumes/$id?key=AIzaSyBczORlfI6MEmYnkTFwP5au6rq_oo4h92s");
 	$results = json_decode($json, TRUE);
 
 	$title = $results[volumeInfo][title]." ".$results[volumeInfo][subtitle];
 	$publishedDate = $results[volumeInfo][publishedDate];
+	$publisher = $results[volumeInfo][publisher];
 	$imageLink = $results[volumeInfo][imageLinks][smallhumbnail];
+
+	foreach ($results[volumeInfo][industryIdentifiers] as $i => $identifier) {
+		if ($identifier[type] === "ISBN_10") {
+			$isbn10 = $identifier[identifier];
+		}
+		if ($identifier[type] === "ISBN_13") {
+			$janCode = $identifier[identifier];
+		}
+	}
+
+	foreach($results[volumeInfo][authors] as $i => $author) {
+		$authors = $authors.$author."　";
+	}
 
 	if ($results[saleInfo][listPrice][amount] == NULL) {
 		$listPrice = "(注文確定後にお知らせ)";
@@ -24,6 +38,40 @@
 		$imageLink = "img/noimage.png";
 	} else {
 		$imageLink = $results[volumeInfo][imageLinks][thumbnail];
+	}
+
+	/* データベースに接続 */
+	$dsn = 'mysql:dbname=b7_obookstore;host=ja-cdbr-azure-east-a.cloudapp.net;charset=utf8';
+	$username = 'b62d87cb5623a5';
+	$password = '6d93d6d8';
+	$pdo = new PDO($dsn, $username, $password);
+
+	/* カートに追加する本をデータベースから検索、無ければ追加 */
+	$sql = "SELECT count(*) FROM product WHERE JANCode='$janCode'";
+	$stmt = $pdo->query($sql);
+	$count = $stmt->fetchColumn();
+
+	if ($count == 0) {
+		$sql = "INSERT INTO product VALUES(:JANCode,:Price)";
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindParam(':JANCode',$janCode);
+		if ($results[saleInfo][listPrice][amount] == NULL) {
+			$stmt->bindValue(':Price',NULL,PDO::PARAM_NULL);
+		} else {
+			$stmt->bindParam(':Price',$listPrice);
+		}
+		$stmt->execute();
+
+		$sql = "INSERT INTO book VALUES(:JANCode,:Title,:Writer,:Publisher,:ISBN10,:MagazineCode,:GoogleID)";
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindParam(':JANCode',$janCode);
+		$stmt->bindParam(':Title',$title);
+		$stmt->bindParam(':Writer',$authors);
+		$stmt->bindParam(':Publisher',$publisher);
+		$stmt->bindParam(':ISBN10',$isbn10);
+		$stmt->bindValue(':MagazineCode',NULL,PDO::PARAM_NULL);
+		$stmt->bindParam(':GoogleID',$id);
+		$stmt->execute();
 	}
 ?>
 
@@ -55,6 +103,8 @@
 		<div id="cart">
 			<section>
 				<h2>カートに追加しました</h2>
+				<!-- <?php echo $count ?> -->
+
 				<img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
 
 				<h3><?php echo $title ?></h3>
