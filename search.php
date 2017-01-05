@@ -24,7 +24,7 @@
 	$books = array();
 	
 	while ($i < 20) {
-		$json = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=$q_encoded&startIndex=$startIndex&maxResults=40&key=AIzaSyBczORlfI6MEmYnkTFwP5au6rq_oo4h92s");
+		$json = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=$q_encoded&startIndex=$nextIndex&maxResults=40&key=AIzaSyBczORlfI6MEmYnkTFwP5au6rq_oo4h92s");
 		$results = json_decode($json, TRUE);
 
 		if (count($results[items]) == NULL) {
