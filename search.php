@@ -97,7 +97,7 @@
 				}
 		?>
 				<section>
-					<a href="<?php echo "detail.php?id=$id" ?>"></a>
+					<a href="<?php echo "book.php?id=$id" ?>"></a>
 					<img alt="<?php echo $title ?>" src="<?php echo $thumbnail ?>">
 
 					<div>

@@ -49,7 +49,7 @@ $isbn10 = preg_grep("/^ISBN:[0-9]{10}$/",(array)$isbn);
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<link rel="stylesheet" href="css/detail.css">
+	<link rel="stylesheet" href="css/book.css">
 	<link rel="icon" href="img/favicon.ico">
 	<title>O書店</title>
 </head>
