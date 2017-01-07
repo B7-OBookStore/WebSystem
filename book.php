@@ -72,7 +72,7 @@ $isbn10 = preg_grep("/^ISBN:[0-9]{10}$/",(array)$isbn);
 			<img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
 
 			<div>
-				<a id="add" class="button" href="cart.php?id=<?php echo $id ?>">カートに追加</a>
+				<a id="add" class="button" href="cart_update.php?id=<?php echo $id ?>">カートに追加</a>
 
 				<h2><?php echo $title ?></h2>
 
