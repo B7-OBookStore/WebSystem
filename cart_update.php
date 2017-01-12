@@ -52,7 +52,7 @@
 	$count = $stmt->fetchColumn();
 
 	if ($count == 0) {
-		$sql = "INSERT INTO product VALUES(:JANCode,:Price)";
+		$sql = "INSERT INTO product VALUES(:JANCode,:Price,:ProductName)";
 		$stmt = $pdo->prepare($sql);
 		$stmt->bindParam(':JANCode',$janCode);
 		if ($results[saleInfo][listPrice][amount] == NULL) {
@@ -60,12 +60,12 @@
 		} else {
 			$stmt->bindParam(':Price',$listPrice);
 		}
+		$stmt->bindParam(':ProductName',$title);
 		$stmt->execute();
 
-		$sql = "INSERT INTO book VALUES(:JANCode,:Title,:Writer,:Publisher,:ISBN10,:MagazineCode,:GoogleID)";
+		$sql = "INSERT INTO book VALUES(:JANCode,:Writer,:Publisher,:ISBN10,:MagazineCode,:GoogleID)";
 		$stmt = $pdo->prepare($sql);
 		$stmt->bindParam(':JANCode',$janCode);
-		$stmt->bindParam(':Title',$title);
 		$stmt->bindParam(':Writer',$authors);
 		$stmt->bindParam(':Publisher',$publisher);
 		$stmt->bindParam(':ISBN10',$isbn10);

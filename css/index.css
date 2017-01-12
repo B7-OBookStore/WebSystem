@@ -67,11 +67,17 @@ footer {
 	flex-direction: column;
 }
 
-.book img {
-	margin-bottom: 5px;
+.book a img {
+	width: 128px;
+	height: 182px;
 }
 
-
+.book a {
+	width: 128px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 
 #pickedbooks::-webkit-scrollbar {
 	height: 10px;	 

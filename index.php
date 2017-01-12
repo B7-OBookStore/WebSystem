@@ -1,3 +1,10 @@
+<?php
+	$dsn = 'mysql:dbname=b7_obookstore;host=ja-cdbr-azure-east-a.cloudapp.net;charset=utf8';
+	$username = 'b62d87cb5623a5';
+	$password = '6d93d6d8';
+	$pdo = new PDO($dsn, $username, $password);
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -29,38 +36,16 @@
 	
 	<footer>
 		<section id="pickedbooks">
-			<div class="book">
-				<img alt="a" src="http://books.google.com/books/content?id=1xMfNwAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
-				<a href="">戦え、白井先生!</a>
-			</div>
-			<div class="book">
-				<img alt="a" src="http://books.google.com/books/content?id=1xMfNwAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
-				<a href="">戦え、白井先生!</a>
-			</div>
-			<div class="book">
-				<img alt="a" src="http://books.google.com/books/content?id=1xMfNwAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
-				<a href="">戦え、白井先生!</a>
-			</div>
-			<div class="book">
-				<img alt="a" src="http://books.google.com/books/content?id=1xMfNwAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
-				<a href="">戦え、白井先生!</a>
-			</div>
-			<div class="book">
-				<img alt="a" src="http://books.google.com/books/content?id=1xMfNwAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
-				<a href="">戦え、白井先生!</a>
-			</div>
-			<div class="book">
-				<img alt="a" src="http://books.google.com/books/content?id=1xMfNwAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
-				<a href="">戦え、白井先生!</a>
-			</div>
-			<div class="book">
-				<img alt="a" src="http://books.google.com/books/content?id=1xMfNwAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
-				<a href="">戦え、白井先生!</a>
-			</div>
-			<div class="book">
-				<img alt="a" src="http://books.google.com/books/content?id=1xMfNwAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api">
-				<a href="">戦え、白井先生!</a>
-			</div>
+			<?php
+				$stmt = $pdo->query("SELECT book.JANCode,GoogleID,ProductName,SUM(Num) AS NumSum FROM book,product,stock WHERE book.JANCode = product.JANCode AND book.JANCode = stock.JANCode AND GoogleID IS NOT NULL GROUP BY book.JANCode ORDER BY NumSum DESC LIMIT 40");
+
+				foreach ($stmt as $row) {
+					echo "<div class='book'>";
+					echo "<a href='book.php?id=$row[GoogleID]'><img alt='$row[ProductName]' src='http://books.google.com/books/content?id=$row[GoogleID]&printsec=frontcover&img=1&zoom=5&source=gbs_api'></a>";
+					echo "<a href='book.php?id=$row[GoogleID]'>$row[ProductName]</a>";
+					echo "</div>";
+				}
+			?>
 		</section>
 
 		<nav>
