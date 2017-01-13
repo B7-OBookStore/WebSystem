@@ -63,16 +63,16 @@ footer {
 
 .book {
 	padding: 0 5px;
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
 }
 
-.book a img {
+.book img {
 	width: 128px;
 	height: 182px;
 }
 
-.book a {
+.book p {
 	width: 128px;
 	overflow: hidden;
 	white-space: nowrap;
