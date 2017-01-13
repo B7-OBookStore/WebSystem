@@ -40,7 +40,7 @@
 				$stmt = $pdo->query("SELECT book.JANCode,GoogleID,ProductName,SUM(Num) AS NumSum FROM book,product,stock WHERE book.JANCode = product.JANCode AND book.JANCode = stock.JANCode AND GoogleID IS NOT NULL GROUP BY book.JANCode ORDER BY NumSum DESC LIMIT 40");
 
 				foreach ($stmt as $row) {
-					echo "<a class='book'>";
+					echo "<a class='book' href='book.php?id=$row[GoogleID]'>";
 					echo "<img alt='$row[ProductName]' src='http://books.google.com/books/content?id=$row[GoogleID]&printsec=frontcover&img=1&zoom=5&source=gbs_api'>";
 					echo "<p>$row[ProductName]</p>";
 					echo "</a>";
