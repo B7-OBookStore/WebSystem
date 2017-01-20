@@ -86,9 +86,10 @@
 				$listPrice = $book[saleInfo][listPrice][amount];
 
 				$authors = NULL;
-				foreach($book[volumeInfo][authors] as $j => $author) {
+				foreach($results[volumeInfo][authors] as $i => $author) {
 					$authors = $authors.$author."　";
 				}
+				$authors = rtrim($authors,'　');
 
 				if ($book[volumeInfo][imageLinks][thumbnail] == NULL) {
 					$thumbnail = "img/noimage.png";

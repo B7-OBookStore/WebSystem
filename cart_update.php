@@ -27,6 +27,7 @@
 	foreach($results[volumeInfo][authors] as $i => $author) {
 		$authors = $authors.$author."　";
 	}
+	$authors = rtrim($authors,'　');
 
 	if ($results[saleInfo][listPrice][amount] == NULL) {
 		$listPrice = "(注文確定後にお知らせ)";

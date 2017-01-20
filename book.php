@@ -131,13 +131,22 @@
 		</section>
 
 		<section id="info">
-			<h3>商品説明</h3>
-			<p><?php echo $description ?></p>
+			<?php
+				if ($description != NULL){
+					echo '<h3>商品説明</h3>';
+					echo "<p>$description</p>";
+				}
+			?>
 
-			<h3>ジャンル</h3>
-			<?php foreach($categories as $i => $category) {
-				echo "<p>$category</p>";
-			} ?>
+			<?php
+			if ($categories != NULL){
+				echo '<h3>ジャンル</h3>';
+			
+				foreach($categories as $i => $category) {
+					echo "<p>$category</p>";
+				}
+			}
+			?>
 
 			<h3>出版社</h3>
 			<p><?php echo $publisher ?></p>
