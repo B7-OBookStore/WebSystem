@@ -8,7 +8,6 @@
 		<link rel="icon" href="img/favicon.ico">
 		<script src="js/register.js"></script>
 		<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" charset="UTF-8"></script>
 		<title>O書店</title>
 	</head>
 
@@ -21,8 +20,8 @@
 		</header>
 
 		<form id="search" method="get" action="search.php">
-			<input name="q" type="search" placeholder="書籍を検索">														 <!--
-																	 --><input type="submit" value="">
+			<input name="q" type="search" placeholder="書籍を検索">
+			<input type="submit" value="">
 		</form>
 
 		<div id="main">
@@ -42,7 +41,7 @@
 							<h3>パスワード</h3>
 							<div>
 								<input type="password" maxlength="8" required>
-								<small>8文字以内</small>
+								<small>8文字以上</small>
 							</div>
 						</div>
 

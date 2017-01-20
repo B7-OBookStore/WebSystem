@@ -25,6 +25,16 @@ section {
 	background-color: #FFFFFF;
 }
 
+.vertical {
+	display: flex;
+	flex-direction: column;
+}
+
+.horizontal {
+	display: flex;
+	flex-direction: row;
+}
+
 .button {
 	text-align: center;
 	display: inline-block;

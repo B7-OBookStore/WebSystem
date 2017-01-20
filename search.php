@@ -67,8 +67,8 @@
 		</header>
 
 		<form id="search" method="get" action="search.php">
-			<input name="q" type="search" placeholder="書籍を検索" value="<?php echo $q ?>">																				  <!--
-																							  --><input type="submit" value="">
+			<input name="q" type="search" placeholder="書籍を検索" value="<?php echo $q ?>">
+			<input type="submit" value="">
 		</form>
 
 		<div id="main">

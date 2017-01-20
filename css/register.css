@@ -12,20 +12,10 @@
 	transition: all 300ms 0s ease;
 }
 
-@media screen and ( max-width:1000px ) {
+@media screen and ( max-width:980px ) {
 	#character {
 		opacity: 0;
 	}
-}
-
-.vertical {
-	display: flex;
-	flex-direction: column;
-}
-
-.horizontal {
-	display: flex;
-	flex-direction: row;
 }
 
 h3 {
@@ -35,7 +25,7 @@ h3 {
 	border-style:solid;
 	padding:10px;
 	margin-right: 10px;
-	background-color:#ffe8e8;
+	background-color:#FFE8E8;
 }
 
 #form p{

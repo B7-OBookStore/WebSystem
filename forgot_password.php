@@ -12,14 +12,14 @@
 	<body>
 
 		<header>
-			<h1><a href="index.html">O書店</a></h1>
+			<h1><a href="index.php">O書店</a></h1>
 			<span>Web注文機能を使うためには、ログインしてください</span>
 			<a id="login" href="">ログイン</a>
 		</header>
 
 		<form id="search" method="get" action="search.php">
-			<input name="q" type="search" placeholder="書籍を検索">														 <!--
-																	 --><input type="submit" value="">
+			<input name="q" type="search" placeholder="書籍を検索">
+			<input type="submit" value="">
 		</form>
 
 		<div id="main">
