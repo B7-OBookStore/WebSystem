@@ -32,14 +32,17 @@ class cls_DuplicateCheck
         $checkStr = htmlspecialchars($checkStr, ENT_QUOTES, 'UTF-8');
 
         // Load DB
-        $dbsrc = 'mysql:dbname=websysb7; charset=utf8';
+        $dbsrc = 'mysql:host=127.0.0.1; dbname=websysb7; charset=utf8';
         $user = 'root';
         $pass = 'b7';
-        $pdo = new PDO($dbsrc, $user, $pass);
+        try {
+            $pdo = new PDO($dbsrc, $user, $pass);
+        } catch(PDOException $e){
+            echo $e->getMessage();
+        }
 
         // Prepare Statement
-        $stmt = $pdo->prepare('SELECT :checktype FROM User');
-        $stmt->bindParam(':checktype', $checkType);
+        $stmt = $pdo->prepare('SELECT * FROM User');
         $stmt->execute();
 
         // Check Duplicate
