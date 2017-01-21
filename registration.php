@@ -27,7 +27,7 @@
 		<div id="main">
 			<section>
 				<h2>会員登録</h2>
-				<form action="(送信先)" method="post">
+				<form action="registration_check.php" method="post">
 					<div id="form" class="vertical">
 						<div id="id" class="horizontal">
 							<h3>ID</h3>
