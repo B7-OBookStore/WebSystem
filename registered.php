@@ -64,8 +64,6 @@ $st->bindParam(':apartment', $Apartment, PDO::PARAM_STR);
 
 <header>
 	<h1><a href="index.php">O書店</a></h1>
-	<span>Web注文機能を使うためには、ログインしてください</span>
-	<a id="login" href="">ログイン</a>
 </header>
 
 <form id="search" method="get" action="search.php">

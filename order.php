@@ -40,11 +40,10 @@
 
 	<body>
 
-		<header>
-			<h1><a href="index.php">O書店</a></h1>
-			<span>Web注文機能を使うためには、ログインしてください</span>
-			<a id="login" href="">ログイン</a>
-		</header>
+	<?php
+	// ヘッダ表示部分
+	require 'php/header.php';
+	?>
 
 		<form id="search" method="get" action="search.php">
 			<input name="q" type="search" placeholder="書籍を検索">

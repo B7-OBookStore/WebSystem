@@ -2,15 +2,15 @@
 	// データベースに接続
 	require 'php/db_connect.php';
 	require 'php/cls_Book.php';
-	
+
 	// GETでGoogleBooksのIDを取得
 	$id = $_GET["id"];
-	
+
 	if ($id == NULL){
 		header( "Location: index.php" ) ;
 		exit;
 	}
-	
+
 	$book = new Book($id);
 ?>
 
@@ -27,11 +27,10 @@
 
 	<body>
 
-		<header>
-			<h1><a href="index.php">O書店</a></h1>
-			<span>Web注文機能を使うためには、ログインしてください</span>
-			<a id="login" href="">ログイン</a>
-		</header>
+	<?php
+	// ヘッダ表示部分
+	require 'php/header.php';
+	?>
 
 		<form id="search" method="get" action="search.php">
 			<input name="q" type="search" placeholder="書籍を検索">
@@ -54,7 +53,7 @@
 							echo "(注文確定後にお知らせ)";
 						} else {
 							echo $book->price;
-						}		   
+						}
 						?></p>
 
 					<h3>在庫状況</h3>
@@ -62,7 +61,7 @@
 						<tr>
 							<?php
 								$stmt = $pdo->query("SELECT StoreName FROM Store WHERE StoreNum <> 0");
-								
+
 								foreach ($stmt as $row) {
 									echo "<th>$row[StoreName]</th>";
 									$storeCount++;
@@ -72,11 +71,11 @@
 						<tr>
 							<?php
 								$stmt = $pdo->query("SELECT Store.StoreNum,StockAmount FROM Store LEFT JOIN Stock ON Store.StoreNum = Stock.StoreNum AND JANCode = $book->janCode WHERE Store.StoreNum <> 0 ORDER BY Store.StoreNum");
-								
+
 								foreach ($stmt as $row) {
 									$num = $row[StockAmount];
-								
-									echo '<td>';		
+
+									echo '<td>';
 									if ($num == 0) {
 										echo '×';
 									} else if ($num < 10) {
@@ -103,7 +102,7 @@
 				<?php
 					if ($book->categories != NULL){
 						echo '<h3>ジャンル</h3>';
-					
+
 						foreach($book->categories as $i => $category) {
 							echo "<p>$category</p>";
 						}
