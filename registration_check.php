@@ -1,3 +1,25 @@
+<?php
+
+// セッション変数にデータを保存
+session_start();
+
+$_SESSION['regFirstName'] = $_POST['FirstName'];
+$_SESSION['regLastName'] = $_POST['LastName'];
+$_SESSION['regYomiFirst'] = $_POST['YomiFirst'];
+$_SESSION['regYomiLast'] = $_POST['YomiLast'];
+$_SESSION['regPhone'] = $_POST['Phone'];
+$_SESSION['regMail'] = $_POST['MailUser'].'@'.$_POST['MailDomain'];
+$_SESSION['regUserID'] = $_POST['UserID'];
+$_SESSION['regPassword'] = $_POST['Password'];
+$_SESSION['regBirth'] = $_POST['year'].'-'.$_POST['month'].'-'.$_POST['day'];
+$_SESSION['regGender'] = $_POST['Gender'];
+$_SESSION['regZipCode'] = $_POST['ZipCode1'].$_POST['ZipCode2'];
+$_SESSION['regPref'] = $_POST['pref'];
+$_SESSION['regCity'] = $_POST['city'];
+$_SESSION['regAddress'] = $_POST['Address'];
+$_SESSION['regApartment'] = $_POST['Apartment'];
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -27,7 +49,7 @@
 <div id="main">
 	<section>
 		<h2>会員登録</h2>
-		<form action="registration_check.php" method="post">
+		<form action="registered.php" method="post">
 			<div id="form" class="vertical">
 				<div id="id" class="horizontal">
 					<h3>ID</h3>

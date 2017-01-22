@@ -2,25 +2,33 @@
 // データベースに登録情報を送信
 require 'php/db_connect.php';
 
+session_start();
+
 // 挿入用データを変数に格納
-$FirstName = $_POST['FirstName'];
-$LastName = $_POST['LastName'];
-$YomiFirst = $_POST['YomiFirst'];
-$YomiLast = $_POST['YomiLast'];
-$Phone = $_POST['Phone'];
-$Mail = $_POST['Mail'];
-$UserID = $_POST['UserID'];
-$Password = $_POST['Password'];
-$Birth = $_POST['Birth'];
-$Gender = $_POST['Gender'] == 'male' ? true : false;
-$ZipCode = $_POST['ZipCode'];
-$Pref = $_POST['Pref'];
-$City = $_POST['City'];
-$Address = $_POST['Address'];
-$Apartment = $_POST['Apartment'];
+$FirstName = $_SESSION['regFirstName'];
+$LastName = $_SESSION['regLastName'];
+$YomiFirst = $_SESSION['regYomiFirst'];
+$YomiLast = $_SESSION['regYomiLast'];
+$Phone = $_SESSION['regPhone'];
+$Mail = $_SESSION['regMail'];
+$UserID = $_SESSION['regUserID'];
+$Password = $_SESSION['regPassword'];
+// 暗号化したらこっちに変更
+// $Password = password_hash($_SESSION['regPassword'], PASSWORD_DEFAULT);
+$Birth = $_SESSION['regBirth'];
+$Gender = $_SESSION['regGender'] == 'male' ? true : false;
+$ZipCode = $_SESSION['regZipCode'];
+$Pref = $_SESSION['regPref'];
+$City = $_SESSION['regCity'];
+$Address = $_SESSION['regAddress'];
+$Apartment = $_SESSION['regApartment'];
+
+// 格納し終わったらSession変数を空にして放棄
+$_SESSION = array();
+session_destroy();
 
 // データベースに挿入
-$st->$pdo->prepare("INSERT INTO User(FirstName, LastName, YomiFirst, YomiLast, Phone, Mail,
+$st = $pdo->prepare("INSERT INTO User(FirstName, LastName, YomiFirst, YomiLast, Phone, Mail,
 						UserID, Password, Birth, Gender, ZipCode, Pref, City, Address, Apartment) VALUES
 						 (:firstname, :lastname, :yomifirst, :yomilast, :phone, :mail,
 						 :userid, :password, :birth, :gender, :zipcode, :pref, :city, :address, :apartment)");
@@ -39,13 +47,6 @@ $st->bindParam(':pref', $Pref, PDO::PARAM_STR);
 $st->bindParam(':city', $City, PDO::PARAM_STR);
 $st->bindParam(':address', $Address, PDO::PARAM_STR);
 $st->bindParam(':apartment', $Apartment, PDO::PARAM_STR);
-
-// エラったとき用　念の為
-try {
-	$st->execute();
-} catch (PDOException $e) {
-	echo 'Error!  :  ' . $e->getMessage() . '<br>';
-}
 ?>
 
 <!DOCTYPE html>
@@ -76,25 +77,22 @@ try {
 	<section>
 
 		<?php
-		try {
 			$st->execute();
+			$error = $st->errorInfo();
 
-			// 挿入に成功したら以下の文を表示
-			echo '<h2>会員登録が完了しました</h2>';
-			echo '<p>登録ありがとうございます。今後ともO書店をよろしくお願いします。</p>';
+			// DB挿入エラーチェック
+			if($error[0] = '00000' && $error[1] == NULL && $error[2] == NULL) {
+				// 挿入に成功したら以下の文を表示
+				echo '<h2>会員登録が完了しました</h2>';
+				echo '<p>登録ありがとうございます。今後ともO書店をよろしくお願いします。</p>';
 
-		} catch (PDOException $e) {
+			} else {
+				// 挿入に失敗したら以下の文を表示
+				echo '<h2>会員登録に失敗しました</h2>';
+				echo '<p>会員登録処理に失敗しました。申し訳ありませんが、再度登録をお願いします。</p>';
+			}
 
-			// 挿入に失敗したら以下の文を表示
-			echo '<h2>会員登録に失敗しました</h2>';
-			echo '<p>会員登録処理に失敗しました。申し訳ありませんが、再度登録をお願いします。</p>';
-
-			// エラー内容表示(Debug)
-			// echo 'Error!  :  ' . $e->getMessage() . '<br>';
-		}
 		?>
-
-		<img id="character" alt="O書店公式キャラクター 羽名しおりちゃん" src="img/register_shiori.png">
 	</section>
 
 </div>
