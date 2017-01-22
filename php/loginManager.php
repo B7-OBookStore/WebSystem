@@ -9,13 +9,14 @@ session_start();
 $lgn = new cls_Login();
 
 if($lgn->login($_POST['logUserID'], $_POST['logPassword'])){
-
 	// SessionにユーザIDを保存
 	$_SESSION['UserID'] = $_POST['logUserID'];
+	$cLogUserID = $_POST['logUserID'];
+	$cLogPassword = $_POST['logUserID'];
 
 	// Cookieの設定
-	setcookie('logUserID', $_POST['logUserID'], time() + 60 * 60 * 24 * 14);
-	setcookie('logPassword', $_POST['logPassword'], time() + 60 * 60 * 24 * 14);
+	setcookie('logUserID', $cLogUserID, time() + 60 * 60 * 24 * 14, '/');
+	setcookie('logPassword', $cLogPassword, time() + 60 * 60 * 24 * 14, '/');
 
 	// index.phpに変遷
 	header('Location: /index.php');

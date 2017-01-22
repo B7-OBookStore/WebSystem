@@ -14,10 +14,12 @@
 	</head>
 
 	<body>
-		<header>
-			<span>Web注文機能を使うためには、ログインしてください</span>
-			<a id="login" href="">ログイン</a>
-		</header>
+
+	<?php
+		// ヘッダ表示部分
+		require 'php/header.php';
+	?>
+
 
 		<div id="main">
 			<div>

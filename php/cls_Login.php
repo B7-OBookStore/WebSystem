@@ -9,9 +9,14 @@ class cls_Login
 	function reLogin()
 	{
 		// Cookieにログインデータが残っていたら自動再ログインする
-		if ($_COOKIE['logUserID'] != '') {
+		if (isset($_COOKIE['logUserID'])) {
 			// そのデータを使ってログイン
-			return $this->login($_COOKIE['logUserID'], $_COOKIE['logPassword']);
+			echo 'cookie detected.';
+			if ($this->login($_COOKIE['logUserID'], $_COOKIE['logPassword'])) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 
@@ -28,26 +33,9 @@ class cls_Login
 		}
 	}
 
-	// ログアウト
-	function logout()
-	{
-		// セッション内容をクリア
-		$_SESSION = array();
-		session_destroy();
-
-		// Cookieを削除
-		// Cookie増やしたらここ追加してあげてください
-		setcookie('UserID', '', time() - 420000);
-
-		// トップページに戻る
-		header('Location: index.php');
-		exit();
-	}
-
 	// IDが存在するかのチェック
 	function checkID($id)
 	{
-		echo 'check id...<br>';
 		// DB準備
 		$dbsrc = 'mysql:host=127.0.0.1; dbname=websysb7; charset=utf8';
 		$user = 'root';
@@ -73,7 +61,6 @@ class cls_Login
 	// パスワードが一致しているかのチェック
 	function checkPass($id, $pwd)
 	{
-		echo 'check pass...<br>';
 		// DB準備
 		$dbsrc = 'mysql:host=127.0.0.1; dbname=websysb7; charset=utf8';
 		$user = 'root';
