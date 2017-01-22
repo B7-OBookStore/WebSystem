@@ -25,17 +25,22 @@
 		<div id="main">
 			<section>
 				<h2>ログインページ</h2>
-				<form>
+				<form method="POST" action="php/loginManager.php">
 					<p>
-						<input class="inputbox" type="text" name="id" placeholder="IDまたはメールアドレス">
+						<input class="inputbox" type="text" name="logUserID" placeholder="IDまたはメールアドレス">
 					</p>
 					<p>
-						<input class="inputbox" type="password" name="password" placeholder="パスワード">
+						<input class="inputbox" type="password" name="logPassword" placeholder="パスワード">
 					</p>
 					<p>
 						<input class="button" type="submit" value="送信">
 					</p>
 				</form>
+				<?php
+					if(isset($_GET['login'])){
+						echo '<p style="color: red">IDかパスワードが間違っています。</p>';
+					}
+				?>
 				<p>パスワードを忘れた方は
 					<a href="forgot_password.php">こちら</a>
     から。</p>
