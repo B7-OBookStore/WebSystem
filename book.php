@@ -1,9 +1,11 @@
 <?php
-	$dsn = 'mysql:dbname=b7_obookstore;host=ja-cdbr-azure-east-a.cloudapp.net;charset=utf8';
-	$username = 'b62d87cb5623a5';
-	$password = '6d93d6d8';
+	// データベースに接続
+	$dsn = 'mysql:dbname=websysb7;host=ja-cdbr-azure-east-a.cloudapp.net;charset=utf8';
+	$username = 'b3a7f491a4430f';
+	$password = '0a1e66e0';
 	$pdo = new PDO($dsn, $username, $password);
 	
+	// GoogleBooksAPIから色々取得
 	$id = $_GET["id"];
 	
 	if ($id == NULL){
@@ -30,9 +32,9 @@
 	$categories = $results[volumeInfo][categories];
 	
 	foreach($results[volumeInfo][authors] as $i => $author) {
-		$authors = $authors.$author."　";
+		$authors = $authors.$author.",";
 	}
-	$authors = rtrim($authors,'　');
+	$authors = rtrim($authors,',');
 	
 	if ($results[volumeInfo][imageLinks][small] == NULL){
 		if ($results[volumeInfo][imageLinks][thumbnail] == NULL){
@@ -44,11 +46,64 @@
 		$imageLink = $results[volumeInfo][imageLinks][small];
 	}
 	
-	$listPrice = $results[saleInfo][listPrice][amount];
-	$stmt = $pdo->query("SELECT Price FROM product WHERE JANCode = $janCode");
+	// DBから価格を取得
+	$stmt = $pdo->query("SELECT Price FROM Item WHERE JANCode = $janCode");
 	if ($result = $stmt->fetch()) {
 		$listPrice = $result[Price];
 	}
+	// DBになかったらGoogleBooksから取得
+	if ($listPrice == NULL){
+		$listPrice = $results[saleInfo][listPrice][amount];
+	}
+	// GoogleBooksにもなかったら国会図書館から取得。かなり無理矢理
+	mb_language('Japanese');
+	mb_internal_encoding('UTF-8');
+	
+	if ($listPrice == NULL) {
+		$html = file_get_contents("http://iss.ndl.go.jp/books?ar=4e1f&search_mode=advanced&display=&rft.isbn=9784046316417");
+		$dom = new DOMDocument();
+		@$dom->loadHTML($html);
+		$as = $dom->getElementsByTagName('a');
+	
+		foreach ($as as $a) {
+			$url = $a->getAttribute('href');
+
+			if (preg_match("#^http://iss.ndl.go.jp/books/#",$url)) {
+				$html = file_get_contents($url);
+				$dom = new DOMDocument();
+				@$dom->loadHTML($html);
+				$spans = $dom->getElementsByTagName('span');
+	
+				foreach ($spans as $span){
+					$spanValue = $span->nodeValue;
+					if (mb_substr($spanValue ,-1) == '円'){
+						// 国会図書館のデータは税抜き価格なので1.08かける
+						$priceWithoutTax = preg_replace('/[^0-9]/','',$spanValue);
+						$listPrice = (int)($priceWithoutTax*1.08);
+						break;
+					}
+				}
+				break;
+			}
+		}
+	}
+	/*
+	// JANKEN.JPから取得するスクリプトだが、国会図書館になけりゃここにもあるわけがないので省略
+	if ($listPrice == NULL) {
+		$html = file_get_contents("http://www.janken.jp/goods/jk_catalog_syosai.php?jan=$janCode");
+		$dom = new DOMDocument();
+		@$dom->loadHTML($html);
+		$tds = $dom->getElementsByTagName('td');
+	
+		foreach ($tds as $td){
+			$tdValue = $td->nodeValue;
+			if (mb_substr($tdValue ,0 ,1) == '\\'){
+				$listPrice = preg_replace('/[^0-9]/','',$tdValue);
+				break;
+			}
+		}
+	}
+	*/
 ?>
 
 <!DOCTYPE html>
@@ -71,7 +126,7 @@
 		</header>
 
 		<form id="search" method="get" action="search.php">
-			<input name="q" type="search" placeholder="書籍を検索">	
+			<input name="q" type="search" placeholder="書籍を検索">
 			<input type="submit" value="">
 		</form>
 
@@ -98,7 +153,7 @@
 					<table>
 						<tr>
 							<?php
-								$stmt = $pdo->query("SELECT StoreName FROM store");
+								$stmt = $pdo->query("SELECT StoreName FROM Store WHERE StoreNum <> 0");
 								
 								foreach ($stmt as $row) {
 									echo "<th>$row[StoreName]</th>";
@@ -108,8 +163,8 @@
 						</tr>
 						<tr>
 							<?php
-								for ($i = 0; $i < $storeCount; $i++){
-									$stmt = $pdo->query("SELECT Num FROM stock WHERE JANCode = $janCode AND StoreNumber = $i");
+								for ($i = 1; $i <= $storeCount; $i++){
+									$stmt = $pdo->query("SELECT StockAmount FROM Stock WHERE JANCode = $janCode AND StoreNum = $i");
 								
 									$stock = $stmt->fetch();
 									$num = $stock[Num];
@@ -150,6 +205,18 @@
 
 				<h3>出版社</h3>
 				<p><?php echo $publisher ?></p>
+
+				<h3>登録情報</h3>
+				<table>
+					<tr>
+						<th>JANコード</th>
+						<td><?php echo $janCode ?></td>
+					</tr>
+					<tr>
+						<th>ISBN10</th>
+						<td><?php echo $isbn10 ?></td>
+					</tr>
+				</table>
 			</section>
 		</div>
 
