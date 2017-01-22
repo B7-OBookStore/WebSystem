@@ -2,6 +2,7 @@
 	require 'php/db_connect.php';
 
 	$q = $_GET["q"];
+	$mode = $_GET["mode"];
 	$startIndex = $_GET["startIndex"];
 	$previousIndex = $_GET["previousIndex"];
 	
@@ -21,31 +22,37 @@
 	$previousIndex[] = $startIndex;
 	$nextIndex = $startIndex;
 	
-	$i = 0;
-	$q_encoded = urlencode($q);
-	$books = array();
+	if ($mode == 'book' || $mode == NULL) {
+		$i = 0;
+		$q_encoded = urlencode($q);
+		$books = array();
 	
-	while ($i < 20) {
-		$json = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=$q_encoded&startIndex=$nextIndex&maxResults=40&key=AIzaSyBczORlfI6MEmYnkTFwP5au6rq_oo4h92s");
-		$results = json_decode($json, TRUE);
+		while ($i < 20) {
+			$json = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=$q_encoded&startIndex=$nextIndex&maxResults=40&key=AIzaSyBczORlfI6MEmYnkTFwP5au6rq_oo4h92s");
+			$results = json_decode($json, TRUE);
 	
-		if (count($results[items]) == NULL) {
-			break;
-		}
-	
-		foreach($results[items] as $j => $item) {
-			if ($i >= 20) {
+			if (count($results[items]) == NULL) {
 				break;
 			}
 	
-			foreach ($item[volumeInfo][industryIdentifiers] as $k => $identifier) {
-				if ($identifier[type] === "ISBN_13") {
-					$books[] = $item;
-					$i++;
+			foreach($results[items] as $j => $item) {
+				if ($i >= 20) {
+					break;
 				}
+	
+				foreach ($item[volumeInfo][industryIdentifiers] as $k => $identifier) {
+					if ($identifier[type] === "ISBN_13") {
+						$books[] = $item;
+						$i++;
+					}
+				}
+				$nextIndex++;
 			}
-			$nextIndex++;
 		}
+	}
+
+	if ($mode == 'other') {
+		$others = $pdo->query("SELECT Item.JANCode,Price,Name,Manufacturer,Genre from Item INNER JOIN Other ON Item.JANCode = Other.JANCode WHERE NAME LIKE '%$q%'");
 	}
 ?>
 
@@ -80,7 +87,7 @@
 
 			<div id="result">
 				<?php
-					if (count($books) != 0) {
+					if (($mode == 'book' || $mode == NULL) && count($books) != 0) {
 						foreach($books as $i => $book) {
 							$id = $book[id];
 							$title = $book[volumeInfo][title]." ".$book[volumeInfo][subtitle];
@@ -129,6 +136,26 @@
 						?>
 					</div>
 				</section>
+				<?php
+						}
+					} else if ($mode == 'other') {
+						foreach ($others as $other) {
+				?>
+					<section>
+						<a href="<?php echo "other.php?janCode=$other[JANCode]" ?>"></a>
+						<img alt="TVゲーム" src="img/search_tvgame.png">
+
+						<div>
+							<h2><?php echo $other[Name] ?></h2>
+							<p><?php echo $other[Manufacturer] ?></p>
+
+							<?php
+								if ($other[Price] !== NULL) {
+									echo "<p class='price'>￥ $other[Price]</p>";
+								}
+							?>
+						</div>
+					</section>
 				<?php
 						}
 					} else {
