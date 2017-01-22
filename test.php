@@ -45,10 +45,30 @@ echo "this is test.<br>";
 
 <?php
 // registration.php -> registration_check.phpの送信チェック
-echo $_POST['UserID'].'<br>';
-echo $_POST['Password'].'<br>';
-echo $_POST['Gender'].'<br>';
+// registration.php のform送信先をtest.phpに変えるとうごきます
+
+//echo $_POST['UserID'].'<br>';
+//echo $_POST['Password'].'<br>';
+//echo $_POST['Gender'].'<br>';
 ?>
+
+<?php
+// PDOテスト
+// 何度か悩んだのでメモ書き兼ねて
+
+//	require ('php/db_connect.php');
+//	$st = $pdo->prepare("SELECT UserID, Password FROM User WHERE UserID = :id");
+//	$id = 'taki_mitsuha';
+//	$st->bindParam(':id', $id,PDO::PARAM_STR);
+//	$st->execute();
+//	$counter = 0;
+//	while ($row = $st->fetch(PDO::FETCH_ASSOC)){
+//		echo '<p>'.$row['UserID'].'  '.$row['Password'].'</p>';
+//		$counter++;
+//	}
+//	echo $counter;
+?>
+
 
 
 
