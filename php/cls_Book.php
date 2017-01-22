@@ -78,7 +78,7 @@ class Book {
 		mb_internal_encoding('UTF-8');
 	
 		if ($this->price == NULL) {
-			$html = file_get_contents("http://iss.ndl.go.jp/books?ar=4e1f&search_mode=advanced&display=&rft.isbn=9784046316417");
+			$html = file_get_contents("http://iss.ndl.go.jp/books?ar=4e1f&search_mode=advanced&display=&rft.isbn=$this->janCode");
 			$dom = new DOMDocument();
 			@$dom->loadHTML($html);
 			$as = $dom->getElementsByTagName('a');
