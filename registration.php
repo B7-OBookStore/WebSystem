@@ -33,15 +33,14 @@
 				<div id="id" class="horizontal">
 					<h3>ID</h3>
 					<div>
-						<input id="formID" type="text" name="id" maxlength="11" required>
+						<input id="formID" type="text" name="UserID" maxlength="11" required>
 						<small id="checkID">11文字以内　(例) abcd1234</small>
 					</div>
-
 				</div>
 				<div id="password" class="horizontal">
 					<h3>パスワード</h3>
 					<div>
-						<input type="password" maxlength="8" required>
+						<input type="password" name="Password" maxlength="8" required>
 						<small>8文字以上</small>
 					</div>
 				</div>
@@ -49,8 +48,8 @@
 				<div id="sex" class="horizontal">
 					<h3>性別</h3>
 					<div class="horizontal">
-						<input type="radio" name="sex" value="male">男
-						<input type="radio" name="sex" value="female">女
+						<input type="radio" name="Gender" value="male">男
+						<input type="radio" name="Gender" value="female">女
 					</div>
 				</div>
 
@@ -60,12 +59,12 @@
 						<div class="horizontal">
 							<div>
 								<h4>性</h4>
-								<input type="text" name="name" required>
+								<input type="text" name="LastName" required>
 								<small>(例) 静岡</small>
 							</div>
 							<div>
 								<h4>名</h4>
-								<input type="text" name="name" required>
+								<input type="text" name="FirstName" required>
 								<small>(例) 太郎</small>
 							</div>
 						</div>
@@ -77,13 +76,13 @@
 					<div>
 						<div class="horizontal">
 							<div>
-								<h4>性</h4>
-								<input type="text" name="phonetic" required>
+								<h4>姓</h4>
+								<input type="text" name="YomiLast" required>
 								<small>(例) シズオカ</small>
 							</div>
 							<div>
 								<h4>名</h4>
-								<input type="text" name="phonetic" required>
+								<input type="text" name="YomiFirst" required>
 								<small>(例) タロウ</small>
 							</div>
 						</div>
@@ -201,7 +200,7 @@
 							<option value="2020">2020</option>
 						</select>
 						<p>年</p>
-						<select name="monh3" required>
+						<select name="month" required>
 							<option value="">--</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -258,7 +257,7 @@
 				<div id="phonenumber" class="horizontal">
 					<h3>電話番号</h3>
 					<div>
-						<input id="formPhone" type="text" name="phonenumber" maxlength="11" required>
+						<input id="formPhone" type="text" name="Phone" maxlength="11" required>
 						<small id="checkPhone">(例) 12345678910</small>
 					</div>
 				</div>
@@ -266,9 +265,9 @@
 				<div id="mailaddress" class="horizontal">
 					<h3>メールアドレス</h3>
 					<div>
-						<div class="horizontal"><input class="formMail" id="formMail1" type="text" name="mailaddress"
+						<div class="horizontal"><input class="formMail" id="formMail1" type="text" name="MailUser"
 						                               required>
-							<p>@</p><input class="formMail" id="formMail2" type="text" name="mailaddress" required>
+							<p>@</p><input class="formMail" id="formMail2" type="text" name="MailDomain" required>
 						</div>
 						<small id="checkMail"></small>
 					</div>
@@ -280,12 +279,12 @@
 					<div>
 						<div>
 							<h4>郵便番号</h4>
-							<div class="horizontal"><input type="text" class="addressnumber" name="addressnumber1"
+							<div class="horizontal"><input type="text" class="addressnumber" name="ZipCode1"
 							                               maxlength="3" required>
-								<p>-</p><input type="text" class="addressnumber" name="addressnumber2" maxlength="4"
+								<p>-</p><input type="text" class="addressnumber" name="ZipCode2" maxlength="4"
 								               required>
 								<input id="button" type="button" value="〒"
-								       onclick="AjaxZip3.zip2addr('addressnumber1', 'addressnumber2', 'pref', 'city', 'city');">
+								       onclick="AjaxZip3.zip2addr('ZipCode1', 'ZipCode2', 'pref', 'city', 'city');">
 							</div>
 						</div>
 						<div>
@@ -352,12 +351,12 @@
 
 						<div>
 							<h4>番地</h4>
-							<div><input type="text" name="housenumber" required>
+							<div><input type="text" name="Address" required>
 							</div>
 						</div>
 						<div>
 							<h4>建物名など</h4>
-							<div><input type="text" name="building">
+							<div><input type="text" name="Apartment">
 							</div>
 						</div>
 					</div>
@@ -369,7 +368,7 @@
 
 						// ID重複チェック
 						$('input#formID').change(function () {
-							$.get('res/res_checkID.php', {
+							$.get('php/ajax_checkID.php', {
 								UserID: $('#formID').val()
 							}, function (data) {
 								$('#checkID').html(data);
@@ -378,7 +377,7 @@
 
 						// 電話番号重複チェック
 						$('#formPhone').change(function () {
-							$.get('res/res_checkPhone.php', {
+							$.get('php/ajax_checkPhone.php', {
 								Phone: $('#formPhone').val()
 							}, function (data) {
 								$('#checkPhone').html(data);
@@ -387,7 +386,7 @@
 
 						// メールアドレス重複チェック
 						$('.formMail').change(function () {
-							$.get('res/res_checkMail.php', {
+							$.get('php/ajax_checkMail.php', {
 								Mail: $('#formMail1').val() + '@' + $('#formMail2').val()
 							}, function (data) {
 								$('#checkMail').html(data);
