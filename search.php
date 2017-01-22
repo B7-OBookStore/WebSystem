@@ -1,4 +1,6 @@
 <?php
+	require 'php/db_connect.php';
+
 	$q = $_GET["q"];
 	$startIndex = $_GET["startIndex"];
 	$previousIndex = $_GET["previousIndex"];
@@ -83,13 +85,26 @@
 							$id = $book[id];
 							$title = $book[volumeInfo][title]." ".$book[volumeInfo][subtitle];
 							$publishedDate = $book[volumeInfo][publishedDate];
-							$listPrice = $book[saleInfo][listPrice][amount];
+
+							foreach ($book['volumeInfo']['industryIdentifiers'] as $identifier) {
+								if ($identifier['type'] === 'ISBN_13') {
+									$janCode = $identifier['identifier'];
+									break;
+								}
+							}
+
+							$stmt = $pdo->query("SELECT Price FROM Item WHERE JANCode = $janCode");
+							if ($result = $stmt->fetch()) {
+								$listPrice = $result[Price];
+							} else {
+								$listPrice = $book[saleInfo][listPrice][amount];
+							}
 					
 							$authors = NULL;
 							foreach($results[volumeInfo][authors] as $i => $author) {
-								$authors = $authors.$author."　";
+								$authors = $authors.$author.",";
 							}
-							$authors = rtrim($authors,'　');
+							$authors = rtrim($authors,',');
 					
 							if ($book[volumeInfo][imageLinks][thumbnail] == NULL) {
 								$thumbnail = "img/noimage.png";
@@ -109,8 +124,8 @@
 
 						<?php
 							if ($listPrice !== NULL) {
-													   echo "<p class='price'>￥ $listPrice</p>";
-												   }
+								echo "<p class='price'>￥ $listPrice</p>";
+							}
 						?>
 					</div>
 				</section>
