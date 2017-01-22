@@ -1,8 +1,5 @@
 <?php
-	$dsn = 'mysql:dbname=b7_obookstore;host=ja-cdbr-azure-east-a.cloudapp.net;charset=utf8';
-	$username = 'b62d87cb5623a5';
-	$password = '6d93d6d8';
-	$pdo = new PDO($dsn, $username, $password);
+	require 'php/db_connect.php';
 ?>
 
 <!DOCTYPE html>
@@ -37,12 +34,12 @@
 		<footer>
 			<section id="pickedbooks">
 				<?php
-					$stmt = $pdo->query("SELECT book.JANCode,GoogleID,ProductName,SUM(Num) AS NumSum FROM book,product,stock WHERE book.JANCode = product.JANCode AND book.JANCode = stock.JANCode AND GoogleID IS NOT NULL GROUP BY book.JANCode ORDER BY NumSum DESC LIMIT 40");
+					$stmt = $pdo->query("SELECT SUM(StockAmount) AS Amount,BookTitle,GoogleID FROM Stock INNER JOIN Book ON Stock.JANCode = Book.JANCode WHERE GoogleID IS NOT NULL GROUP BY Stock.JANCode ORDER BY AMOUNT DESC LIMIT 40");
 					
 					foreach ($stmt as $row) {
 						echo "<a class='book' href='book.php?id=$row[GoogleID]'>";
-						echo "<img alt='$row[ProductName]' src='http://books.google.com/books/content?id=$row[GoogleID]&printsec=frontcover&img=1&zoom=5&source=gbs_api'>";
-						echo "<p>$row[ProductName]</p>";
+						echo "<img alt='$row[BookTitle]' src='http://books.google.com/books/content?id=$row[GoogleID]&printsec=frontcover&img=1&zoom=5&source=gbs_api'>";
+						echo "<p>$row[BookTitle]</p>";
 						echo "</a>";
 					}
 				?>
