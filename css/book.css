@@ -72,3 +72,8 @@
 	#info p {
 		margin: 10px;
 	}
+
+	#info table {
+		border-spacing: 10px 5px;
+		margin: 5px 0;
+	}

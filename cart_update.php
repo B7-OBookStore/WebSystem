@@ -61,7 +61,6 @@
 		} else {
 			$stmt->bindParam(':Price',$listPrice);
 		}
-		$stmt->bindParam(':ProductName',$title);
 		$stmt->execute();
 	
 		$sql = "INSERT INTO Book VALUES(:JANCode,:BookTitle,:Writer,:Publisher,:GoogleID)";
