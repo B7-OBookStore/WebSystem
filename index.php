@@ -34,7 +34,7 @@
 		<footer>
 			<section id="pickedbooks">
 				<?php
-					$stmt = $pdo->query("SELECT SUM(StockAmount) AS Amount,BookTitle,GoogleID FROM Stock INNER JOIN Book ON Stock.JANCode = Book.JANCode GROUP BY Stock.JANCode ORDER BY AMOUNT DESC LIMIT 40");
+					$stmt = $pdo->query("SELECT SUM(StockAmount) AS Amount,BookTitle,GoogleID FROM Stock INNER JOIN Book ON Stock.JANCode = Book.JANCode WHERE GoogleID IS NOT NULL GROUP BY Stock.JANCode ORDER BY AMOUNT DESC LIMIT 40");
 					
 					foreach ($stmt as $row) {
 						echo "<a class='book' href='book.php?id=$row[GoogleID]'>";
