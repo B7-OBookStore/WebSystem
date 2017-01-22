@@ -1,0 +1,82 @@
+@import url("common.css");
+
+#main section {
+	position: relative;
+}
+
+#character {
+	position: absolute;
+	z-index: 0;
+	right: 0;
+	bottom: 0;
+	transition: all 300ms 0s ease;
+}
+
+@media screen and ( max-width:980px ) {
+	#character {
+		opacity: 0;
+	}
+}
+
+h3 {
+	width: 200px;
+	border-width:1px;
+	border-color:#B0ACAC;
+	border-style:solid;
+	padding:10px;
+	margin-right: 10px;
+	background-color:#FFE8E8;
+}
+
+#form p{
+	margin:0 3px;
+}
+
+#form div {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+#form div div {
+	padding: 10px 0 10px 10px;
+	align-items: center;
+}
+
+#form div div div {
+	padding: 3px 0;
+}
+
+#form {
+	position: relative;
+	z-index: 1;
+	max-width: 600px;
+	margin: 20px 0 20px 10px;
+	border-collapse: separate; 
+	border-spacing: 10px 2px;
+}
+
+#form input,select {
+	width: 100%;
+	min-width: 0;
+	height: 20px;
+	margin: 5px 0 2px 0;
+}
+
+#form .button_c {
+	width: 100%;
+	height: 40px;
+}
+
+#sex input {
+	max-width: 100px;
+}
+
+#name div div div:first-child,#phonetic div div div:first-child {
+	margin-right: 5px;
+}
+
+#address input[type="button"] {
+	width: 50px;
+	height: 100%;
+	margin-left: 10px;
+}

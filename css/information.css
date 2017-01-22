@@ -1,0 +1,20 @@
+@import url("common.css");
+table.type01 {
+	border-collapse: collapse;
+	text-align: left;
+	line-height:1.5;
+}
+table.type01 th {
+	width:150px;
+	padding:10px;
+	font-weight:bold;
+	vertical-align:top;
+	background-color:#e0e0e0;
+	border:1px solid black;
+}
+table.type01 td {
+	width:350px;
+	padding:10px;
+	vertical-align:top;
+	background-color:white;
+	border:1px solid black;

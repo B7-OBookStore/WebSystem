@@ -63,15 +63,21 @@ footer {
 
 .book {
 	padding: 0 5px;
-	display: flex;
+	display: inline-flex;
 	flex-direction: column;
 }
 
 .book img {
-	margin-bottom: 5px;
+	width: 128px;
+	height: 182px;
 }
 
-
+.book p {
+	width: 128px;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 
 #pickedbooks::-webkit-scrollbar {
 	height: 10px;	 
