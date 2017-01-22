@@ -12,9 +12,9 @@ $YomiLast = $_SESSION['regYomiLast'];
 $Phone = $_SESSION['regPhone'];
 $Mail = $_SESSION['regMail'];
 $UserID = $_SESSION['regUserID'];
-$Password = $_SESSION['regPassword'];
-// 暗号化したらこっちに変更
-// $Password = password_hash($_SESSION['regPassword'], PASSWORD_DEFAULT);
+// 暗号化したのでこっちはコメントアウト
+// $Password = $_SESSION['regPassword'];
+$Password = password_hash($_SESSION['regPassword'], PASSWORD_DEFAULT);
 $Birth = $_SESSION['regBirth'];
 $Gender = $_SESSION['regGender'] == 'male' ? true : false;
 $ZipCode = $_SESSION['regZipCode'];

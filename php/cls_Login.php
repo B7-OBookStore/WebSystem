@@ -89,26 +89,24 @@ class cls_Login
 		$st->bindParam(':id', $id, PDO::PARAM_STR);
 		$st->execute();
 
-		// パスワードチェック
-		while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-			if ($row['Password'] == $pwd) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-
-		// パスワードチェック(暗号化できたらこっちに変更するよ)
+		// パスワードチェック(暗号化したのでこっちは廃止)
 //		while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
-//			// 受け取ったパスワードをBCRYPTのhashに変換
-//			$hash = password_hash($pwd,PASSWORD_DEFAULT);
-//
-//			if(password_verify($row['Password'],$hash)){
+//			if ($row['Password'] == $pwd) {
 //				return true;
 //			} else {
 //				return false;
 //			}
 //		}
+
+		// パスワードチェック(暗号化できたらこっちに変更するよ)
+		while ($row = $st->fetch(PDO::FETCH_ASSOC)) {
+
+			if(password_verify($pwd,$row['Password'])){
+				return true;
+			} else {
+				return false;
+			}
+		}
 	}
 }
 

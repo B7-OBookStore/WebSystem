@@ -24,5 +24,4 @@ if($lgn->login($_POST['logUserID'], $_POST['logPassword'])){
 	// login.phpに戻る
 	header('Location: /login.php?login=failed');
 }
-
 exit();
