@@ -16,6 +16,8 @@ session_destroy();
 setcookie('logUserID', '', time() - 420000, '/');
 setcookie('logPassword', '', time() - 420000, '/');
 setcookie('Callback', '', time() - 420000, '/');
+setcookie('LastSearch', '', time() - 420000, '/');
+
 
 // トップページに戻る
 header('Location: /index.php');
