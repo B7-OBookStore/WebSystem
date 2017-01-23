@@ -62,7 +62,7 @@ $resultZipCode2 = $replaced[0];
 
 <div id="main">
 	<section>
-		<h2>会員登録</h2>
+		<h2>会員情報変更</h2>
 		<form action="userdata_check.php" method="post">
 			<div id="form" class="vertical">
 
