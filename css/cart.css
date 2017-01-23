@@ -32,16 +32,3 @@
 	section h2 {
 		margin-bottom: 10px;
 	}
-
-	section img {
-		margin-right: 10px;
-		float: left;
-	}
-
-	section:after {
-		content: "";
-		clear: both;
-		height: 0;
-		display: block;
-		visibility: hidden;
-	}

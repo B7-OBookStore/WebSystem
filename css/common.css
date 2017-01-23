@@ -89,6 +89,22 @@ section section {
 		color: #8B4513;
 	}
 
+	.item {
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+	}
+
+	.item>* {
+		flex-shrink: 0;
+	}
+
+	.item div {
+		padding-left: 10px;
+		flex-grow: 1;
+		flex-shrink: 1;
+	}
+
 /* --------------------------------------
 　検索フォーム
 --------------------------------------- */
