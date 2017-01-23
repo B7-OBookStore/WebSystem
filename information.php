@@ -1,3 +1,34 @@
+<?php
+// セッション
+session_start();
+
+// ログインしていなかったら無理矢理index.phpに飛ばす
+if (!isset($_SESSION['UserID'])) {
+	header('Location: index.php');
+	exit();
+}
+
+// データベース準備
+require 'php/db_connect.php';
+
+$st = $pdo->prepare("SELECT FirstName, LastName, YomiFirst, YomiLast, Phone, Mail, ZipCode, Pref, City, Address, Apartment
+          FROM User WHERE UserID = :userid");
+$st->bindParam(':userid', $_SESSION['UserID'], PDO::PARAM_STR);
+$st->execute();
+$row = $st->fetch(PDO::FETCH_ASSOC);
+
+$replaced = '';
+
+// 郵便番号前半を抽出する正規表現
+preg_match('/^.{3}/', $row['ZipCode'], $replaced);
+$resultZipCode1 = $replaced[0];
+
+// 郵便番号後半を抽出する正規表現
+preg_match('/.{4}$/', $row['ZipCode'], $replaced);
+$resultZipCode2 = $replaced[0];
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -27,27 +58,28 @@
 				<table class="type01">
 					<tr>
 						<th scope="row">名前</th>
-						<td>秦泉寺辰文</td>
+						<td><?php echo $row['LastName'].' '.$row['FirstName']; ?></td>
 					</tr>
 					<tr>
 						<th scope="row">フリガナ</th>
-						<td>ジンゼンジタツフミ</td>
+						<td><?php echo $row['YomiLast'].' '.$row['YomiFirst']; ?></td>
 					</tr>
 					<tr>
 						<th scope="row">電話番号</th>
-						<td>000-0000-0000</td>
+						<td><?php echo $row['Phone']; ?></td>
 					</tr>
 					<tr>
 						<th scope="row">メールアドレス</th>
-						<td>abc@inf...</td>
+						<td><?php echo $row['Mail']; ?></td>
 					</tr>
 					<tr>
 						<th scope="row">生年月日</th>
-						<td>〇〇〇〇年〇月〇日</td>
+						<td><?php echo $row['Year'].'年'.$row['Month'].'月'.$row['Day'].'日'; ?></td>
 					</tr>
 					<tr>
 						<th scope="row">住所</th>
-						<td>浜松市〇〇</td>
+						<td><?php echo $resultZipCode1.'-'.$resultZipCode2.'<br>'.
+								$row['Pref'].$row['City'].$row['Address'].$row['Apartment']; ?></td>
 					</tr>
 				</table>
 			</section>
