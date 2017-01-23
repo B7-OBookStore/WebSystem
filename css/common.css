@@ -154,12 +154,19 @@ section {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		font-size: large;
+		font-weight: bold;
 	}
 		@media screen and ( max-width:500px ){
 			header span {
 				visibility: hidden
 			}
 		}
+
+	header img {
+		margin-left: 10px;
+		margin-right: 10px;
+	}
 
 	#login {
 		flex-shrink: 0;
@@ -173,6 +180,8 @@ section {
 		background-color: #FFFFFF;
 		color: #8B4513;
 	}
+
+
 
 /* --------------------------------------
 　フッター
