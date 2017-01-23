@@ -1,7 +1,6 @@
-<?php
+﻿<?php
 // セッション
 session_start();
-
 // ログインしていなかったら無理矢理index.phpに飛ばす
 if (!isset($_SESSION['UserID'])) {
 	header('Location: index.php');
@@ -16,7 +15,7 @@ if (!isset($_SESSION['UserID'])) {
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="widh3=device-widh3,initial-scale=1">
-	<link rel="stylesheet" href="css/registration.css">
+	<link rel="stylesheet" href="css/register.css">
 	<link rel="icon" href="img/favicon.ico">
 	<script src="js/register.js"></script>
 	<script src="js/jquery-3.1.1.min.js"></script>
@@ -35,8 +34,8 @@ if (!isset($_SESSION['UserID'])) {
 <div id="main">
 	<section>
 		<h2>会員情報変更</h2>
-		<p><a href="favorite.php">お気に入り書店の設定</a></p>
-		<p><a href="userdata.php">その他会員情報の設定</a></p>
+		<p><a href="information.php">会員情報の閲覧</a></p>
+		<p><a href="userdata.php">会員情報の修正</a></p>
 	</section>
 
 </div>
