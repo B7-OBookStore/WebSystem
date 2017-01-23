@@ -1,30 +1,6 @@
 <?php
-	$id = $_GET["id"];
-	
-	if ($id == NULL){
-		header( "Location: index.php" ) ;
-		exit;
-	}
-	
-	/* 本の情報を取得 */
-	$json = file_get_contents("https://www.googleapis.com/books/v1/volumes/".$id);
-	$results = json_decode($json, TRUE);
-	
-	$title = $results[volumeInfo][title]." ".$results[volumeInfo][subtitle];
-	$publishedDate = $results[volumeInfo][publishedDate];
-	$imageLink = $results[volumeInfo][imageLinks][smallhumbnail];
-	
-	if ($results[saleInfo][listPrice][amount] == NULL) {
-		$listPrice = "(注文確定後にお知らせ)";
-	} else {
-		$listPrice = $results[saleInfo][listPrice][amount];
-	}
-	
-	if ($results[volumeInfo][imageLinks][thumbnail] == NULL){
-		$imageLink = "img/noimage.png";
-	} else {
-		$imageLink = $results[volumeInfo][imageLinks][thumbnail];
-	}
+	require 'php/db_connect.php';
+	require 'php/cls_Book.php';
 ?>
 
 <!DOCTYPE html>
@@ -52,31 +28,40 @@
 
 		<div id="main">
 			<div id="cart">
-				<section>
-					<h2>カートに追加しました</h2>
-					<img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
-
-					<h3><?php echo $title ?></h3>
-
-					<p class="publishedDate"><?php echo $publishedDate ?></p>
-					<p><?php echo $authors ?></p>
-					<p class="price">￥ <?php echo $listPrice ?></p>
-				</section>
 
 				<section>
 					<h2>カートに入っている商品</h2>
-					<img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
+					<?php
+						$userID = $_SESSION['UserID'];
+						$stmt = $pdo->query("SELECT GoogleID FROM Cart INNER JOIN Book ON Cart.JANCode = Book.JANCode INNER JOIN User ON Cart.UserNum = User.UserNum WHERE UserID = '$userID'");
 
-					<h3><?php echo $title ?></h3>
+						foreach ($stmt as $row) {
+							$item = new Book($row[GoogleID]);
+					?>
+					<section>
+						<img alt="<?php echo $item->title ?>" src="<?php echo $item->imageLinks[thumbnail] ?>">
 
-					<p class="publishedDate"><?php echo $publishedDate ?></p>
-					<p><?php echo $authors ?></p>
-					<p class="price">￥ <?php echo $listPrice ?></p>
+						<h3><?php echo $item->title ?></h3>
+
+						<p class="publishedDate"><?php echo $item->publishedDate ?></p>
+						<p><?php echo $item->writer ?></p>
+						<p class="price">￥
+						<?php
+							if ($item->price == NULL){
+								echo "(注文確定後にお知らせ)";
+							} else {
+								echo $item->price;
+							}
+						?></p>
+					</section>
+					<?php
+						}
+					?>
 				</section>
 			</div>
 
 			<section id="nav">
-				<p><a class="button" href="order.php?id=<?php echo $id ?>">注文を確定する</a></p>
+				<p><a class="button" href="order.php">注文を確定する</a></p>
 				<p><a class="button_c" href="">買い物を続ける</a></p>
 			</section>
 		</div>

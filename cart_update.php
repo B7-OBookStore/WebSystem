@@ -62,13 +62,32 @@
 
 				<section>
 					<h2>カートに入っている商品</h2>
-					<img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
+					<?php
+						$userID = $_SESSION['UserID'];
+						$stmt = $pdo->query("SELECT GoogleID FROM Cart INNER JOIN Book ON Cart.JANCode = Book.JANCode INNER JOIN User ON Cart.UserNum = User.UserNum WHERE UserID = '$userID'");
 
-					<h3><?php echo $title ?></h3>
+						foreach ($stmt as $row) {
+							$item = new Book($row[GoogleID]);
+					?>
+					<section>
+						<img alt="<?php echo $item->title ?>" src="<?php echo $item->imageLinks[thumbnail] ?>">
 
-					<p class="publishedDate"><?php echo $publishedDate ?></p>
-					<p><?php echo $authors ?></p>
-					<p class="price">￥ <?php echo $listPrice ?></p>
+						<h3><?php echo $item->title ?></h3>
+
+						<p class="publishedDate"><?php echo $item->publishedDate ?></p>
+						<p><?php echo $item->writer ?></p>
+						<p class="price">￥
+						<?php
+							if ($item->price == NULL){
+								echo "(注文確定後にお知らせ)";
+							} else {
+								echo $item->price;
+							}
+						?></p>
+					</section>
+					<?php
+						}
+					?>
 				</section>
 			</div>
 

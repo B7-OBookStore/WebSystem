@@ -25,6 +25,11 @@ section {
 	background-color: #FFFFFF;
 }
 
+section section {
+	margin: 10px 0;
+	padding: 0;
+}
+
 .vertical {
 	display: flex;
 	flex-direction: column;
@@ -154,19 +159,12 @@ section {
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
-		font-size: large;
-		font-weight: bold;
 	}
 		@media screen and ( max-width:500px ){
 			header span {
 				visibility: hidden
 			}
 		}
-
-	header img {
-		margin-left: 10px;
-		margin-right: 10px;
-	}
 
 	#login {
 		flex-shrink: 0;
@@ -180,8 +178,6 @@ section {
 		background-color: #FFFFFF;
 		color: #8B4513;
 	}
-
-
 
 /* --------------------------------------
 　フッター
