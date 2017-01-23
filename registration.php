@@ -4,9 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="widh3=device-widh3,initial-scale=1">
-	<link rel="stylesheet" href="css/register.css">
+	<link rel="stylesheet" href="css/registration.css">
 	<link rel="icon" href="img/favicon.ico">
-	<script src="js/register.js"></script>
 	<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 	<script src="js/jquery-3.1.1.min.js"></script>
 	<title>O書店</title>

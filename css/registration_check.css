@@ -1,0 +1,11 @@
+@import url("common.css");
+@import url("registration.css");
+
+h3 {
+	margin-right: 0;
+}
+
+#form>div>div {
+	padding-left: 10px;
+	border: 1px solid #B0ACAC;
+}

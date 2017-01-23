@@ -26,7 +26,7 @@ $_SESSION['regApartment'] = $_POST['Apartment'];
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="widh3=device-widh3,initial-scale=1">
-	<link rel="stylesheet" href="css/register.css">
+	<link rel="stylesheet" href="css/registration_check.css">
 	<link rel="icon" href="img/favicon.ico">
 	<script src="js/register.js"></script>
 	<script src="js/jquery-3.1.1.min.js"></script>
@@ -98,17 +98,23 @@ $_SESSION['regApartment'] = $_POST['Apartment'];
 
 				<div id="birth" class="horizontal">
 					<h3>生年月日</h3>
-					<p><?php echo $_POST['year'], '年', $_POST['month'], '月', $_POST['day'], '日'; ?></p>
+					<div>
+						<p><?php echo $_POST['year'], '年', $_POST['month'], '月', $_POST['day'], '日'; ?></p>
+					</div>
 				</div>
 
 				<div id="phonenumber" class="horizontal">
 					<h3>電話番号</h3>
-					<p><?php echo $_POST['Phone']; ?></p>
+					<div>
+						<p><?php echo $_POST['Phone']; ?></p>
+					</div>
 				</div>
 
 				<div id="mailaddress" class="horizontal">
 					<h3>メールアドレス</h3>
-					<p><?php echo $_POST['MailUser'], '@', $_POST['MailDomain']; ?></p>
+					<div>
+						<p><?php echo $_POST['MailUser'], '@', $_POST['MailDomain']; ?></p>
+					</div>
 				</div>
 
 				<div id="address" class="horizontal">
