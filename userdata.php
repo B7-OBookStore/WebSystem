@@ -160,6 +160,8 @@ $resultZipCode2 = $replaced[0];
 							<h4>都道府県</h4>
 							<div>
 								<select name="pref" required>
+									<?php echo preg_replace('/'.$result['Pref'].'\"\>/',
+											$result['Pref'].'" selected>', '
 									<option value="">都道府県</option>
 									<option value="北海道">北海道</option>
 									<option value="青森県">青森県</option>
@@ -208,6 +210,7 @@ $resultZipCode2 = $replaced[0];
 									<option value="宮崎県">宮崎県</option>
 									<option value="鹿児島県">鹿児島県</option>
 									<option value="沖縄県">沖縄県</option>
+								'); ?>
 								</select>
 							</div>
 						</div>
