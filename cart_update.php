@@ -60,7 +60,15 @@
 
 							<p class="publishedDate"><?php echo $book->publishedDate ?></p>
 							<p><?php echo $book->writer ?></p>
-							<p class="price">￥ <?php echo $book->price ?></p>
+							<p class="price">￥
+							<?php
+								if ($book->price == NULL) {
+									echo "(注文確定後にお知らせ)";
+								} else {
+									echo $book->price;
+								}
+							?>
+							</p>
 						</div>
 
 						<a class="button" href="cart_delete.php?id=<?php echo $id ?>">削除</a>
