@@ -140,7 +140,12 @@ section section {
 		border-bottom: 10px solid #FFFFFF;
 		padding: 20px;
 		margin-bottom: 10px;
-		background-color: #8B4513;
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(1.00, #8B4513), color-stop(0.00, #cf7e44));
+		background: -webkit-linear-gradient(#cf7e44, #8B4513);
+		background: -moz-linear-gradient(#cf7e44, #8B4513);
+		background: -o-linear-gradient(#cf7e44, #8B4513);
+		background: -ms-linear-gradient(#cf7e44, #8B4513);
+		background: linear-gradient(#cf7e44, #8B4513);
 	}
 
 	header * {
@@ -153,12 +158,19 @@ section section {
 		margin-right: 15px;
 	}
 
+	header img{
+		margin-left: 10px;
+		margin-right: 10px;
+	}
+
 	header span {
 		flex-grow: 1;
 		text-align: right;
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
+		font-size: large;
+		font-weight: bold;
 	}
 		@media screen and ( max-width:500px ){
 			header span {
