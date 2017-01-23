@@ -6,7 +6,6 @@ session_start();
 if (!isset($_SESSION['UserID'])) {
 	header('Location: index.php');
 	exit();
-} else {
 }
 
 // データベース準備
@@ -63,7 +62,7 @@ $resultZipCode2 = $replaced[0];
 <div id="main">
 	<section>
 		<h2>会員情報変更</h2>
-		<form action="userdata_check.php" method="post">
+		<form action="userdata_show.php" method="post">
 			<div id="form" class="vertical">
 
 				<div id="password" class="horizontal">
