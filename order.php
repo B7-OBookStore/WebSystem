@@ -1,6 +1,12 @@
 <?php
 	require 'php/db_connect.php';
 	require 'php/cls_Book.php';
+
+	session_start();
+	if (!isset($_SESSION['UserID'])) {
+		header('Location: login.php');
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -66,7 +72,7 @@
 							$stmt = $pdo->query("SELECT * FROM Store WHERE StoreNum <> 0");
 
 							foreach ($stmt as $row) {
-								echo "<input type='radio' name='storeNum' value='$row[StoreNum]'>$row[StoreName]<br>";
+								echo "<input type='radio' name='storeNum' value='$row[StoreNum]' required>$row[StoreName]<br>";
 							}
 						?>
 					</div>

@@ -1,6 +1,12 @@
 <?php
 	require 'php/db_connect.php';
 	require 'php/cls_Book.php';
+
+	session_start();
+	if (!isset($_SESSION['UserID'])) {
+		header('Location: login.php');
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -34,6 +40,7 @@
 					<?php
 						$userID = $_SESSION['UserID'];
 						$stmt = $pdo->query("SELECT Book.JANCode,Price,BookTitle,Writer,GoogleID FROM Cart INNER JOIN Item ON Cart.JANCode = Item.JANCode INNER JOIN Book ON Cart.JANCode = Book.JANCode INNER JOIN User ON Cart.UserNum = User.UserNum WHERE UserID = '$userID'");
+						$count = 0;
 
 						foreach ($stmt as $row) {
 					?>
@@ -57,6 +64,10 @@
 						<a class="button" href="cart_delete.php?id=<?php echo $row[GoogleID] ?>">削除</a>
 					</section>
 					<?php
+							$count++;
+						}
+						if ($count === 0) {
+							echo '<p>現在カートに入っている商品はありません。</p>';
 						}
 					?>
 				</section>
