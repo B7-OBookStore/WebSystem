@@ -10,9 +10,9 @@ class cls_DuplicateCheck
 	function existPhone($phone)
 	{
 		if ($this->dbChecker('Phone', $phone)) {
-			return '<span style="color:red">この電話番号はすでに登録されています。</span>';
+			return true;
 		} else {
-			return 'この電話番号は使用できます。';
+			return false;
 		}
 	}
 
@@ -20,18 +20,18 @@ class cls_DuplicateCheck
 	function existMail($mail)
 	{
 		if ($this->dbChecker('Mail', $mail)) {
-			return '<span style="color:red">このメールアドレスはすでに登録されています。</span>';
+			return true;
 		} else {
-			return 'このメールアドレスは使用できます。';
+			return false;
 		}
 	}
 
 	function existUserID($userid)
 	{
 		if ($this->dbChecker('UserID', $userid)) {
-			return '<span style="color:red">このIDはすでに登録されています。</span>';
+			return true;
 		} else {
-			return 'このIDは使用できます。';
+			return false;
 		}
 	}
 
