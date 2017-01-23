@@ -1,30 +1,6 @@
 <?php
-	$id = $_GET["id"];
-	$shop = $_GET["shop"];
-	
-	if ($id == NULL){
-		header( "Location: index.php" ) ;
-		exit;
-	}
-	
-	$json = file_get_contents("https://www.googleapis.com/books/v1/volumes/".$id);
-	$results = json_decode($json, TRUE);
-	
-	$title = $results[volumeInfo][title]." ".$results[volumeInfo][subtitle];
-	$publishedDate = $results[volumeInfo][publishedDate];
-	$imageLink = $results[volumeInfo][imageLinks][smallhumbnail];
-	
-	if ($results[saleInfo][listPrice][amount] == NULL) {
-		$listPrice = "(注文確定後にお知らせ)";
-	} else {
-		$listPrice = $results[saleInfo][listPrice][amount];
-	}
-	
-	if ($results[volumeInfo][imageLinks][thumbnail] == NULL){
-		$imageLink = "img/noimage.png";
-	} else {
-		$imageLink = $results[volumeInfo][imageLinks][thumbnail];
-	}
+	require 'php/db_connect.php';
+	require 'php/cls_Book.php';
 ?>
 
 <!DOCTYPE html>
@@ -51,31 +27,53 @@
 		</form>
 
 		<div id="main">
-			<section>
+			<section id="store" class="vertical">
 				<h2>お受け取りに使う店舗を選択してください</h2>
 
-				<fieldset form="submit">
-					<input type="radio" name="shop" value="本店">本店<br>
-					<input type="radio" name="shop" value="駅前店">駅前店<br>
-					<input type="radio" name="shop" value="工大前店">工大前店<br>
-					<input type="radio" name="shop" value="県庁通店">県庁通店<br>
-					<input type="radio" name="shop" value="プラザ店">プラザ店<br>
-					<input type="radio" name="shop" value="山環状店">山環状店<br>
-				</fieldset>
+				<form class="horizontal" action="order_check.php" method="post">
+					<div>
+						<?php
+							$stmt = $pdo->query("SELECT * FROM Store WHERE StoreNum <> 0");
 
-				<a class="button" href="#overray">決定</a>
-
+							foreach ($stmt as $row) {
+								echo "<input type='radio' name='store' value='$row[StoreNum]'>$row[StoreName]<br>";
+							}
+						?>
+					</div>
+					<input class="button" type="submit" value="決定">
+				</form>
 			</section>
 
-			<section>
+			<section id="cart">
 				<h2>注文内容</h2>
-				<img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
+					<?php
+						$userID = $_SESSION['UserID'];
+						$stmt = $pdo->query("SELECT Book.JANCode,Price,BookTitle,Writer,GoogleID FROM Cart INNER JOIN Item ON Cart.JANCode = Item.JANCode INNER JOIN Book ON Cart.JANCode = Book.JANCode INNER JOIN User ON Cart.UserNum = User.UserNum WHERE UserID = '$userID'");
 
-				<h3><?php echo $title ?></h3>
+						foreach ($stmt as $row) {
+					?>
+					<section class="horizontal items">
+						<img alt="<?php echo $row[BookTitle] ?>" src="http://books.google.com/books/content?id=<?php echo $row[GoogleID] ?>&printsec=frontcover&img=1&zoom=5&source=gbs_api">
 
-				<p class="publishedDate"><?php echo $publishedDate ?></p>
-				<p><?php echo $authors ?></p>
-				<p class="price">￥ <?php echo $listPrice ?></p>
+						<div class="info">
+							<h3><?php echo $row[BookTitle] ?></h3>
+
+							<p><?php echo $row[Writer] ?></p>
+							<p class="price">￥
+							<?php
+								if ($row[Price] == NULL){
+									echo "(注文確定後にお知らせ)";
+								} else {
+									echo $row[Price];
+								}
+							?></p>
+						</div>
+
+						<a class="button" href="cart_delete.php?id=<?php echo $row[GoogleID] ?>">削除</a>
+					</section>
+					<?php
+						}
+					?>
 			</section>
 		</div>
 
@@ -84,25 +82,6 @@
 			<a href="">プライバシー</a>
 			<a href="">店舗</a>
 		</footer>
-
-		<div id="overray"></div>
-		<div id="container">
-			<div id="dialog">
-				<h2>注文最終確認</h2>
-				<h3>お受け取りの店舗</h3>
-				<p>本店</p>
-
-				<h3>注文内容</h3>
-				<p><?php echo $title ?></p>
-
-				<div id="button">
-					<form id="submit" method="get" action="order.php">
-						<button class="button" type="submit">注文を確定</button>
-					</form>
-					<a class="button_c" href="#" class="button">閉じる</a>
-				</div>
-			</div>
-		</div>
 
 	</body>
 

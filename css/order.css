@@ -1,86 +1,38 @@
 @import url("common.css");
+@import url("cart.css");
 
-	section h2 {
-		margin-bottom: 10px;
-	}
-
-	section img {
-		margin-right: 10px;
-		float: left;
-	}
-
-	section:after {
-		content: "";
-		clear: both;
-		height: 0;
-		display: block;
-		visibility: hidden;
-	}
-
-section fieldset {
-	border: none;
-}
-
-section fieldset input[type=radio] {
+section form input[type=radio] {
 	margin: 5px;
 }
 
-#overray {
-	position: fixed;
-	top: 0;
-	left: 0;
-	height: 100%;
-	width: 100%;
-	background: #000000;
-	opacity: 0.5;
-	z-index: 1;
-	display: none;
+section form {
+	align-items: flex-end;
 }
 
-#container {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	max-width: 600px;
-	height: 400px;
-	margin: auto;
-	z-index: 2;
-	display: none;
+section form div {
+	flex-grow: 1;
 }
 
-#dialog {
-	border: 1px solid #000000;
-	width: 80%;
-	height: 100%;
-	margin: auto;
-	padding: 10px;
-	background-color: #FFFFFF;
+@media screen and ( max-width:800px ){
+	#main {
+		flex-wrap: wrap;
+	}
+
+	#main section {
+		width: 100%;
+	}
 }
 
-#dialog p {
-	width: 100%;
+#store {
+	position: relative;
+	flex-grow: 2;
 }
 
-#dialog #button {
-	position: absolute;
-	bottom: 0;
-	right: 60px;
+#cart {
+	flex-grow: 3;
 }
 
-#dialog #button * {
-	font-size: 16px;
-}
-
-#dialog #button form {
-	display: inline;
-}
-
-#dialog h3 {
-	margin: 10px 0;
-}
-
-#overray:target, #overray:target + #container {
-	display: block;
+#character {
+	margin: 15px 0 0 auto;
+	flex-shrink: 1;
 }

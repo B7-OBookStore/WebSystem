@@ -33,25 +33,23 @@
 					<h2>カートに入っている商品</h2>
 					<?php
 						$userID = $_SESSION['UserID'];
-						$stmt = $pdo->query("SELECT GoogleID FROM Cart INNER JOIN Book ON Cart.JANCode = Book.JANCode INNER JOIN User ON Cart.UserNum = User.UserNum WHERE UserID = '$userID'");
+						$stmt = $pdo->query("SELECT Book.JANCode,Price,BookTitle,Writer,GoogleID FROM Cart INNER JOIN Item ON Cart.JANCode = Item.JANCode INNER JOIN Book ON Cart.JANCode = Book.JANCode INNER JOIN User ON Cart.UserNum = User.UserNum WHERE UserID = '$userID'");
 
 						foreach ($stmt as $row) {
-							$item = new Book($row[GoogleID]);
 					?>
 					<section class="horizontal items">
-						<img alt="<?php echo $item->title ?>" src="<?php echo $item->imageLinks[thumbnail] ?>">
+						<img alt="<?php echo $row[BookTitle] ?>" src="http://books.google.com/books/content?id=<?php echo $row[GoogleID] ?>&printsec=frontcover&img=1&zoom=5&source=gbs_api">
 
 						<div class="info">
-							<h3><?php echo $item->title ?></h3>
+							<h3><?php echo $row[BookTitle] ?></h3>
 
-							<p class="publishedDate"><?php echo $item->publishedDate ?></p>
-							<p><?php echo $item->writer ?></p>
+							<p><?php echo $row[Writer] ?></p>
 							<p class="price">￥
 							<?php
-								if ($item->price == NULL){
+								if ($row[Price] == NULL){
 									echo "(注文確定後にお知らせ)";
 								} else {
-									echo $item->price;
+									echo $row[Price];
 								}
 							?></p>
 						</div>
