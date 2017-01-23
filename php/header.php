@@ -8,6 +8,12 @@
 // セッション開始
 session_start();
 
+// ログインページでなかったらCookieにそのページのアドレス保存する
+// ->ログイン後にそのページに戻ってこれるようにするため
+if(!preg_match('/^\/login\.php.*$/',$_SERVER['REQUEST_URI'])) {
+	setcookie('Callback',$_SERVER['REQUEST_URI'],time()+60*60*24*14, '/');
+}
+
 $cUserID = $_COOKIE['logUserID'];
 $cPassword = $_COOKIE['logPassword'];
 

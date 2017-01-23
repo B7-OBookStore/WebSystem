@@ -18,8 +18,13 @@ if($lgn->login($_POST['logUserID'], $_POST['logPassword'])){
 	setcookie('logUserID', $cLogUserID, time() + 60 * 60 * 24 * 14, '/');
 	setcookie('logPassword', $cLogPassword, time() + 60 * 60 * 24 * 14, '/');
 
-	// index.phpに変遷
-	header('Location: /index.php');
+	// ログイン前のページに戻る
+	if(!empty($_COOKIE['Callback'])) {
+		header('Location: '.$_COOKIE['Callback']);
+	} else {
+		header('Location: /index.php');
+
+	}
 
 } else {
 	// login.phpに戻る
