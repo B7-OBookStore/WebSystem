@@ -110,7 +110,7 @@
 
 			<section id="nav">
 				<p><a class="button" href="order.php">注文を確定する</a></p>
-				<p><a class="button_c" href="">買い物を続ける</a></p>
+				<p><a class="button_c" href="book.php?id=<?php echo $id ?>">買い物を続ける</a></p>
 			</section>
 		</div>
 
