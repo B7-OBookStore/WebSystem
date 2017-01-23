@@ -62,7 +62,7 @@ $resultZipCode2 = $replaced[0];
 <div id="main">
 	<section>
 		<h2>会員情報変更</h2>
-		<form action="userdata_show.php" method="post">
+		<form id="registerForm" action="userdata_show.php" method="post">
 			<div id="form" class="vertical">
 
 				<div id="password" class="horizontal">
@@ -92,7 +92,8 @@ $resultZipCode2 = $replaced[0];
 							</div>
 							<div>
 								<h4>名</h4>
-								<input type="text" name="FirstName" value="<?php echo $result['FirstName']; ?>" required>
+								<input type="text" name="FirstName" value="<?php echo $result['FirstName']; ?>"
+								       required>
 								<small>(例) 太郎</small>
 							</div>
 						</div>
@@ -110,7 +111,8 @@ $resultZipCode2 = $replaced[0];
 							</div>
 							<div>
 								<h4>名</h4>
-								<input type="text" name="YomiFirst" value="<?php echo $result['YomiFirst']; ?>" required>
+								<input type="text" name="YomiFirst" value="<?php echo $result['YomiFirst']; ?>"
+								       required>
 								<small>(例) タロウ</small>
 							</div>
 						</div>
@@ -121,7 +123,8 @@ $resultZipCode2 = $replaced[0];
 				<div id="phonenumber" class="horizontal">
 					<h3>電話番号</h3>
 					<div>
-						<input id="formPhone" type="text" name="Phone" maxlength="11" value="<?php echo $result['Phone']; ?>" required>
+						<input id="formPhone" type="text" name="Phone" maxlength="11"
+						       value="<?php echo $result['Phone']; ?>" required>
 						<small id="checkPhone">(例) 12345678910</small>
 					</div>
 				</div>
@@ -144,7 +147,8 @@ $resultZipCode2 = $replaced[0];
 						<div>
 							<h4>郵便番号</h4>
 							<div class="horizontal"><input type="text" class="addressnumber" name="ZipCode1"
-							                               maxlength="3" value="<?php echo $resultZipCode1; ?>" required>
+							                               maxlength="3" value="<?php echo $resultZipCode1; ?>"
+							                               required>
 								<p>-</p><input type="text" class="addressnumber" name="ZipCode2" maxlength="4"
 								               value="<?php echo $resultZipCode2; ?>" required>
 								<input id="button" type="button" value="〒"
@@ -220,7 +224,7 @@ $resultZipCode2 = $replaced[0];
 						</div>
 						<div>
 							<h4>建物名など</h4>
-							<div><input type="text" name="Apartment" value="<?php echo $result['Apartment']; ?>" >
+							<div><input type="text" name="Apartment" value="<?php echo $result['Apartment']; ?>">
 							</div>
 						</div>
 					</div>
@@ -264,6 +268,35 @@ $resultZipCode2 = $replaced[0];
 		</form>
 
 		<img id="character" alt="O書店公式キャラクター 羽名しおりちゃん" src="img/register_shiori.png">
+
+		<script>
+			// ----- Validation Check -----
+
+			// Validation Flag
+			$flag = false;
+
+			function reqPhp() {
+				$.get('php/ajax_validationCheck2.php', {
+					Phone: $('#formPhone').val(),
+					Mail: $('#formMail1').val() + '@' + $('#formMail2').val()
+				}, function (data) {
+					if (data == 'ok') {
+						$flag = true;
+					} else if (data == 'ng') {
+						$flag = false;
+					}
+				});
+			}
+
+			$('#registerForm').submit(function () {
+				reqPhp();
+				if ($flag && $('#formPass1').val() === $('#formPass2').val()) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+		</script>
 	</section>
 
 </div>
