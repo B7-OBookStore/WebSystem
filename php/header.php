@@ -41,6 +41,10 @@ if(!isset($_SESSION['UserID'])) {
 
 // ログイン時の表示
 } else {
+	// 各種変数
+	$UserName = ''; // ユーザの氏名
+	$cartin = false; // カートにアイテムが入っているかどうか
+
 	// ユーザIDから名前を取得
 	require 'db_connect.php';
 	$headerst = $pdo->prepare("SELECT FirstName, LastName FROM User WHERE UserID = :userid");
@@ -50,8 +54,27 @@ if(!isset($_SESSION['UserID'])) {
 		$UserName = $headerrow['LastName'] . $headerrow['FirstName'];
 	}
 
+	// カートにアイテムがあるかチェック
+	$headerst2 = $pdo->prepare("SELECT UserNum,JANCode FROM Cart NATURAL JOIN User WHERE User.UserID = :userid");
+	$headerst2->bindParam(':userid', $_SESSION['UserID'], PDO::PARAM_STR);
+	$headerst2->execute();
+	while($headerrow2 = $headerst2->fetch(PDO::FETCH_ASSOC)){
+		if(!empty($headerrow2['JANCode'])){
+			$cartin = true;
+			break;
+		} else {
+			$cartin = false;
+			break;
+		}
+	}
+
 	// 表示部
 	echo '<span>ようこそ  '.$UserName.'  さん</span>';
+	if($cartin){
+		echo '<img src="/img/cart_exist.png" width="32px" height="32px" alt="cart_exist">';
+	} else {
+		echo '<img src="/img/cart_empty.png" width="32px" height="32px" alt="cart_empty">';
+	}
 	echo '<a id="login" href="/php/logoutManager.php">ログアウト</a>';
 }
 
