@@ -34,11 +34,20 @@
 						<small id="checkID">11文字以内　(例) abcd1234</small>
 					</div>
 				</div>
+
 				<div id="password" class="horizontal">
 					<h3>パスワード</h3>
 					<div>
-						<input type="password" name="Password" maxlength="8" required>
+						<input class="formPass" id="formPass1" type="password" name="Password" maxlength="8" required>
 						<small>8文字以上</small>
+					</div>
+				</div>
+
+				<div id="password" class="horizontal">
+					<h3>パスワード再入力</h3>
+					<div>
+						<input class="formPass" id="formPass2" type="password2" name="Password2" maxlength="8" required>
+						<small id="checkPass"></small>
 					</div>
 				</div>
 
@@ -388,6 +397,15 @@
 							}, function (data) {
 								$('#checkMail').html(data);
 							});
+						});
+
+						// パスワードチェック
+						$('.formPass').change(function() {
+							if($('#formPass1').val() !== $('#formPass2').val()){
+								$('#checkPass').html('<span style="color:red">パスワードが一致していません。</span>');
+							} else {
+								$('#checkPass').html('');
+							}
 						});
 					});
 				</script>
