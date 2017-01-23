@@ -11,7 +11,7 @@
 		exit;
 	}
 
-	if ($q === '糸田♯') {
+	if ($q === '糸田＃') {
 		header( "Location: img/hosoi.jpg" ) ;
 		exit;
 	}
