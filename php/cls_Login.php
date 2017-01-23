@@ -11,7 +11,6 @@ class cls_Login
 		// Cookieにログインデータが残っていたら自動再ログインする
 		if (isset($_COOKIE['logUserID'])) {
 			// そのデータを使ってログイン
-			echo 'cookie detected.';
 			if ($this->login($_COOKIE['logUserID'], $_COOKIE['logPassword'])) {
 				return true;
 			} else {
@@ -23,7 +22,6 @@ class cls_Login
 	// ログイン
 	function login($id, $pass)
 	{
-		echo 'check process<br>';
 		if ($id != '' && $pass != '') {
 			if ($this->checkID($id) && $this->checkPass($id, $pass)) {
 				return true;
