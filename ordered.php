@@ -2,6 +2,11 @@
 	require 'php/db_connect.php';
 
 	$storeNum = $_POST['storeNum'];
+
+	if ($storeNum == NULL) {
+		header( "Location: index.php" ) ;
+		exit;
+	}
 ?>
 
 <!DOCTYPE html>

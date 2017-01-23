@@ -1,6 +1,12 @@
 <?php
 	require 'php/db_connect.php';
 	require 'php/cls_Book.php';
+
+	session_start();
+	if (!isset($_SESSION['UserID'])) {
+		header('Location: login.php');
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>

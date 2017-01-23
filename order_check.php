@@ -3,6 +3,11 @@
 
 	$storeNum = $_POST['storeNum'];
 
+	if ($storeNum == NULL) {
+		header( "Location: index.php" ) ;
+		exit;
+	}
+
 	$stmt = $pdo->query("SELECT StoreName FROM Store WHERE StoreNum=$storeNum");
 	if ($result = $stmt->fetch()) {
 		$storeName = $result[StoreName];
