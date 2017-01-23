@@ -35,8 +35,8 @@ if (!isset($_SESSION['UserID'])) {
 <div id="main">
 	<section>
 		<h2>会員情報変更</h2>
-		<p><a href="favorite.php">お気に入り書店の設定</a></p>
-		<p><a href="userdata.php">その他会員情報の設定</a></p>
+		<p><a href="information.php">会員情報の閲覧</a></p>
+		<p><a href="userdata.php">会員情報の修正</a></p>
 	</section>
 
 </div>
