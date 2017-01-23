@@ -31,8 +31,3 @@ section form div {
 #cart {
 	flex-grow: 3;
 }
-
-#character {
-	margin: 15px 0 0 auto;
-	flex-shrink: 1;
-}

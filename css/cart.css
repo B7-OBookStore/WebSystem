@@ -32,17 +32,3 @@
 	section h2 {
 		margin-bottom: 10px;
 	}
-
-	.items {
-		align-items: flex-start;
-	}
-
-	.items>* {
-		flex-shrink: 0;
-	}
-
-	.info {
-		padding-left: 10px;
-		flex-grow: 1;
-		flex-shrink: 1;
-	}

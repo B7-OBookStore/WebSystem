@@ -37,7 +37,7 @@
 
 						foreach ($stmt as $row) {
 					?>
-					<section class="horizontal items">
+					<section class="item">
 						<img alt="<?php echo $row[BookTitle] ?>" src="http://books.google.com/books/content?id=<?php echo $row[GoogleID] ?>&printsec=frontcover&img=1&zoom=5&source=gbs_api">
 
 						<div class="info">

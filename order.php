@@ -27,23 +27,6 @@
 		</form>
 
 		<div id="main">
-			<section id="store" class="vertical">
-				<h2>お受け取りに使う店舗を選択してください</h2>
-
-				<form class="horizontal" action="order_check.php" method="post">
-					<div>
-						<?php
-							$stmt = $pdo->query("SELECT * FROM Store WHERE StoreNum <> 0");
-
-							foreach ($stmt as $row) {
-								echo "<input type='radio' name='store' value='$row[StoreNum]'>$row[StoreName]<br>";
-							}
-						?>
-					</div>
-					<input class="button" type="submit" value="決定">
-				</form>
-			</section>
-
 			<section id="cart">
 				<h2>注文内容</h2>
 					<?php
@@ -52,7 +35,7 @@
 
 						foreach ($stmt as $row) {
 					?>
-					<section class="horizontal items">
+					<section class="item">
 						<img alt="<?php echo $row[BookTitle] ?>" src="http://books.google.com/books/content?id=<?php echo $row[GoogleID] ?>&printsec=frontcover&img=1&zoom=5&source=gbs_api">
 
 						<div class="info">
@@ -68,12 +51,27 @@
 								}
 							?></p>
 						</div>
-
-						<a class="button" href="cart_delete.php?id=<?php echo $row[GoogleID] ?>">削除</a>
 					</section>
 					<?php
 						}
 					?>
+			</section>
+
+			<section id="store" class="vertical">
+				<h2>お受け取りに使う店舗を選択してください</h2>
+
+				<form class="horizontal" action="order_check.php" method="post">
+					<div>
+						<?php
+							$stmt = $pdo->query("SELECT * FROM Store WHERE StoreNum <> 0");
+
+							foreach ($stmt as $row) {
+								echo "<input type='radio' name='storeNum' value='$row[StoreNum]'>$row[StoreName]<br>";
+							}
+						?>
+					</div>
+					<input class="button" type="submit" value="決定">
+				</form>
 			</section>
 		</div>
 
