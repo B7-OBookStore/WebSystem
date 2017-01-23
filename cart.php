@@ -75,7 +75,13 @@
 
 			<section id="nav">
 				<p><a class="button" href="order.php">注文を確定する</a></p>
-				<p><a class="button_c" href="<?php echo $_COOKIE['LastSearch']; ?>">買い物を続ける</a></p>
+				<p><a class="button_c" href="<?php
+					if ($_COOKIE['LastSearch'] == NULL) {
+						echo 'index.php'
+					} else {
+						echo $_COOKIE['LastSearch'];
+					}
+					?>">買い物を続ける</a></p>
 			</section>
 		</div>
 
