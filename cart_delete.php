@@ -38,18 +38,13 @@
 		<div id="main">
 			<div id="cart">
 				<section>
+					<h2>カートから削除しました</h2>
 					<?php
 						/* カートに追加する本をデータベースから検索、無ければ追加 */
-						$sql = "INSERT INTO Cart SELECT UserNum,$book->janCode FROM User WHERE UserID=:userid";
+						$sql = "DELETE Cart FROM Cart INNER JOIN User ON Cart.UserNum = User.UserNum WHERE JANCode = $book->janCode AND UserID=:userid";
 						$stmt = $pdo->prepare($sql);
 						$stmt->bindParam(':userid', $_SESSION['UserID']);
-						$result = $stmt->execute();
-						
-						if ($result) {
-							echo '<h2>カートに追加しました</h2>';
-						} else {
-							echo '<h2>既にカートに追加されています</h2>';
-						}
+						$stmt->execute();
 					?>
 					<section class="horizontal items">
 						
@@ -63,7 +58,7 @@
 							<p class="price">￥ <?php echo $book->price ?></p>
 						</div>
 
-						<a class="button" href="cart_delete.php?id=<?php echo $id ?>">削除</a>
+						<a class="button" href="cart_update.php?id=<?php echo $id ?>">元に戻す</a>
 					</section>
 				</section>
 

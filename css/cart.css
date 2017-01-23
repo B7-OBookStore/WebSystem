@@ -33,15 +33,16 @@
 		margin-bottom: 10px;
 	}
 
-	section img {
-		margin-right: 10px;
-		float: left;
+	.items {
+		align-items: flex-start;
 	}
 
-	section:after {
-		content: "";
-		clear: both;
-		height: 0;
-		display: block;
-		visibility: hidden;
+	.items>* {
+		flex-shrink: 0;
+	}
+
+	.info {
+		padding-left: 10px;
+		flex-grow: 1;
+		flex-shrink: 1;
 	}

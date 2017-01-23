@@ -38,21 +38,25 @@
 						foreach ($stmt as $row) {
 							$item = new Book($row[GoogleID]);
 					?>
-					<section>
+					<section class="horizontal items">
 						<img alt="<?php echo $item->title ?>" src="<?php echo $item->imageLinks[thumbnail] ?>">
 
-						<h3><?php echo $item->title ?></h3>
+						<div class="info">
+							<h3><?php echo $item->title ?></h3>
 
-						<p class="publishedDate"><?php echo $item->publishedDate ?></p>
-						<p><?php echo $item->writer ?></p>
-						<p class="price">￥
-						<?php
-							if ($item->price == NULL){
-								echo "(注文確定後にお知らせ)";
-							} else {
-								echo $item->price;
-							}
-						?></p>
+							<p class="publishedDate"><?php echo $item->publishedDate ?></p>
+							<p><?php echo $item->writer ?></p>
+							<p class="price">￥
+							<?php
+								if ($item->price == NULL){
+									echo "(注文確定後にお知らせ)";
+								} else {
+									echo $item->price;
+								}
+							?></p>
+						</div>
+
+						<a class="button" href="cart_delete.php?id=<?php echo $row[GoogleID] ?>">削除</a>
 					</section>
 					<?php
 						}
