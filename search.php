@@ -10,6 +10,11 @@
 		header( "Location: index.php" ) ;
 		exit;
 	}
+
+	if ($q === 'フェリスof細井健太') {
+		header( "Location: img/hosoi.jpg" ) ;
+		exit;
+	}
 	
 	if ($startIndex == NULL) {
 		$startIndex = 0;
