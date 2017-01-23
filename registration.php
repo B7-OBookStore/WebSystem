@@ -34,11 +34,20 @@
 						<small id="checkID">11文字以内　(例) abcd1234</small>
 					</div>
 				</div>
+
 				<div id="password" class="horizontal">
 					<h3>パスワード</h3>
 					<div>
-						<input type="password" name="Password" maxlength="8" required>
+						<input class="formPass" id="formPass1" type="password" name="Password" maxlength="8" required>
 						<small>8文字以上</small>
+					</div>
+				</div>
+
+				<div id="password" class="horizontal">
+					<h3>パスワード再入力</h3>
+					<div>
+						<input class="formPass" id="formPass2" type="password2" name="Password2" maxlength="8" required>
+						<small id="checkPass"></small>
 					</div>
 				</div>
 
@@ -89,7 +98,7 @@
 				<div id="birth" class="horizontal">
 					<h3>生年月日</h3>
 					<div class="horizontal">
-						<select name="year" required>
+						<select class="formBirth" id="formYear" name="year" required>
 							<option value="">--</option>
 							<option value="1917">1917</option>
 							<option value="1918">1918</option>
@@ -197,7 +206,7 @@
 							<option value="2020">2020</option>
 						</select>
 						<p>年</p>
-						<select name="month" required>
+						<select class="formBirth" id="formMonth" name="month" required>
 							<option value="">--</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -213,39 +222,33 @@
 							<option value="12">12</option>
 						</select>
 						<p>月</p>
-						<select name="day" required>
-							<option value="">--</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
-							<option value="13">13</option>
-							<option value="14">14</option>
-							<option value="15">15</option>
-							<option value="16">16</option>
-							<option value="17">17</option>
-							<option value="18">18</option>
-							<option value="19">19</option>
-							<option value="20">20</option>
-							<option value="21">21</option>
-							<option value="22">22</option>
-							<option value="23">23</option>
-							<option value="24">24</option>
-							<option value="25">25</option>
-							<option value="26">26</option>
-							<option value="27">27</option>
-							<option value="28">28</option>
-							<option value="29">29</option>
-							<option value="30">30</option>
-							<option value="31">31</option>
+						<select id="formDay" name="day" required>
+							<script>
+								// 月の日数を返す関数
+								function getDaysOfMonth(iYear, iMonth) {
+									var daysInMonth = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+
+									// うるう年
+									if (((iYear % 4 == 0) && (iYear % 100 != 0)) || (iYear % 400 == 0)) {
+										daysInMonth[1] = 29;
+									}
+
+									return daysInMonth[iMonth - 1];
+								}
+
+								$(function() {
+									$('.formBirth').change(function() {
+										$year = $('#formYear').val();
+										$month = $('#formMonth').val();
+										$daynum = getDaysOfMonth($year, $month);
+										$output = '';
+										for($i = 1; $i <= $daynum; $i++){
+											$output += '<option value="' + $i + '">' + $i + '</option>';
+										}
+										$('#formDay').html($output);
+									});
+								});
+							</script>
 						</select>
 						<p>日</p>
 					</div>
@@ -388,6 +391,15 @@
 							}, function (data) {
 								$('#checkMail').html(data);
 							});
+						});
+
+						// パスワードチェック
+						$('.formPass').change(function() {
+							if($('#formPass1').val() !== $('#formPass2').val()){
+								$('#checkPass').html('<span style="color:red">パスワードが一致していません。</span>');
+							} else {
+								$('#checkPass').html('');
+							}
 						});
 					});
 				</script>
