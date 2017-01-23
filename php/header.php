@@ -75,10 +75,11 @@ if(!isset($_SESSION['UserID'])) {
 
 	// 表示部
 	echo '<span>ようこそ  '.$UserName.'  さん</span>';
+	echo '<a href="user.php"><img src="/img/setting.png"></a>';
 	if($cartin){
-		echo '<img src="/img/cart_exist.png" width="32px" height="32px" alt="cart_exist">';
+		echo '<a href="cart.php"><img src="/img/cart_exist.png" alt="cart_exist"></a>';
 	} else {
-		echo '<img src="/img/cart_empty.png" width="32px" height="32px" alt="cart_empty">';
+		echo '<a href="cart.php"><img src="/img/cart_empty.png" alt="cart_empty"></a>';
 	}
 	echo '<a id="login" href="/php/logoutManager.php">ログアウト</a>';
 }
