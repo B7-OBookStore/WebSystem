@@ -32,6 +32,13 @@
 				<div>
 				<?php
 					$userID = $_SESSION['UserID'];
+
+					$stmt = $pdo->query("SELECT count(*) FROM Cart INNER JOIN User ON Cart.UserNum=User.UserNum WHERE UserID = '$userID'");
+					$count = $stmt->fetchColumn();
+					if ($count == 0) {
+						header( "Location: index.php" ) ;
+						exit;
+					}
 					
 					$stmt = $pdo->query("SELECT Count(*) FROM Request");
 					$requestNum = $stmt->fetchColumn();
@@ -55,6 +62,11 @@
 							$stmt->execute();
 						}
 
+						$sql = 'DELETE Cart FROM Cart INNER JOIN User ON Cart.UserNum = User.UserNum WHERE UserID=:UserID';
+						$stmt = $pdo->prepare($sql);
+						$stmt->bindParam(':UserID', $_SESSION['UserID']);
+						$stmt->execute();
+
 						echo '<h2>注文完了</h2>';
 						echo '<p>ご注文ありがとうございます。今後ともO書店をよろしくお願いします。</p>';
 					} else {
@@ -63,10 +75,10 @@
 					}
 				?>
 
-				<a class="button" href="">トップに戻る</a>
+				<a class="button" href="index.php">トップに戻る</a>
 				</div>
 
-				<img id="" alt="O書店公式キャラクター 石蕗クミコ" src="img/ordered_kumiko.png">
+				<img id="character" alt="O書店公式キャラクター 石蕗クミコ" src="img/ordered_kumiko.png">
 			</section>
 		</div>
 

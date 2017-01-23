@@ -1,9 +1,22 @@
 @import url("common.css");
 
+#main section {
+	position: relative;
+}
+
+#main section div {
+	position: relative;
+	z-index: 1;
+	width: 700px;
+	height: 400px;
+}
+
 #main p {
 	margin: 10px;
 }
 
 #character {
-	
+	position: absolute;
+	right: 0;
+	bottom: 0;
 }
