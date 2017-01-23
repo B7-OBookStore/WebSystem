@@ -15,6 +15,11 @@
 		header( "Location: img/hosoi.jpg" ) ;
 		exit;
 	}
+
+	if ($q === 'unitygame'){
+		header("Location: unitygame.php");
+		exit;
+	}
 	
 	if ($startIndex == NULL) {
 		$startIndex = 0;
