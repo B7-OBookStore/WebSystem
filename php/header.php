@@ -34,6 +34,11 @@ if(!isset($_SESSION['UserID'])){
 
 echo '<header>';
 
+// トップページ以外であれば左にO書店と表示する
+if($_SERVER['REQUEST_URI'] != '/index.php'){
+	echo '<h1><a href="index.php">O書店</a></h1>';
+}
+
 // 非ログイン時の表示
 if(!isset($_SESSION['UserID'])) {
 	echo '<span>Web注文機能を使うためには、ログインしてください</span>';
