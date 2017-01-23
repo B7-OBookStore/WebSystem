@@ -1,4 +1,7 @@
 <?php
+	require 'php/db_connect.php';
+	require 'php/cls_Book.php';
+
 	$id = $_GET["id"];
 	
 	if ($id == NULL){
@@ -6,72 +9,7 @@
 		exit;
 	}
 	
-	/* 本の情報を取得 */
-	$json = file_get_contents("https://www.googleapis.com/books/v1/volumes/$id?key=AIzaSyBczORlfI6MEmYnkTFwP5au6rq_oo4h92s");
-	$results = json_decode($json, TRUE);
-	
-	$title = $results[volumeInfo][title]." ".$results[volumeInfo][subtitle];
-	$publishedDate = $results[volumeInfo][publishedDate];
-	$publisher = $results[volumeInfo][publisher];
-	$imageLink = $results[volumeInfo][imageLinks][smallhumbnail];
-	
-	foreach ($results[volumeInfo][industryIdentifiers] as $i => $identifier) {
-		if ($identifier[type] === "ISBN_10") {
-			$isbn10 = $identifier[identifier];
-		}
-		if ($identifier[type] === "ISBN_13") {
-			$janCode = $identifier[identifier];
-		}
-	}
-	
-	foreach($results[volumeInfo][authors] as $i => $author) {
-		$authors = $authors.$author."　";
-	}
-	$authors = rtrim($authors,'　');
-	
-	if ($results[saleInfo][listPrice][amount] == NULL) {
-		$listPrice = "(注文確定後にお知らせ)";
-	} else {
-		$listPrice = $results[saleInfo][listPrice][amount];
-	}
-	
-	if ($results[volumeInfo][imageLinks][thumbnail] == NULL){
-		$imageLink = "img/noimage.png";
-	} else {
-		$imageLink = $results[volumeInfo][imageLinks][thumbnail];
-	}
-	
-	/* データベースに接続 */
-	$dsn = 'mysql:dbname=websysb7;host=ja-cdbr-azure-east-a.cloudapp.net;charset=utf8';
-	$username = 'b3a7f491a4430f';
-	$password = '0a1e66e0';
-	$pdo = new PDO($dsn, $username, $password);
-	
-	/* カートに追加する本をデータベースから検索、無ければ追加 */
-	$sql = "SELECT count(*) FROM Item WHERE JANCode='$janCode'";
-	$stmt = $pdo->query($sql);
-	$count = $stmt->fetchColumn();
-	
-	if ($count == 0) {
-		$sql = "INSERT INTO Item(JANCode,Price) VALUES(:JANCode,:Price)";
-		$stmt = $pdo->prepare($sql);
-		$stmt->bindParam(':JANCode',$janCode);
-		if ($results[saleInfo][listPrice][amount] == NULL) {
-			$stmt->bindValue(':Price',NULL,PDO::PARAM_NULL);
-		} else {
-			$stmt->bindParam(':Price',$listPrice);
-		}
-		$stmt->execute();
-	
-		$sql = "INSERT INTO Book VALUES(:JANCode,:BookTitle,:Writer,:Publisher,:GoogleID)";
-		$stmt = $pdo->prepare($sql);
-		$stmt->bindParam(':JANCode',$janCode);
-		$stmt->bindParam(':BookTitle',$title);
-		$stmt->bindParam(':Writer',$authors);
-		$stmt->bindParam(':Publisher',$publisher);
-		$stmt->bindParam(':GoogleID',$id);
-		$stmt->execute();
-	}
+	$book = new Book($id);
 ?>
 
 <!DOCTYPE html>
@@ -100,14 +38,26 @@
 		<div id="main">
 			<div id="cart">
 				<section>
-					<h2>カートに追加しました</h2>
-					<img alt="<?php echo $title ?>" src="<?php echo $imageLink ?>">
+					<?php
+						/* カートに追加する本をデータベースから検索、無ければ追加 */
+						$sql = "INSERT INTO Cart SELECT UserNum,$book->janCode FROM User WHERE UserID=:userid";
+						$stmt = $pdo->prepare($sql);
+						$stmt->bindParam(':userid', $_SESSION['UserID']);
+						$result = $stmt->execute();
+						
+						if ($result) {
+							echo '<h2>カートに追加しました</h2>';
+						} else {
+							echo '<h2>既にカートに追加されています</h2>';
+						}
+					?>
+					<img alt="<?php echo $book->title ?>" src="<?php echo $book->imageLinks[thumbnail] ?>">
 
-					<h3><?php echo $title ?></h3>
+					<h3><?php $book->title ?></h3>
 
-					<p class="publishedDate"><?php echo $publishedDate ?></p>
-					<p><?php echo $authors ?></p>
-					<p class="price">￥ <?php echo $listPrice ?></p>
+					<p class="publishedDate"><?php echo $book->publishedDate ?></p>
+					<p><?php echo $book->writer ?></p>
+					<p class="price">￥ <?php echo $book->price ?></p>
 				</section>
 
 				<section>
@@ -123,7 +73,7 @@
 			</div>
 
 			<section id="nav">
-				<p><a class="button" href="order.php?id=<?php echo $id ?>">注文を確定する</a></p>
+				<p><a class="button" href="order.php">注文を確定する</a></p>
 				<p><a class="button_c" href="">買い物を続ける</a></p>
 			</section>
 		</div>
