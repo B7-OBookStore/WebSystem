@@ -25,7 +25,7 @@
 <div id="main">
 	<section>
 		<h2>会員登録</h2>
-		<form action="registration_check.php" method="post">
+		<form id="registerForm" action="registration_check.php" method="post">
 			<div id="form" class="vertical">
 				<div id="id" class="horizontal">
 					<h3>ID</h3>
@@ -64,7 +64,7 @@
 					<div>
 						<div class="horizontal">
 							<div>
-								<h4>性</h4>
+								<h4>姓</h4>
 								<input type="text" name="LastName" required>
 								<small>(例) 静岡</small>
 							</div>
@@ -236,13 +236,13 @@
 									return daysInMonth[iMonth - 1];
 								}
 
-								$(function() {
-									$('.formBirth').change(function() {
+								$(function () {
+									$('.formBirth').change(function () {
 										$year = $('#formYear').val();
 										$month = $('#formMonth').val();
 										$daynum = getDaysOfMonth($year, $month);
 										$output = '';
-										for($i = 1; $i <= $daynum; $i++){
+										for ($i = 1; $i <= $daynum; $i++) {
 											$output += '<option value="' + $i + '">' + $i + '</option>';
 										}
 										$('#formDay').html($output);
@@ -289,7 +289,7 @@
 						</div>
 						<div>
 
-							<h4>都道府県</h4>
+							<h4 id="debug">都道府県</h4>
 							<div>
 								<select name="pref" required>
 									<option value="">都道府県</option>
@@ -394,8 +394,8 @@
 						});
 
 						// パスワードチェック
-						$('.formPass').change(function() {
-							if($('#formPass1').val() !== $('#formPass2').val()){
+						$('.formPass').change(function () {
+							if ($('#formPass1').val() !== $('#formPass2').val()) {
 								$('#checkPass').html('<span style="color:red">パスワードが一致していません。</span>');
 							} else {
 								$('#checkPass').html('');
@@ -404,7 +404,38 @@
 					});
 				</script>
 
-				<input class="button_c" type="submit" value="送信">
+
+				<input id="submit" class="button_c" type="submit" value="送信">
+
+				<script>
+					// ----- Validation Check -----
+
+					// Validation Flag
+					$flag = false;
+
+					function reqPhp(){
+						$.get('php/ajax_validationCheck.php', {
+							UserID: $('#formID').val(),
+							Phone: $('#formPhone').val(),
+							Mail: $('#formMail1').val() + '@' + $('#formMail2').val()
+						}, function (data) {
+							if (data == 'ok') {
+								$flag = true;
+							} else if (data == 'ng') {
+								$flag = false;
+							}
+						});
+					}
+
+					$('#registerForm').submit(function(){
+						reqPhp();
+						if($flag && $('#formPass1').val() === $('#formPass2').val()){
+							return true;
+						} else {
+							return false;
+						}
+					});
+				</script>
 			</div>
 		</form>
 
