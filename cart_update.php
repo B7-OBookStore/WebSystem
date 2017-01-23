@@ -69,14 +69,21 @@
 						foreach ($stmt as $row) {
 							$item = new Book($row[GoogleID]);
 					?>
-					<section class="">
+					<section>
 						<img alt="<?php echo $item->title ?>" src="<?php echo $item->imageLinks[thumbnail] ?>">
 
 						<h3><?php echo $item->title ?></h3>
 
 						<p class="publishedDate"><?php echo $item->publishedDate ?></p>
 						<p><?php echo $item->writer ?></p>
-						<p class="price">￥ <?php echo $item->price ?></p>
+						<p class="price">￥
+						<?php
+							if ($item->price == NULL){
+								echo "(注文確定後にお知らせ)";
+							} else {
+								echo $item->price;
+							}
+						?></p>
 					</section>
 					<?php
 						}
