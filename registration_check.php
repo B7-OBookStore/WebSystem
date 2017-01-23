@@ -46,7 +46,7 @@ $_SESSION['regApartment'] = $_POST['Apartment'];
 
 <div id="main">
 	<section>
-		<h2>会員登録</h2>
+		<h2>以下の情報で登録します。</h2>
 		<form action="registered.php" method="post">
 			<div id="form" class="vertical">
 				<div id="id" class="horizontal">
