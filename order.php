@@ -7,6 +7,15 @@
 		header('Location: login.php');
 		exit();
 	}
+
+	$userID = $_SESSION['UserID'];
+	$stmt = $pdo->query("SELECT count(*) FROM Cart INNER JOIN User ON Cart.UserNum=User.UserNum WHERE UserID = '$userID'");
+	$count = $stmt->fetchColumn();
+
+	if ($count == 0) {
+		header('Location: index.php');
+		exit();
+	}
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +45,6 @@
 			<section id="cart">
 				<h2>注文内容</h2>
 					<?php
-						$userID = $_SESSION['UserID'];
 						$stmt = $pdo->query("SELECT Book.JANCode,Price,BookTitle,Writer,GoogleID FROM Cart INNER JOIN Item ON Cart.JANCode = Item.JANCode INNER JOIN Book ON Cart.JANCode = Book.JANCode INNER JOIN User ON Cart.UserNum = User.UserNum WHERE UserID = '$userID'");
 
 						foreach ($stmt as $row) {

@@ -74,7 +74,10 @@
 			</div>
 
 			<section id="nav">
+				<?php if ($count !== 0) {?>
 				<p><a class="button" href="order.php">注文を確定する</a></p>
+				<?php } ?>
+					
 				<p><a class="button_c" href="<?php
 					if ($_COOKIE['LastSearch'] == NULL) {
 						echo 'index.php';
