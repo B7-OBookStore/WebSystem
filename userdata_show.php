@@ -1,7 +1,6 @@
 <?php
 // セッション変数にデータを保存
 session_start();
-
 $FirstName = $_POST['FirstName'];
 $LastName = $_POST['LastName'];
 $YomiFirst = $_POST['YomiFirst'];
@@ -14,12 +13,10 @@ $Pref = $_POST['pref'];
 $City = $_POST['city'];
 $Address = $_POST['Address'];
 $Apartment = $_POST['Apartment'];
-
 require 'php/db_connect.php';
 $st = $pdo->prepare("UPDATE User SET FirstName = :firstname, LastName = :lastname, YomiFirst = :yomifirst,
 						YomiLast = :yomilast, Phone = :phone, Mail = :mail, Password = :password, ZipCode = :zipcode,
 						Pref = :pref, City = :city, Address = :address, Apartment = :apartment WHERE UserID = :userid");
-
 $st->bindParam(':firstname', $FirstName, PDO::PARAM_STR);
 $st->bindParam(':lastname', $LastName, PDO::PARAM_STR);
 $st->bindParam(':yomifirst', $YomiFirst, PDO::PARAM_STR);
@@ -35,13 +32,11 @@ $st->bindParam(':apartment', $Apartment, PDO::PARAM_STR);
 $st->bindParam(':userid', $_SESSION['UserID'], PDO::PARAM_STR);
 $st->execute();
 $error = $st->errorInfo();
-
 // ログインしていなかったら無理矢理index.phpに飛ばす
 if (!isset($_SESSION['UserID'])) {
 	header('Location: index.php');
 	exit();
 }
-
 ?>
 
 <!DOCTYPE html>

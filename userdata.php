@@ -1,40 +1,32 @@
 <?php
 // セッション
 session_start();
-
 // ログインしていなかったら無理矢理index.phpに飛ばす
 if (!isset($_SESSION['UserID'])) {
 	header('Location: index.php');
 	exit();
 }
-
 // データベース準備
 require 'php/db_connect.php';
 $st = $pdo->prepare("SELECT FirstName, LastName, YomiFirst, YomiLast, Phone, Mail, ZipCode, Pref, City, Address, Apartment
 					FROM User WHERE UserID = :userid");
 $st->bindParam(':userid', $_SESSION['UserID'], PDO::PARAM_STR);
 $st->execute();
-
 // 変数に値を格納
 $result = $st->fetch(PDO::FETCH_ASSOC);
 $replaced = '';
-
 // メールユーザを抽出する正規表現
 preg_match('/^[\w\.\-]+/', $result['Mail'], $replaced);
 $resultMailUser = $replaced[0];
-
 // メールドメインを抽出する正規表現
 preg_match('/[\w\.\-]+$/', $result['Mail'], $replaced);
 $resultMailDomain = $replaced[0];
-
 // 郵便番号前半を抽出する正規表現
 preg_match('/^.{3}/', $result['ZipCode'], $replaced);
 $resultZipCode1 = $replaced[0];
-
 // 郵便番号後半を抽出する正規表現
 preg_match('/.{4}$/', $result['ZipCode'], $replaced);
 $resultZipCode2 = $replaced[0];
-
 ?>
 
 <!DOCTYPE html>
@@ -160,6 +152,8 @@ $resultZipCode2 = $replaced[0];
 							<h4>都道府県</h4>
 							<div>
 								<select name="pref" required>
+									<?php echo preg_replace('/'.$result['Pref'].'\"\>/',
+											$result['Pref'].'" selected>', '
 									<option value="">都道府県</option>
 									<option value="北海道">北海道</option>
 									<option value="青森県">青森県</option>
@@ -208,6 +202,7 @@ $resultZipCode2 = $replaced[0];
 									<option value="宮崎県">宮崎県</option>
 									<option value="鹿児島県">鹿児島県</option>
 									<option value="沖縄県">沖縄県</option>
+								'); ?>
 								</select>
 							</div>
 						</div>
@@ -233,7 +228,6 @@ $resultZipCode2 = $replaced[0];
 				<script>
 					$(function () {
 						// Ajaxによる重複チェック
-
 						// 電話番号重複チェック
 						$('#formPhone').change(function () {
 							$.get('php/ajax_checkPhone.php', {
@@ -242,7 +236,6 @@ $resultZipCode2 = $replaced[0];
 								$('#checkPhone').html(data);
 							});
 						});
-
 						// メールアドレス重複チェック
 						$('.formMail').change(function () {
 							$.get('php/ajax_checkMail.php', {
@@ -251,7 +244,6 @@ $resultZipCode2 = $replaced[0];
 								$('#checkMail').html(data);
 							});
 						});
-
 						// パスワードチェック
 						$('.formPass').change(function () {
 							if ($('#formPass1').val() !== $('#formPass2').val()) {
@@ -271,10 +263,8 @@ $resultZipCode2 = $replaced[0];
 
 		<script>
 			// ----- Validation Check -----
-
 			// Validation Flag
 			$flag = false;
-
 			function reqPhp() {
 				$.get('php/ajax_validationCheck2.php', {
 					Phone: $('#formPhone').val(),
@@ -287,7 +277,6 @@ $resultZipCode2 = $replaced[0];
 					}
 				});
 			}
-
 			$('#registerForm').submit(function () {
 				reqPhp();
 				if ($flag && $('#formPass1').val() === $('#formPass2').val()) {
