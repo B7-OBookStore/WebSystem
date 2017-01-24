@@ -18,9 +18,13 @@
 	margin: 2px;
 }
 
-input[type='text'], input[type='password'] {
+#main section form input[type='text'],#main section form input[type='password'] {
 	height: 30px;
 	padding: 5px;
+}
+
+#main section form input[type='submit'] {
+	margin-bottom: 10px;
 }
 
 #character {
