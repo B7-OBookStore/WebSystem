@@ -76,6 +76,14 @@ section section {
 	color: #808080;
 }
 
+.bold {
+	font-weight: bold;
+}
+
+.light {
+	font-weight: lighter;
+}
+
 /* --------------------------------------
 　本の詳細情報表示用
 --------------------------------------- */

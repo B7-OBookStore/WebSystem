@@ -85,13 +85,22 @@
 	?>
 
 		<form id="search" method="get" action="search.php">
+			<input type="hidden" name="mode" value="<?php echo $mode ?>">
 			<input name="q" type="search" placeholder="書籍を検索" value="<?php echo $q ?>">
 			<input type="submit" value="">
 		</form>
 
 		<div id="main">
 			<section id="option">
-			(検索オプションとか)
+				<?php
+					if ($mode == 'book' || $mode == NULL) {
+						echo '<p class="bold">書籍</p>';
+						echo "<p><a href='search.php?q=$q&mode=other'>その他</a></p>";
+					} else if ($mode == 'other') {
+						echo "<p><a href='search.php?q=$q&mode=book'>書籍</a></p>";
+						echo '<p class="bold">その他</p>';
+					}
+				?>
 			</section>
 
 			<div id="result">
@@ -147,12 +156,20 @@
 				</section>
 				<?php
 						}
-					} else if ($mode == 'other') {
-						foreach ($others as $other) {
+					} else if ($mode == 'other' && $other=$others->fetch()) {
+						do {
 				?>
 					<section>
 						<a href="<?php echo "other.php?janCode=$other[JANCode]" ?>"></a>
-						<img alt="TVゲーム" src="img/search_tvgame.png">
+						<?php
+							if ($other[Genre] == "TVゲーム") {
+								echo '<img alt="ゲーム" src="img/tvgame.png">';
+							} else if ($other[Genre] == "CD") {
+								echo '<img alt="CD" src="img/cd.png">';
+							} else {
+								echo '<img alt="その他" src="img/other.png">';
+							}
+						?>
 
 						<div>
 							<h2><?php echo $other[Name] ?></h2>
@@ -166,7 +183,7 @@
 						</div>
 					</section>
 				<?php
-						}
+						} while($other=$others->fetch());
 					} else {
 						echo "<section>見つかりませんでした。</section>";
 					}
