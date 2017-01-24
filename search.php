@@ -196,7 +196,12 @@
 								echo "<a class='button' href='search.php?q=$q'>最初へ</a>";
 							}
 							if (count($previousIndex) > 1) {
-								echo "<a class='button' href='search.php?q=$q&startIndex=$previousIndex'>前へ</a>";
+								$formerPreviousIndex = $previousIndex;
+								array_pop($formerPreviousIndex);
+								$formerStartIndex = array_pop($formerPreviousIndex);
+								$formerPreviousIndex = implode(",", $formerPreviousIndex);
+
+								echo "<a class='button' href='search.php?q=$q&startIndex=$formerStartIndex&previousIndex=$formerPreviousIndex'>前へ</a>";
 							}
 						?>
 					</div>
