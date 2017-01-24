@@ -20,8 +20,11 @@ if (preg_match('/^\/search\.php.*$/', $_SERVER['REQUEST_URI'])) {
 	setcookie('LastSearch', $_SERVER['REQUEST_URI'], time() + 60 * 60 * 24 * 14, '/');
 }
 
-$cUserID = $_COOKIE['logUserID'];
-$cPassword = $_COOKIE['logPassword'];
+// Cookieがあったらそれを変数に代入
+if(!empty($_COOKIE['logUserID'])){
+	$cUserID = $_COOKIE['logUserID'];
+	$cPassword = $_COOKIE['logPassword'];
+}
 
 // 再接続時にcookieからIDとパスを拾って自動再ログイン
 if (!isset($_SESSION['UserID'])) {

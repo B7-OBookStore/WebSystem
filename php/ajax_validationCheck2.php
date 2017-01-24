@@ -5,8 +5,8 @@
  * okかngを文字列で値で返しています。
  */
 
-require 'cls_DuplicateCheck.php';
-$checker = new cls_DuplicateCheck();
+require 'cls_ChangeCheck.php';
+$checker = new cls_ChangeCheck();
 if(!$checker->existPhone($_GET['Phone']) && !$checker->existMail($_GET['Mail'])) {
 	echo 'ok';
 } else {
