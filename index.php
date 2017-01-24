@@ -51,6 +51,9 @@
 				<small>Copyright &copy;2016 O書店 All Rights Reserved.</small>
 			</nav>
 		</footer>
+
+	<script src="https://use.typekit.net/ifv0iyq.js"></script>
+	<script>try{Typekit.load({ async: true });}catch(e){console.log('Typekit error')}</script>
 	</body>
 
 </html>
