@@ -34,15 +34,19 @@
 					<p>
 						<input class="button" type="submit" value="送信">
 					</p>
+
+					<?php
+						if(isset($_GET['login'])){
+							echo '<p style="color: red">IDかパスワードが間違っています。</p>';
+						}
+					?>
+
+					<p>新規登録は<a href="registration.php">こちら</a>。</p>
+					<p>パスワードを忘れた方は<a href="forgot_password.php">こちら</a>から。</p>
 				</form>
-				<?php
-					if(isset($_GET['login'])){
-						echo '<p style="color: red">IDかパスワードが間違っています。</p>';
-					}
-				?>
-				<p>パスワードを忘れた方は
-					<a href="forgot_password.php">こちら</a>
-    から。</p>
+				
+				<img id="character" alt="O書店公式キャラクター 陽本綴" src="img/login_himoto.png">
+
 			</section>
 		</div>
 

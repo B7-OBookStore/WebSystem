@@ -1,4 +1,44 @@
 @import url("common.css");
 
+#main section {
+	position: relative;
+}
+
+#main section form {
+	position: relative;
+	z-index: 1;
+	width: calc(100% - 400px);
+	min-height: 420px;
+	transition: all 300ms 0s ease;
+}
+
+#main section form * {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 2px;
+}
+
+input[type='text'], input[type='password'] {
+	height: 30px;
+	padding: 5px;
+}
+
+#character {
+	position: absolute;
+	z-index: 0;
+	right: 0;
+	bottom: 0;
+	transition: all 300ms 0s ease;
+}
 
 
+@media screen and ( max-width:640px ) {
+	#main section form {
+		width: 100%;
+		min-height: 0;
+	}
+	
+	#character {
+		opacity: 0;
+	}
+}
