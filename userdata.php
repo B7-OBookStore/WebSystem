@@ -230,7 +230,7 @@ $resultZipCode2 = $replaced[0];
 						// Ajaxによる重複チェック
 						// 電話番号重複チェック
 						$('#formPhone').change(function () {
-							$.get('php/ajax_checkPhone.php', {
+							$.get('php/ajax_checkPhone2.php', {
 								Phone: $('#formPhone').val()
 							}, function (data) {
 								$('#checkPhone').html(data);
@@ -238,7 +238,7 @@ $resultZipCode2 = $replaced[0];
 						});
 						// メールアドレス重複チェック
 						$('.formMail').change(function () {
-							$.get('php/ajax_checkMail.php', {
+							$.get('php/ajax_checkMail2.php', {
 								Mail: $('#formMail1').val() + '@' + $('#formMail2').val()
 							}, function (data) {
 								$('#checkMail').html(data);
