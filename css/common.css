@@ -219,8 +219,6 @@ section section {
 　フッター
 --------------------------------------- */
 	footer {
-		text-align: center;
-	
 		padding: 10px;
 		height: 20px;
 	}
@@ -239,5 +237,6 @@ section section {
 	}
 
 	footer small {
+		display: table;
 		margin: 0 auto;
 	}
