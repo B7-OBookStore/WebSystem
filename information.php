@@ -8,7 +8,7 @@ if (!isset($_SESSION['UserID'])) {
 }
 // データベース準備
 require 'php/db_connect.php';
-$st = $pdo->prepare("SELECT FirstName, LastName, YomiFirst, YomiLast, Phone, Mail, ZipCode, Pref, City, Address, Apartment
+$st = $pdo->prepare("SELECT FirstName, LastName, YomiFirst, YomiLast, Phone, Mail, Birth, ZipCode, Pref, City, Address, Apartment
           FROM User WHERE UserID = :userid");
 $st->bindParam(':userid', $_SESSION['UserID'], PDO::PARAM_STR);
 $st->execute();
@@ -67,7 +67,7 @@ $resultZipCode2 = $replaced[0];
 					</tr>
 					<tr>
 						<th scope="row">生年月日</th>
-						<td><?php echo $row['Year'].'年'.$row['Month'].'月'.$row['Day'].'日'; ?></td>
+						<td><?php echo date('Y年m月d日', strtotime($row['Birth'])); ?></td>
 					</tr>
 					<tr>
 						<th scope="row">住所</th>

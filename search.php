@@ -62,7 +62,34 @@
 	}
 
 	if ($mode == 'other') {
-		$others = $pdo->query("SELECT Item.JANCode,Price,Name,Manufacturer,Genre from Item INNER JOIN Other ON Item.JANCode = Other.JANCode WHERE NAME LIKE '%$q%'");
+		// 半角・全角スペースで分割し配列に格納
+		$qOther = preg_split('/[\s　]/u', $q);
+		for($i = 0; $i < count($qOther); $i++){
+			$qOther[$i] = '%'.$qOther[$i].'%';
+		}
+		// Debug
+		echo var_dump($qOther).'<br>';
+
+		$sqlOther = "SELECT Item.JANCode,Price,Name,Manufacturer,Genre 
+									FROM Item INNER JOIN Other ON Item.JANCode = Other.JANCode 
+									WHERE ";
+		// 配列数だけNAME LIKE〜を追加する
+		for($i = 0; $i < count($qOther); $i++){
+			if($i > 0) $sqlOther .= " AND ";
+			$sqlOther .= "Name LIKE :str".$i;
+		}
+
+		// Debug
+		echo $sqlOther;
+
+		// プリペアドステートメントを発行し、配列の値を順次バインド
+		$others = $pdo->prepare($sqlOther);
+		for($i = 0; $i < count($qOther); $i++){
+			$others->bindParam(':str'.$i, $qOther[$i], PDO::PARAM_STR);
+		}
+
+		$others->execute();
+
 	}
 ?>
 
