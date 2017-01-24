@@ -1,34 +1,3 @@
-<?php
-// セッション
-session_start();
-
-// ログインしていなかったら無理矢理index.phpに飛ばす
-if (!isset($_SESSION['UserID'])) {
-	header('Location: index.php');
-	exit();
-}
-
-// データベース準備
-require 'php/db_connect.php';
-
-$st = $pdo->prepare("SELECT FirstName, LastName, YomiFirst, YomiLast, Phone, Mail, ZipCode, Pref, City, Address, Apartment
-          FROM User WHERE UserID = :userid");
-$st->bindParam(':userid', $_SESSION['UserID'], PDO::PARAM_STR);
-$st->execute();
-$row = $st->fetch(PDO::FETCH_ASSOC);
-
-$replaced = '';
-
-// 郵便番号前半を抽出する正規表現
-preg_match('/^.{3}/', $row['ZipCode'], $replaced);
-$resultZipCode1 = $replaced[0];
-
-// 郵便番号後半を抽出する正規表現
-preg_match('/.{4}$/', $row['ZipCode'], $replaced);
-$resultZipCode2 = $replaced[0];
-
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -58,28 +27,27 @@ $resultZipCode2 = $replaced[0];
 				<table class="type01">
 					<tr>
 						<th scope="row">名前</th>
-						<td><?php echo $row['LastName'].' '.$row['FirstName']; ?></td>
+						<td>秦泉寺辰文</td>
 					</tr>
 					<tr>
 						<th scope="row">フリガナ</th>
-						<td><?php echo $row['YomiLast'].' '.$row['YomiFirst']; ?></td>
+						<td>ジンゼンジタツフミ</td>
 					</tr>
 					<tr>
 						<th scope="row">電話番号</th>
-						<td><?php echo $row['Phone']; ?></td>
+						<td>000-0000-0000</td>
 					</tr>
 					<tr>
 						<th scope="row">メールアドレス</th>
-						<td><?php echo $row['Mail']; ?></td>
+						<td>abc@inf...</td>
 					</tr>
 					<tr>
 						<th scope="row">生年月日</th>
-						<td><?php echo $row['Year'].'年'.$row['Month'].'月'.$row['Day'].'日'; ?></td>
+						<td>〇〇〇〇年〇月〇日</td>
 					</tr>
 					<tr>
 						<th scope="row">住所</th>
-						<td><?php echo $resultZipCode1.'-'.$resultZipCode2.'<br>'.
-								$row['Pref'].$row['City'].$row['Address'].$row['Apartment']; ?></td>
+						<td>浜松市〇〇</td>
 					</tr>
 				</table>
 			</section>
@@ -88,9 +56,7 @@ $resultZipCode2 = $replaced[0];
 		</div>
 
 		<footer>
-			<a href="">規約</a>
-			<a href="">プライバシー</a>
-			<a href="">店舗</a>
+			<small>Copyright &copy;2016 O書店 All Rights Reserved.</small>
 		</footer>
 	</body>
 

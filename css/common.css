@@ -211,7 +211,7 @@ section section {
 　フッター
 --------------------------------------- */
 	footer {
-		display: flex;
+		text-align: center;
 	
 		padding: 10px;
 		height: 20px;
@@ -228,4 +228,8 @@ section section {
 
 	footer a:hover {
 		text-decoration: underline;
+	}
+
+	footer small {
+		margin: 0 auto;
 	}

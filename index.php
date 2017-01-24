@@ -48,9 +48,7 @@
 			</section>
 
 			<nav>
-				<a href="">規約</a>
-				<a href="">プライバシー</a>
-				<a href="">店舗</a>
+				<small>Copyright &copy;2016 O書店 All Rights Reserved.</small>
 			</nav>
 		</footer>
 	</body>

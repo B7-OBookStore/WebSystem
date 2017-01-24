@@ -40,9 +40,7 @@ if (!isset($_SESSION['UserID'])) {
 </div>
 
 <footer>
-	<a href="">規約</a>
-	<a href="">プライバシー</a>
-	<a href="">店舗</a>
+	<small>Copyright &copy;2016 O書店 All Rights Reserved.</small>
 </footer>
 
 </body>
