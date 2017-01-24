@@ -25,17 +25,9 @@
 			<section>
 				<h2>パスワードをリセット</h2>
 				<form>
-					<table class="fill">
-						<tr>
-							<td class="space">メールアドレスを入力してください。</td>
-							<td>
-								<input class="fill inputbox" type="text" name="mail_address">
-							</td>
-						</tr>
-					</table>
-					<p>
-						<input class="button" type="submit" value="送信">
-					</p>
+					<p>メールアドレスを入力してください。</p>
+					<p><input class="fill inputbox" type="text" name="mail_address"></p>
+					<p><input class="button" type="submit" value="送信"></p>
 				</form>
 			</section>
 		</div>
