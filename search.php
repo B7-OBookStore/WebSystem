@@ -1,92 +1,8 @@
 <?php
-	require 'php/db_connect.php';
-
 	$q = $_GET["q"];
 	$mode = $_GET["mode"];
 	$startIndex = $_GET["startIndex"];
 	$previousIndex = $_GET["previousIndex"];
-	
-	if ($q == NULL){
-		header( "Location: index.php" ) ;
-		exit;
-	}
-
-	if ($q === '糸田＃') {
-		header( "Location: img/hosoi.jpg" ) ;
-		exit;
-	}
-
-	if ($q === 'unitygame'){
-		header("Location: unitygame.php");
-		exit;
-	}
-	
-	if ($startIndex == NULL) {
-		$startIndex = 0;
-	}
-	
-	if ($previousIndex != NULL){
-		$previousIndex = explode(",", $previousIndex);
-	}
-	
-	$previousIndexNext = $previousIndex;
-	$previousIndexNext[] = $startIndex;
-	$nextIndex = $startIndex;
-	
-	if ($mode == 'book' || $mode == NULL) {
-		$i = 0;
-		$q_encoded = urlencode($q);
-		$books = array();
-	
-		while ($i < 20) {
-			$json = file_get_contents("https://www.googleapis.com/books/v1/volumes?q=$q_encoded&startIndex=$nextIndex&maxResults=40&key=AIzaSyBczORlfI6MEmYnkTFwP5au6rq_oo4h92s");
-			$results = json_decode($json, TRUE);
-	
-			if (count($results[items]) == NULL) {
-				break;
-			}
-	
-			foreach($results[items] as $j => $item) {
-				if ($i >= 20) {
-					break;
-				}
-	
-				foreach ($item[volumeInfo][industryIdentifiers] as $k => $identifier) {
-					if ($identifier[type] === "ISBN_13") {
-						$books[] = $item;
-						$i++;
-					}
-				}
-				$nextIndex++;
-			}
-		}
-	}
-
-	if ($mode == 'other') {
-		// 半角・全角スペースで分割し配列に格納
-		$qOther = preg_split('/[\s　]/u', $q);
-		for($i = 0; $i < count($qOther); $i++){
-			$qOther[$i] = '%'.$qOther[$i].'%';
-		}
-
-		$sqlOther = "SELECT Item.JANCode,Price,Name,Manufacturer,Genre 
-                  FROM Item INNER JOIN Other ON Item.JANCode = Other.JANCode 
-                  WHERE ";
-
-		// 配列数だけNAME LIKE〜を追加する
-		for($i = 0; $i < count($qOther); $i++){
-			if($i > 0) $sqlOther .= " AND ";
-			$sqlOther .= "Name LIKE :str".$i;
-		}
-
-		// プリペアドステートメントを発行し、配列の値を順次バインド
-		$others = $pdo->prepare($sqlOther);
-		for($i = 0; $i < count($qOther); $i++){
-			$others->bindParam(':str'.$i, $qOther[$i], PDO::PARAM_STR);
-		}
-
-		$others->execute();
-	}
 ?>
 
 <!DOCTYPE html>
@@ -103,8 +19,14 @@
 	<body>
 
 	<?php
-	// ヘッダ表示部分
-	require 'php/header.php';
+		// ヘッダ表示部分
+		require 'php/header.php';
+	?>
+
+	<?php
+		// 検索
+		require 'php/db_connect.php';
+		require 'php/searchManager.php';
 	?>
 
 		<form id="search" method="get" action="search.php">

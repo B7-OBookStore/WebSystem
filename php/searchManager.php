@@ -3,11 +3,6 @@
  * 検索関係の管理。
  */
 
-$q = $_GET["q"];
-$mode = $_GET["mode"];
-$startIndex = $_GET["startIndex"];
-$previousIndex = $_GET["previousIndex"];
-
 require 'cls_Search.php';
 $clsSearch = new cls_Search();
 
