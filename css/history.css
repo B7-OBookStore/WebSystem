@@ -1,0 +1,50 @@
+@import url("common.css");
+
+/* --------------------------------------
+　検索オプションと検索結果を横並びにする
+--------------------------------------- */
+	#main {
+		display: flex;
+		align-items: flex-start;
+	}
+
+	#option {
+		flex-shrink: 0;
+		width: 140px;
+	}
+
+	/* 横幅が狭い時は縦並びにする */
+	@media screen and ( max-width:700px ){
+		#main {
+			flex-wrap: wrap;
+		}
+		#option {
+			flex-shrink: 1;
+			margin-top: 0;
+			width: 100%;
+		}
+	}
+
+	#result {
+		width: 100%;
+	}
+
+	.request {
+		border-spacing: 5px 5px;
+		margin: 5px 0;
+	}
+
+	.requestDetail {
+		border-spacing: 10px 0;
+		margin: 20px 0 0 5px;;
+	}
+
+	.requestDetail th {
+		text-align: left;
+		font-weight: normal;
+	}
+
+	.item {
+		margin-top: 0;
+		margin-left: 15px;
+	}
