@@ -1,7 +1,23 @@
 <?php
+$q = $_GET["q"];
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="stylesheet" href="css/search.css">
+	<script src="js/pace.js"></script>
+	<link href="css/pace.css" rel="stylesheet" />
+	<link rel="icon" href="img/favicon.ico">
+	<title><?php echo $q ?> -O書店検索</title>
+</head>
+
+<?php
 	require 'php/db_connect.php';
 
-	$q = $_GET["q"];
 	$mode = $_GET["mode"];
 	$startIndex = $_GET["startIndex"];
 	$previousIndex = $_GET["previousIndex"];
@@ -66,17 +82,6 @@
 		$others = $pdo->query("SELECT Item.JANCode,Price,Name,Manufacturer,Genre from Item INNER JOIN Other ON Item.JANCode = Other.JANCode WHERE NAME LIKE '%$q%'");
 	}
 ?>
-
-<!DOCTYPE html>
-<html>
-
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<link rel="stylesheet" href="css/search.css">
-		<link rel="icon" href="img/favicon.ico">
-		<title><?php echo $q ?> -O書店検索</title>
-	</head>
 
 	<body>
 
