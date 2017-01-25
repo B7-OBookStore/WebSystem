@@ -1,3 +1,7 @@
+<?php
+$q = $_GET["q"];
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -14,7 +18,6 @@
 <?php
 	require 'php/db_connect.php';
 
-	$q = $_GET["q"];
 	$mode = $_GET["mode"];
 	$startIndex = $_GET["startIndex"];
 	$previousIndex = $_GET["previousIndex"];
