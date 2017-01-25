@@ -63,8 +63,24 @@ h3 {
 }
 
 #form .button_c {
+	border: none;
 	width: 100%;
 	height: 40px;
+	margin: 0;
+	background: linear-gradient(to bottom, #FFFFFF, #efefef);
+	color: #505050;
+}
+
+#form .button_c:hover {
+	background: linear-gradient(to bottom, #efefef, #dfdfdf);
+	color: #000000;
+}
+
+#form .button_c_border {
+	padding: 2px;
+	border-radius: 5px;
+	margin-top: 10px;
+	background: linear-gradient(to bottom, #dfdfdf, #cfcfcf);
 }
 
 #sex input {
