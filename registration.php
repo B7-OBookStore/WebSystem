@@ -46,7 +46,7 @@
 				<div id="password" class="horizontal">
 					<h3>パスワード再入力</h3>
 					<div>
-						<input class="formPass" id="formPass2" type="password2" name="Password2" maxlength="8" required>
+						<input class="formPass" id="formPass2" type="password" name="Password2" maxlength="8" required>
 						<small id="checkPass"></small>
 					</div>
 				</div>
