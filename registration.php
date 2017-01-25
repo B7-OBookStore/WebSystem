@@ -404,8 +404,9 @@
 					});
 				</script>
 
-
-				<input id="submit" class="button_c" type="submit" value="送信">
+				<div class="button_c_border">
+					<input id="submit" class="button_c" type="submit" value="送信">
+				</div>
 
 				<script>
 					// ----- Validation Check -----
