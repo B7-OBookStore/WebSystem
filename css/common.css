@@ -7,7 +7,12 @@
 
 /* 背景色を設定 */
 body {
-	background-color: #8B4513;
+	background-image: url(../img/background_c.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color: #464646;
 }
 
 /* メインコンテンツを中央揃えに */
@@ -161,15 +166,15 @@ section section {
 		justify-content: space-between;
 		align-items: center;
 	
-		border-bottom: 10px solid #FFFFFF;
+		border-bottom: 3px solid rgba(255, 255, 255, 0.35);
 		padding: 20px;
 		margin-bottom: 10px;
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(1.00, #8B4513), color-stop(0.00, #cf7e44));
+		/*background: -webkit-gradient(linear, left top, left bottom, color-stop(1.00, #8B4513), color-stop(0.00, #cf7e44));
 		background: -webkit-linear-gradient(#cf7e44, #8B4513);
 		background: -moz-linear-gradient(#cf7e44, #8B4513);
 		background: -o-linear-gradient(#cf7e44, #8B4513);
 		background: -ms-linear-gradient(#cf7e44, #8B4513);
-		background: linear-gradient(#cf7e44, #8B4513);
+		background: linear-gradient(#cf7e44, #8B4513);*/
 	}
 
 	header * {
