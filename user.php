@@ -32,7 +32,8 @@ if (!isset($_SESSION['UserID'])) {
 
 <div id="main">
 	<section>
-		<h2>会員情報変更</h2>
+		<h2>会員情報</h2>
+		<p><a href="history.php">注文履歴</a></p>
 		<p><a href="information.php">会員情報の閲覧</a></p>
 		<p><a href="userdata.php">会員情報の修正</a></p>
 	</section>
