@@ -9,6 +9,7 @@ class cls_DuplicateCheck
 	// 電話番号重複チェック
 	function existPhone($phone)
 	{
+		// データベース上に重複したものが存在しているか
 		if ($this->dbChecker('Phone', $phone)) {
 			return true;
 		} else {
