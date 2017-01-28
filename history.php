@@ -1,5 +1,7 @@
 <?php
 	require 'php/db_connect.php';
+
+	$filter = $_GET['filter'];
 ?>
 
 <!DOCTYPE html>
@@ -29,12 +31,37 @@
 		<div id="main">
 			<section id="option">
 				<h2>注文履歴</h2>
+				<?php
+					if ($filter == NULL) {
+						echo '<p class="bold">全て</p>';
+					} else {
+						echo '<p><a href="history.php">全て</a></p>';
+					}
+					if ($filter == 'unreceived') {
+						echo '<p class="bold">未受け取り</p>';
+					} else {
+						echo '<p><a href="history.php?filter=unreceived">未受け取り</a></p>';
+					};
+					if ($filter == 'received') {
+						echo '<p class="bold">受取済</p>';
+					} else {
+						echo '<p><a href="history.php?filter=received">受取済</a></p>';
+					}
+				?>
 			</section>
 
 			<div id="result">
 				<?php
 					$userID = $_SESSION['UserID'];
-					$requests = $pdo->query("SELECT * FROM Request INNER JOIN User ON Request.UserNum=User.UserNum INNER JOIN Store ON Request.StoreNum=Store.StoreNum WHERE UserID='$userID' ORDER BY RequestNum DESC");
+					switch ($filter) {
+						case 'unreceived':
+							$where = 'AND ReceiptStat=false';
+							break;
+						case 'received':
+							$where = 'AND ReceiptStat=true';
+							break;
+					}
+					$requests = $pdo->query("SELECT * FROM Request INNER JOIN User ON Request.UserNum=User.UserNum INNER JOIN Store ON Request.StoreNum=Store.StoreNum WHERE UserID='$userID' $where ORDER BY RequestNum DESC");
 					
 					foreach ($requests as $request) {
 				?>
