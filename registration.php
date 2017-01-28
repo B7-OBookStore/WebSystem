@@ -17,11 +17,6 @@
 	<h1><a href="index.php">O書店</a></h1>
 </header>
 
-<form id="search" method="get" action="search.php">
-	<input name="q" type="search" placeholder="書籍を検索">
-	<input type="submit" value="">
-</form>
-
 <div id="main">
 	<section>
 		<h2>会員登録</h2>
