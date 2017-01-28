@@ -46,9 +46,10 @@
 				<section>
 					<?php
 						/* カートに追加する本をデータベースから検索、無ければ追加 */
-						$sql = "INSERT INTO Cart SELECT UserNum,$book->janCode FROM User WHERE UserID=:userid";
+						$sql = "INSERT INTO Cart SELECT UserNum,:jancode FROM User WHERE UserID=:userid";
 						$stmt = $pdo->prepare($sql);
-						$stmt->bindParam(':userid', $_SESSION['UserID']);
+						$stmt->bindParam(':jancode', $book->janCode, PDO::PARAM_STR);
+						$stmt->bindParam(':userid', $_SESSION['UserID'], PDO::PARAM_STR);
 						$result = $stmt->execute();
 						
 						if ($result) {

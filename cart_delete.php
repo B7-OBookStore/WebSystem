@@ -47,9 +47,10 @@
 					<h2>カートから削除しました</h2>
 					<?php
 						/* カートに追加する本をデータベースから検索、無ければ追加 */
-						$sql = "DELETE Cart FROM Cart INNER JOIN User ON Cart.UserNum = User.UserNum WHERE JANCode = $book->janCode AND UserID=:userid";
+						$sql = "DELETE Cart FROM Cart INNER JOIN User ON Cart.UserNum = User.UserNum WHERE JANCode = :jancode AND UserID = :userid";
 						$stmt = $pdo->prepare($sql);
-						$stmt->bindParam(':userid', $_SESSION['UserID']);
+						$stmt->bindParam(':jancode', $book->janCode, PDO::PARAM_STR);
+						$stmt->bindParam(':userid', $_SESSION['UserID'], PDO::PARAM_STR);
 						$stmt->execute();
 					?>
 					<section class="horizontal item">

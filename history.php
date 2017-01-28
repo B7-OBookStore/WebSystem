@@ -98,9 +98,11 @@
 						</tr>
 					</table>
 					<?php
-						$requestDetails = $pdo->query("SELECT RequestDetail.JANCode,DeliveryStat,Price,BookTitle,Writer,Publisher,GoogleID FROM RequestDetail
+						$requestDetails = $pdo->prepare("SELECT RequestDetail.JANCode,DeliveryStat,Price,BookTitle,Writer,Publisher,GoogleID FROM RequestDetail
 							INNER JOIN Item ON RequestDetail.JANCode=Item.JANCode INNER JOIN Book ON RequestDetail.JANCode=Book.JANCode
-							WHERE RequestNum=$request[RequestNum]");
+							WHERE RequestNum = :request");
+						$requestDetails->bindParam(':request', $request[RequestNum], PDO::PARAM_INT);
+						$requestDetails->execute();
 						
 						foreach ($requestDetails as $requestDetail) {
 					?>

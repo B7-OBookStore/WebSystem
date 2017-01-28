@@ -11,7 +11,9 @@
 		exit;
 	}
 
-	$stmt = $pdo->query("SELECT Other.JANCode,Price,Name,Manufacturer,Genre FROM Item INNER JOIN Other ON Item.JANCode=Other.JANCode WHERE Other.JANCode=$janCode");
+	$stmt = $pdo->query("SELECT Other.JANCode,Price,Name,Manufacturer,Genre FROM Item INNER JOIN Other ON Item.JANCode=Other.JANCode WHERE Other.JANCode = :jancode");
+	$stmt->bindParam(':jancode', $janCode, PDO::PARAM_STR);
+	$stmt->execute();
 	
 	if (!$other = $stmt->fetch()){
 		header( "Location: index.php" );
@@ -78,7 +80,9 @@
 						</tr>
 						<tr>
 							<?php
-								$stmt = $pdo->query("SELECT Store.StoreNum,StockAmount FROM Store LEFT JOIN Stock ON Store.StoreNum = Stock.StoreNum AND JANCode = $janCode WHERE Store.StoreNum <> 0 ORDER BY Store.StoreNum");
+								$stmt = $pdo->prepare("SELECT Store.StoreNum,StockAmount FROM Store LEFT JOIN Stock ON Store.StoreNum = Stock.StoreNum AND JANCode = :jancode WHERE Store.StoreNum <> 0 ORDER BY Store.StoreNum");
+								$stmt->bindParam(':jancode', $janCode, PDO::PARAM_STR);
+								$stmt->execute();
 
 								foreach ($stmt as $row) {
 									$num = $row[StockAmount];

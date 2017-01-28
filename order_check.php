@@ -8,7 +8,10 @@
 		exit;
 	}
 
-	$stmt = $pdo->query("SELECT StoreName FROM Store WHERE StoreNum=$storeNum");
+	$stmt = $pdo->prepare("SELECT StoreName FROM Store WHERE StoreNum = :storenum");
+	$stmt->bindParam(':storenum', $storeNum, PDO::PARAM_INT);
+	$stmt->execute();
+
 	if ($result = $stmt->fetch()) {
 		$storeName = $result[StoreName];
 	}

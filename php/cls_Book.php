@@ -63,7 +63,9 @@ class Book {
 
 		// DBから価格を取得
 		require 'db_connect.php';
-		$stmt = $pdo->query("SELECT Price FROM Item WHERE JANCode = $this->janCode");
+		$stmt = $pdo->prepare("SELECT Price FROM Item WHERE JANCode = :jancode");
+		$stmt->bindParam(':jancode', $this->janCode, PDO::PARAM_STR);
+		$stmt->execute();
 		if ($result = $stmt->fetch()) {
 			$this->price = $result[Price];
 		}
@@ -129,7 +131,9 @@ class Book {
 	function insertDB() {
 		require 'db_connect.php';
 
-		$stmt = $pdo->query("SELECT count(*) FROM Item WHERE JANCode=$this->janCode");
+		$stmt = $pdo->prepare("SELECT count(*) FROM Item WHERE JANCode = :jancode");
+		$stmt->bindParam(':jancode', $this->janCode, PDO::PARAM_STR);
+		$stmt->execute();
 		$count = $stmt->fetchColumn();
 	
 		if ($count == 0) {

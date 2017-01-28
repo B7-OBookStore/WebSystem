@@ -60,7 +60,8 @@
 					<table>
 						<tr>
 							<?php
-								$stmt = $pdo->query("SELECT StoreName FROM Store WHERE StoreNum <> 0");
+								$stmt = $pdo->prepare("SELECT StoreName FROM Store WHERE StoreNum <> 0");
+								$stmt->execute();
 
 								foreach ($stmt as $row) {
 									echo "<th>$row[StoreName]</th>";
@@ -70,7 +71,9 @@
 						</tr>
 						<tr>
 							<?php
-								$stmt = $pdo->query("SELECT Store.StoreNum,StockAmount FROM Store LEFT JOIN Stock ON Store.StoreNum = Stock.StoreNum AND JANCode = $book->janCode WHERE Store.StoreNum <> 0 ORDER BY Store.StoreNum");
+								$stmt = $pdo->prepare("SELECT Store.StoreNum,StockAmount FROM Store LEFT JOIN Stock ON Store.StoreNum = Stock.StoreNum AND JANCode = :jancode WHERE Store.StoreNum <> 0 ORDER BY Store.StoreNum");
+								$stmt->bindParam(':jancode', $book->janCode, PDO::PARAM_STR);
+								$stmt->execute();
 
 								foreach ($stmt as $row) {
 									$num = $row[StockAmount];
