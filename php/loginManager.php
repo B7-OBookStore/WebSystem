@@ -9,6 +9,10 @@ session_start();
 $lgn = new cls_Login();
 
 if($lgn->login($_POST['logUserID'], $_POST['logPassword'])){
+	// Session Fixation攻撃への対策
+	// セッションIDのリジェネレート
+	session_regenerate_id(true);
+
 	// SessionにユーザIDを保存
 	$_SESSION['UserID'] = $_POST['logUserID'];
 	$cLogUserID = $_POST['logUserID'];
