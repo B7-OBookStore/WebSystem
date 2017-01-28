@@ -34,6 +34,7 @@
 --------------------------------------- */
 	#result section {
 		position:relative;
+		transition: all 200ms 0s ease;
 	}
 
 	#result section a {
