@@ -259,7 +259,7 @@ $resultZipCode2 = $replaced[0];
 			</div>
 		</form>
 
-		<img id="character" alt="O書店公式キャラクター 羽名しおりちゃん" src="img/register_shiori.png">
+		<img id="character" alt="O書店公式キャラクター 三反英太" src="img/userdata_eita.png">
 
 		<script>
 			// ----- Validation Check -----
