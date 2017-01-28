@@ -31,7 +31,7 @@
 					<h3>ID</h3>
 					<div>
 						<input id="formID" type="text" name="UserID" maxlength="128" required>
-						<small id="checkID">半角英数字のみ　(例) abcd1234</small>
+						<small id="checkID">半角英数字(小文字)のみ　(例) abcd1234</small>
 					</div>
 				</div>
 

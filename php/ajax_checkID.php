@@ -8,9 +8,9 @@ $msg = '';
 
 // DBチェック
 if($checker->existUserID($_GET['UserID'])) {
-    $msg = '<span style="color:red">このメールアドレスはすでに登録されています。</span>';
+    $msg = '<span style="color:red">このはすでに登録されています。</span>';
 } else {
-    $msg = '<span>このメールアドレスは使用できます。</span>';
+    $msg = '<span>このIDは使用できます。</span>';
 }
 
 // 値のチェック
