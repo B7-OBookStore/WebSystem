@@ -1,8 +1,22 @@
 <?php
 require 'cls_DuplicateCheck.php';
+require 'cls_FormChecker.php';
 $checker = new cls_DuplicateCheck();
-if($checker->existUserID($_GET['UserID'])){
-	echo '<span style="color:red">このIDはすでに登録されています。</span>';
+$formchecker = new cls_FormChecker();
+
+$msg = '';
+
+// DBチェック
+if($checker->existUserID($_GET['UserID'])) {
+    $msg = '<span style="color:red">このメールアドレスはすでに登録されています。</span>';
 } else {
-	echo '<span>このIDは使用できます。</span>';
+    $msg = '<span>このメールアドレスは使用できます。</span>';
 }
+
+// 値のチェック
+if($formchecker->IDChecker($_GET['UserID'])){
+    $msg = '';
+    $msg = '<span style="color:red">不正な値です。</span>';
+}
+
+echo $msg;

@@ -11,7 +11,7 @@ $checker = new cls_DuplicateCheck();
 $formchecker = new cls_FormChecker();
 if(!$checker->existPhone($_GET['Phone']) && !$checker->existMail($_GET['Mail'])
 		&& !$checker->existUserID($_GET['UserID']) && !$formchecker->phoneChecker($_GET['Phone'])
-		&& !$formchecker->mailChecker($_GET['Mail'])) {
+		&& !$formchecker->mailChecker($_GET['Mail']) && !$formchecker->IDChecker($_GET['UserID'])) {
 	echo 'ok';
 } else {
 	echo 'ng';

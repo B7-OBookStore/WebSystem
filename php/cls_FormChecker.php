@@ -17,4 +17,9 @@ class cls_FormChecker
 		// . を許してしまうと例えばGmailとかユーザ名末尾につければ無限に錬成できてしまうため対応しません。
 		return !preg_match('/^[a-zA-Z0-9_.+-]+[@][a-zA-Z0-9.-]+$/', $Mail);
 	}
+
+	// ユーザIDの値として存在し得ないものが入っているかどうか
+    function IDChecker($UserID){
+	    return !preg_match('/^[a-z0-9]+$/', $UserID);
+    }
 }

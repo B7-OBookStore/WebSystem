@@ -30,15 +30,15 @@
 				<div id="id" class="horizontal">
 					<h3>ID</h3>
 					<div>
-						<input id="formID" type="text" name="UserID" maxlength="11" required>
-						<small id="checkID">11文字以内　(例) abcd1234</small>
+						<input id="formID" type="text" name="UserID" maxlength="128" required>
+						<small id="checkID">半角英数字のみ　(例) abcd1234</small>
 					</div>
 				</div>
 
 				<div id="password" class="horizontal">
 					<h3>パスワード</h3>
 					<div>
-						<input class="formPass" id="formPass1" type="password" name="Password" maxlength="8" required>
+						<input class="formPass" id="formPass1" type="password" name="Password" minlength="8" maxlength="128" required>
 						<small>8文字以上</small>
 					</div>
 				</div>
@@ -46,7 +46,7 @@
 				<div id="password" class="horizontal">
 					<h3>パスワード再入力</h3>
 					<div>
-						<input class="formPass" id="formPass2" type="password" name="Password2" maxlength="8" required>
+						<input class="formPass" id="formPass2" type="password" name="Password" minlength="8" maxlength="128" required>
 						<small id="checkPass"></small>
 					</div>
 				</div>
@@ -257,7 +257,7 @@
 				<div id="phonenumber" class="horizontal">
 					<h3>電話番号</h3>
 					<div>
-						<input id="formPhone" type="text" name="Phone" maxlength="11" required>
+						<input id="formPhone" type="text" name="Phone" minlength="10" maxlength="11" required>
 						<small id="checkPhone">(例) 12345678910</small>
 					</div>
 				</div>
@@ -280,8 +280,8 @@
 						<div>
 							<h4>郵便番号</h4>
 							<div class="horizontal"><input type="text" class="addressnumber" name="ZipCode1"
-							                               maxlength="3" required>
-								<p>-</p><input type="text" class="addressnumber" name="ZipCode2" maxlength="4"
+							                               minlength="3" maxlength="3" required>
+								<p>-</p><input type="text" class="addressnumber" name="ZipCode2" minlength="4" maxlength="4"
 								               required>
 								<input id="button" type="button" value="〒"
 								       onclick="AjaxZip3.zip2addr('ZipCode1', 'ZipCode2', 'pref', 'city', 'city');">

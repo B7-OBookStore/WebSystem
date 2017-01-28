@@ -60,7 +60,7 @@ $resultZipCode2 = $replaced[0];
 				<div id="password" class="horizontal">
 					<h3>パスワード</h3>
 					<div>
-						<input class="formPass" id="formPass1" type="password" name="Password" maxlength="8" required>
+						<input class="formPass" id="formPass1" type="password" name="Password" maxlength="128" required>
 						<small>8文字以上</small>
 					</div>
 				</div>
@@ -68,7 +68,7 @@ $resultZipCode2 = $replaced[0];
 				<div id="password" class="horizontal">
 					<h3>パスワード再入力</h3>
 					<div>
-						<input class="formPass" id="formPass2" type="password2" name="Password2" maxlength="8" required>
+						<input class="formPass" id="formPass2" type="password" name="Password2" maxlength="128" required>
 						<small id="checkPass"></small>
 					</div>
 				</div>
@@ -115,7 +115,7 @@ $resultZipCode2 = $replaced[0];
 				<div id="phonenumber" class="horizontal">
 					<h3>電話番号</h3>
 					<div>
-						<input id="formPhone" type="text" name="Phone" maxlength="11"
+						<input id="formPhone" type="text" name="Phone" minlength="10" maxlength="11"
 						       value="<?php echo $result['Phone']; ?>" required>
 						<small id="checkPhone">(例) 12345678910</small>
 					</div>
@@ -139,9 +139,9 @@ $resultZipCode2 = $replaced[0];
 						<div>
 							<h4>郵便番号</h4>
 							<div class="horizontal"><input type="text" class="addressnumber" name="ZipCode1"
-							                               maxlength="3" value="<?php echo $resultZipCode1; ?>"
+							                               minlength="3" maxlength="3" value="<?php echo $resultZipCode1; ?>"
 							                               required>
-								<p>-</p><input type="text" class="addressnumber" name="ZipCode2" maxlength="4"
+								<p>-</p><input type="text" class="addressnumber" name="ZipCode2" minlength="3" maxlength="4"
 								               value="<?php echo $resultZipCode2; ?>" required>
 								<input id="button" type="button" value="〒"
 								       onclick="AjaxZip3.zip2addr('ZipCode1', 'ZipCode2', 'pref', 'city', 'city');">
