@@ -36,6 +36,7 @@ if (!isset($_SESSION['UserID'])) {
 		<p><a href="history.php">注文履歴</a></p>
 		<p><a href="information.php">会員情報の閲覧</a></p>
 		<p><a href="userdata.php">会員情報の修正</a></p>
+		<p><a href="userpolicy.html">利用規約</a></p>
 	</section>
 
 </div>
