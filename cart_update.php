@@ -8,7 +8,7 @@
 		exit();
 	}
 
-	$id = $_GET["id"];
+	$id = htmlspecialchars($_GET["id"], ENT_QUOTES, 'UTF-8');
 	
 	if ($id == NULL){
 		header( "Location: index.php" ) ;

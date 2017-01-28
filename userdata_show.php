@@ -1,18 +1,18 @@
 <?php
 // セッション変数にデータを保存
 session_start();
-$FirstName = $_POST['FirstName'];
-$LastName = $_POST['LastName'];
-$YomiFirst = $_POST['YomiFirst'];
-$YomiLast = $_POST['YomiLast'];
-$Phone = $_POST['Phone'];
-$Mail = $_POST['MailUser'].'@'.$_POST['MailDomain'];
-$Password = password_hash($_POST['Password'], PASSWORD_DEFAULT);
-$ZipCode = $_POST['ZipCode1'].$_POST['ZipCode2'];
-$Pref = $_POST['pref'];
-$City = $_POST['city'];
-$Address = $_POST['Address'];
-$Apartment = $_POST['Apartment'];
+$FirstName = htmlspecialchars($_POST['FirstName'], ENT_QUOTES, 'UTF-8');
+$LastName = htmlspecialchars($_POST['LastName'], ENT_QUOTES, 'UTF-8');
+$YomiFirst = htmlspecialchars($_POST['YomiFirst'], ENT_QUOTES, 'UTF-8');
+$YomiLast = htmlspecialchars($_POST['YomiLast'], ENT_QUOTES, 'UTF-8');
+$Phone = htmlspecialchars($_POST['Phone'], ENT_QUOTES, 'UTF-8');
+$Mail = htmlspecialchars($_POST['MailUser'].'@'.$_POST['MailDomain'], ENT_QUOTES, 'UTF-8');
+$Password = password_hash(htmlspecialchars($_POST['Password'], ENT_QUOTES, 'UTF-8'), PASSWORD_DEFAULT);
+$ZipCode = htmlspecialchars($_POST['ZipCode1'].$_POST['ZipCode2'], ENT_QUOTES, 'UTF-8');
+$Pref = htmlspecialchars($_POST['pref'], ENT_QUOTES, 'UTF-8');
+$City = htmlspecialchars($_POST['city'], ENT_QUOTES, 'UTF-8');
+$Address = htmlspecialchars($_POST['Address'], ENT_QUOTES, 'UTF-8');
+$Apartment = htmlspecialchars($_POST['Apartment'], ENT_QUOTES, 'UTF-8');
 require 'php/db_connect.php';
 $st = $pdo->prepare("UPDATE User SET FirstName = :firstname, LastName = :lastname, YomiFirst = :yomifirst,
 						YomiLast = :yomilast, Phone = :phone, Mail = :mail, Password = :password, ZipCode = :zipcode,
@@ -90,28 +90,28 @@ if (!isset($_SESSION['UserID'])) {
 				<div id="name" class="horizontal">
 					<h3>氏名</h3>
 					<div>
-						<p><?php echo $_POST['LastName'] . '  ' . $_POST['FirstName']; ?></p>
+						<p><?php echo htmlspecialchars($_POST['LastName'] . '  ' . $_POST['FirstName'], ENT_QUOTES, 'UTF-8'); ?></p>
 					</div>
 				</div>
 
 				<div id="phonetic" class="horizontal">
 					<h3>フリガナ</h3>
 					<div>
-						<p><?php echo $_POST['YomiLast'] . '  ' . $_POST['YomiFirst']; ?></p>
+						<p><?php echo htmlspecialchars($_POST['YomiLast'] . '  ' . $_POST['YomiFirst'], ENT_QUOTES, 'UTF-8'); ?></p>
 					</div>
 				</div>
 
 				<div id="phonenumber" class="horizontal">
 					<h3>電話番号</h3>
 					<div>
-						<p><?php echo $_POST['Phone']; ?></p>
+						<p><?php echo htmlspecialchars($_POST['Phone'], ENT_QUOTES, 'UTF-8'); ?></p>
 					</div>
 				</div>
 
 				<div id="mailaddress" class="horizontal">
 					<h3>メールアドレス</h3>
 					<div>
-						<p><?php echo $_POST['MailUser'], '@', $_POST['MailDomain']; ?></p>
+						<p><?php echo htmlspecialchars($_POST['MailUser'].'@'.$_POST['MailDomain'], ENT_QUOTES, 'UTF-8'); ?></p>
 					</div>
 				</div>
 
@@ -121,25 +121,25 @@ if (!isset($_SESSION['UserID'])) {
 					<div>
 						<div>
 							<h4>郵便番号</h4>
-							<p><?php echo $_POST['ZipCode1'], '-', $_POST['ZipCode2']; ?></p>
+							<p><?php echo htmlspecialchars($_POST['ZipCode1'].'-'.$_POST['ZipCode2'], ENT_QUOTES, 'UTF-8'); ?></p>
 						</div>
 
 						<div>
 							<h4>都道府県</h4>
-							<p><?php echo $_POST['pref']; ?>
+							<p><?php echo htmlspecialchars($_POST['pref'], ENT_QUOTES, 'UTF-8'); ?>
 						</div>
 
 						<div>
 							<h4>市区町村</h4>
-							<p><?php echo $_POST['city']; ?></p>
+							<p><?php echo htmlspecialchars($_POST['city'], ENT_QUOTES, 'UTF-8'); ?></p>
 						</div>
 
 						<div>
 							<h4>番地</h4>
-							<p><?php echo $_POST['Address']; ?></p>
+							<p><?php echo htmlspecialchars($_POST['Address'], ENT_QUOTES, 'UTF-8'); ?></p>
 						</div>
 						<div>
-							<p><?php echo $_POST['Apartment']; ?></p>
+							<p><?php echo htmlspecialchars($_POST['Apartment'], ENT_QUOTES, 'UTF-8'); ?></p>
 						</div>
 					</div>
 				</div>

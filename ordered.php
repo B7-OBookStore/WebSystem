@@ -1,7 +1,7 @@
 <?php
 	require 'php/db_connect.php';
 
-	$storeNum = $_POST['storeNum'];
+	$storeNum = htmlspecialchars($_POST['storeNum'], ENT_QUOTES, 'UTF-8');
 
 	if ($storeNum == NULL) {
 		header( "Location: index.php" ) ;

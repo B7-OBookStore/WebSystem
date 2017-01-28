@@ -4,7 +4,7 @@
 	require 'php/cls_Book.php';
 
 	// GETでGoogleBooksのIDを取得
-	$janCode = $_GET["janCode"];
+	$janCode = htmlspecialchars($_GET["janCode"], ENT_QUOTES, 'UTF-8');
 
 	if ($janCode == NULL) {
 		header( "Location: index.php" );

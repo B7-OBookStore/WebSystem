@@ -1,8 +1,8 @@
 <?php
-	$q = $_GET["q"];
-	$mode = $_GET["mode"];
-	$startIndex = $_GET["startIndex"];
-	$previousIndex = $_GET["previousIndex"];
+	$q = htmlspecialchars($_GET["q"], ENT_QUOTES, 'UTF-8');
+	$mode = htmlspecialchars($_GET["mode"], ENT_QUOTES, 'UTF-8');
+	$startIndex = htmlspecialchars($_GET["startIndex"], ENT_QUOTES, 'UTF-8');
+	$previousIndex = htmlspecialchars($_GET["previousIndex"], ENT_QUOTES, 'UTF-8');
 ?>
 
 <!DOCTYPE html>

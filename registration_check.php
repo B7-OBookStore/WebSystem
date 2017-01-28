@@ -3,21 +3,21 @@
 // セッション変数にデータを保存
 session_start();
 
-$_SESSION['regFirstName'] = $_POST['FirstName'];
-$_SESSION['regLastName'] = $_POST['LastName'];
-$_SESSION['regYomiFirst'] = $_POST['YomiFirst'];
-$_SESSION['regYomiLast'] = $_POST['YomiLast'];
-$_SESSION['regPhone'] = $_POST['Phone'];
-$_SESSION['regMail'] = $_POST['MailUser'].'@'.$_POST['MailDomain'];
-$_SESSION['regUserID'] = $_POST['UserID'];
-$_SESSION['regPassword'] = $_POST['Password'];
-$_SESSION['regBirth'] = $_POST['year'].'-'.$_POST['month'].'-'.$_POST['day'];
-$_SESSION['regGender'] = $_POST['Gender'];
-$_SESSION['regZipCode'] = $_POST['ZipCode1'].$_POST['ZipCode2'];
-$_SESSION['regPref'] = $_POST['pref'];
-$_SESSION['regCity'] = $_POST['city'];
-$_SESSION['regAddress'] = $_POST['Address'];
-$_SESSION['regApartment'] = $_POST['Apartment'];
+$_SESSION['regFirstName'] = htmlspecialchars($_POST['FirstName'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regLastName'] = htmlspecialchars($_POST['LastName'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regYomiFirst'] = htmlspecialchars($_POST['YomiFirst'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regYomiLast'] = htmlspecialchars($_POST['YomiLast'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regPhone'] = htmlspecialchars($_POST['Phone'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regMail'] = htmlspecialchars($_POST['MailUser'].'@'.$_POST['MailDomain'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regUserID'] = htmlspecialchars($_POST['UserID'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regPassword'] = htmlspecialchars($_POST['Password'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regBirth'] = htmlspecialchars($_POST['year'].'-'.$_POST['month'].'-'.$_POST['day'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regGender'] = htmlspecialchars($_POST['Gender'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regZipCode'] = htmlspecialchars($_POST['ZipCode1'].$_POST['ZipCode2'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regPref'] = htmlspecialchars($_POST['pref'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regCity'] = htmlspecialchars($_POST['city'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regAddress'] = htmlspecialchars($_POST['Address'], ENT_QUOTES, 'UTF-8');
+$_SESSION['regApartment'] = htmlspecialchars($_POST['Apartment'], ENT_QUOTES, 'UTF-8');
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +52,7 @@ $_SESSION['regApartment'] = $_POST['Apartment'];
 				<div id="id" class="horizontal">
 					<h3>ID</h3>
 					<div>
-						<p><?php echo $_POST['UserID']; ?></p>
+						<p><?php echo htmlspecialchars($_POST['UserID'], ENT_QUOTES, 'UTF-8'); ?></p>
 
 					</div>
 
@@ -61,7 +61,8 @@ $_SESSION['regApartment'] = $_POST['Apartment'];
 					<h3>パスワード</h3>
 					<div>
 						<p><?php
-							for($i = 0; $i < strlen($_POST['Password']); $i++){
+							$pasnum = htmlspecialchars($_POST['Password'], ENT_QUOTES, 'UTF-8');
+							for($i = 0; $i < strlen($pasnum); $i++){
 								echo '*';
 							}
 							?></p>
@@ -85,35 +86,35 @@ $_SESSION['regApartment'] = $_POST['Apartment'];
 				<div id="name" class="horizontal">
 					<h3>氏名</h3>
 					<div>
-						<p><?php echo $_POST['LastName'] . '  ' . $_POST['FirstName']; ?></p>
+						<p><?php echo htmlspecialchars($_POST['LastName'] . '  ' . $_POST['FirstName'], ENT_QUOTES, 'UTF-8'); ?></p>
 					</div>
 				</div>
 
 				<div id="phonetic" class="horizontal">
 					<h3>フリガナ</h3>
 					<div>
-						<p><?php echo $_POST['YomiLast'] . '  ' . $_POST['YomiFirst']; ?></p>
+						<p><?php echo htmlspecialchars($_POST['YomiLast'] . '  ' . $_POST['YomiFirst'], ENT_QUOTES, 'UTF-8'); ?></p>
 					</div>
 				</div>
 
 				<div id="birth" class="horizontal">
 					<h3>生年月日</h3>
 					<div>
-						<p><?php echo $_POST['year'], '年', $_POST['month'], '月', $_POST['day'], '日'; ?></p>
+						<p><?php echo htmlspecialchars($_POST['year'].'年'.$_POST['month'].'月'.$_POST['day'].'日', ENT_QUOTES, 'UTF-8'); ?></p>
 					</div>
 				</div>
 
 				<div id="phonenumber" class="horizontal">
 					<h3>電話番号</h3>
 					<div>
-						<p><?php echo $_POST['Phone']; ?></p>
+						<p><?php echo htmlspecialchars($_POST['Phone'], ENT_QUOTES, 'UTF-8'); ?></p>
 					</div>
 				</div>
 
 				<div id="mailaddress" class="horizontal">
 					<h3>メールアドレス</h3>
 					<div>
-						<p><?php echo $_POST['MailUser'], '@', $_POST['MailDomain']; ?></p>
+						<p><?php echo htmlspecialchars($_POST['MailUser'].'@'.$_POST['MailDomain'], ENT_QUOTES, 'UTF-8'); ?></p>
 					</div>
 				</div>
 
@@ -123,25 +124,25 @@ $_SESSION['regApartment'] = $_POST['Apartment'];
 					<div>
 						<div>
 							<h4>郵便番号</h4>
-							<p><?php echo $_POST['ZipCode1'], '-', $_POST['ZipCode2']; ?></p>
+							<p><?php echo htmlspecialchars($_POST['ZipCode1'].'-'.$_POST['ZipCode2'], ENT_QUOTES, 'UTF-8'); ?></p>
 						</div>
 
 						<div>
 							<h4>都道府県</h4>
-							<p><?php echo $_POST['pref']; ?>
+							<p><?php echo htmlspecialchars($_POST['pref'], ENT_QUOTES, 'UTF-8'); ?>
 						</div>
 
 						<div>
 							<h4>市区町村</h4>
-							<p><?php echo $_POST['city']; ?></p>
+							<p><?php echo htmlspecialchars($_POST['city'], ENT_QUOTES, 'UTF-8'); ?></p>
 						</div>
 
 						<div>
 							<h4>番地</h4>
-							<p><?php echo $_POST['Address']; ?></p>
+							<p><?php echo htmlspecialchars($_POST['Address'], ENT_QUOTES, 'UTF-8'); ?></p>
 						</div>
 						<div>
-							<p><?php echo $_POST['Apartment']; ?></p>
+							<p><?php echo htmlspecialchars($_POST['Apartment'], ENT_QUOTES, 'UTF-8'); ?></p>
 						</div>
 					</div>
 				</div>

@@ -82,7 +82,7 @@
 					if ($_COOKIE['LastSearch'] == NULL) {
 						echo 'index.php';
 					} else {
-						echo $_COOKIE['LastSearch'];
+						echo htmlspecialchars($_COOKIE['LastSearch'], ENT_QUOTES, 'UTF-8');
 					}
 					?>">買い物を続ける</a></p>
 			</section>

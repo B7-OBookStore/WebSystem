@@ -1,7 +1,7 @@
 <?php
 	require 'php/db_connect.php';
 
-	$filter = $_GET['filter'];
+	$filter = htmlspecialchars($_GET['filter'], ENT_QUOTES, 'UTF-8');
 ?>
 
 <!DOCTYPE html>
