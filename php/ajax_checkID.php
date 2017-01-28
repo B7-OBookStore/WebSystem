@@ -8,7 +8,7 @@ $msg = '';
 
 // DBチェック
 if($checker->existUserID($_GET['UserID'])) {
-    $msg = '<span style="color:red">このはすでに登録されています。</span>';
+    $msg = '<span style="color:red">このIDはすでに登録されています。</span>';
 } else {
     $msg = '<span>このIDは使用できます。</span>';
 }
