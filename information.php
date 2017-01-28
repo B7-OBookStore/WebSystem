@@ -71,7 +71,7 @@ $resultZipCode2 = $replaced[0];
 					</tr>
 					<tr>
 						<th scope="row">住所</th>
-						<td><?php echo $resultZipCode1.'-'.$resultZipCode2.'<br>'.
+						<td><?php echo '〒'.$resultZipCode1.'-'.$resultZipCode2.'<br>'.
 								$row['Pref'].$row['City'].$row['Address'].$row['Apartment']; ?></td>
 					</tr>
 				</table>

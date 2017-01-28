@@ -24,7 +24,7 @@ $nextIndex = $startIndex;
 
 
 if ($mode == 'book' || $mode == NULL) {
-	$books = $clsSearch->searchBook($q, $nextIndex);
+	list($books,$nextIndex) = $clsSearch->searchBook($q, $nextIndex);
 } else if ($mode == 'other') {
 	$others = $clsSearch->searchOthers($q, $pdo);
 }

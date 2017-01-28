@@ -49,7 +49,7 @@ class cls_Search
 				$nextIndex++;
 			}
 		}
-		return $books;
+		return array($books,$nextIndex);
 	}
 
 	/** その他商品の検索 */
