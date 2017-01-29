@@ -3,6 +3,8 @@
 // セッション変数にデータを保存
 session_start();
 
+require 'php/tokenManager.php';
+
 $_SESSION['regFirstName'] = htmlspecialchars($_POST['FirstName'], ENT_QUOTES, 'UTF-8');
 $_SESSION['regLastName'] = htmlspecialchars($_POST['LastName'], ENT_QUOTES, 'UTF-8');
 $_SESSION['regYomiFirst'] = htmlspecialchars($_POST['YomiFirst'], ENT_QUOTES, 'UTF-8');
@@ -141,7 +143,7 @@ $_SESSION['regApartment'] = htmlspecialchars($_POST['Apartment'], ENT_QUOTES, 'U
 						</div>
 					</div>
 				</div>
-
+				<input type="hidden" name="Token" value="<?php echo htmlspecialchars($_SESSION['Token'], ENT_QUOTES, 'UTF-8'); ?>">
 				<input class="button_c" type="submit" value="送信">
 			</div>
 		</form>

@@ -84,6 +84,7 @@
 							}
 						?>
 					</div>
+					<input type="hidden" name="Token" value="<?php echo htmlspecialchars($_SESSION['Token'], ENT_QUOTES, 'UTF-8'); ?>">
 					<input class="button" type="submit" value="決定">
 				</form>
 			</section>

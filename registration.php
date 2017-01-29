@@ -400,6 +400,7 @@
 				</script>
 
 				<div class="button_c_border">
+					<input type="hidden" name="Token" value="<?php echo htmlspecialchars($_SESSION['Token'], ENT_QUOTES, 'UTF-8'); ?>">
 					<input id="submit" class="button_c" type="submit" value="送信">
 				</div>
 

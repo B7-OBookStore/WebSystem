@@ -25,6 +25,11 @@
 			<div>
 				<h1>O書店</h1>
 				<p>お客様は王様であり、私たちは本の王様である。</p>
+				<?php
+					if($_GET['checker'] == 'Bad'){
+						echo '<p style="color: red; font-weight: bold; font-size: large">不正な操作を検出しました。</p>';
+					}
+				?>
 
 				<form id="search" method="get" action="search.php">
 					<input name="q" type="search" placeholder="書籍を検索">

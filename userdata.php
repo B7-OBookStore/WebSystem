@@ -249,7 +249,7 @@ $resultZipCode2 = $replaced[0];
 						});
 					});
 				</script>
-
+				<input type="hidden" name="Token" value="<?php echo htmlspecialchars($_SESSION['Token'], ENT_QUOTES, 'UTF-8'); ?>">
 				<input class="button_c" type="submit" value="送信">
 			</div>
 		</form>

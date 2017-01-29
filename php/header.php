@@ -40,11 +40,13 @@ if (!isset($_SESSION['UserID'])) {
 	}
 }
 
+// CSRF対策
+require 'tokenManager.php';
 
 echo '<header>';
 
 // トップページ以外であれば左にO書店と表示する
-if ($_SERVER['REQUEST_URI'] != '/index.php' && $_SERVER['REQUEST_URI'] != '/') {
+if (!preg_match('/^\/index\.php.*$/', $_SERVER['REQUEST_URI']) && $_SERVER['REQUEST_URI'] != '/') {
 	echo '<h1><a href="index.php">O書店</a></h1>';
 }
 

@@ -79,6 +79,7 @@
 					<form action="ordered.php" method="post">
 						<input type="hidden" name="storeNum" value="<?php echo $storeNum ?>">
 						<input class="button" type="submit" value="注文">
+						<input type="hidden" name="Token" value="<?php echo htmlspecialchars($_SESSION['Token'], ENT_QUOTES, 'UTF-8'); ?>">
 					</form>
 				</div>
 

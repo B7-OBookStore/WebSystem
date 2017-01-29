@@ -4,6 +4,8 @@ require 'php/db_connect.php';
 
 session_start();
 
+require 'php/tokenManager.php';
+
 // 挿入用データを変数に格納
 $FirstName = $_SESSION['regFirstName'];
 $LastName = $_SESSION['regLastName'];

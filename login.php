@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -30,6 +31,7 @@
 					</p>
 					<p>
 						<input class="inputbox" type="password" name="logPassword" placeholder="パスワード">
+						<input type="hidden" name="Token" value="<?php echo htmlspecialchars($_SESSION['Token'], ENT_QUOTES, 'UTF-8'); ?>">
 					</p>
 					<p>
 						<input class="button" type="submit" value="送信">
