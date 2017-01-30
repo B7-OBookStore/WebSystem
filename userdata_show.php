@@ -2,9 +2,6 @@
 // セッション変数にデータを保存
 session_start();
 
-// CSRF対策
-require 'php/tokenManager.php';
-
 $FirstName = htmlspecialchars($_POST['FirstName'], ENT_QUOTES, 'UTF-8');
 $LastName = htmlspecialchars($_POST['LastName'], ENT_QUOTES, 'UTF-8');
 $YomiFirst = htmlspecialchars($_POST['YomiFirst'], ENT_QUOTES, 'UTF-8');
@@ -58,9 +55,7 @@ if (!isset($_SESSION['UserID'])) {
 
 <body>
 
-<header>
-	<h1><a href="index.php">O書店</a></h1>
-</header>
+<?php require 'php/header.php'; ?>
 
 <div id="main">
 	<section>
