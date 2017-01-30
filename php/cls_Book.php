@@ -21,7 +21,7 @@ class Book {
 	// コンストラクタ；GoogleIDから本の情報を取得。データベースになければ追加
 	function __construct($id) {
 		$this->id = $id;
-		$json = file_get_contents("https://www.googleapis.com/books/v1/volumes/$id?key=AIzaSyBczORlfI6MEmYnkTFwP5au6rq_oo4h92s");
+		$json = file_get_contents("https://www.googleapis.com/books/v1/volumes/$id?key=AIzaSyDqDNwOfr_cvL6EeihdleSvHCc9FkmMhE4");
 		$results = json_decode($json, TRUE);
 
 		// Googleからタイトル、出版日、説明文、出版社、カテゴリを取得
