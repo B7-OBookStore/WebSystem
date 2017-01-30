@@ -11,6 +11,38 @@ echo "this is test.<br>";
 ?>
 
 <?php
+require 'php/mailManager.php';
+sendMail('ia15076@s.inf.shizuoka.ac.jp','注文完了','test');
+/*
+require 'php/mailManager.php';
+
+$mail = new PHPMailer();
+$mail->isSMTP();
+$mail->Host = 'smtp.gmail.com';
+$mail->Port = 587;
+$mail->SMTPSecure = 'tls';
+$mail->SMTPAuth = true;
+$mail->Username = "kyakuchu.yaro@gmail.com";
+$mail->Password = "KuroTaitsu";
+
+$mail->CharSet = "UTF-8";
+$mail->Encoding = "base64";
+
+$mail->setFrom('order@kyakuchu-yaro.com', '客注野郎.com');
+$mail->addAddress('ia15076@s.inf.shizuoka.ac.jp', 'O書店');
+
+$mail->Subject = '【客注野郎.com】客注注文受付のお知らせ';
+$mail->Body = 'test';
+
+$mail->send();
+
+foreach ($mail as $name => $value) {
+	echo "$name: $value<br>";
+}
+*/
+?>
+
+<?php
 // cls_DuplicateCheck.php テスト用
 //
 //
