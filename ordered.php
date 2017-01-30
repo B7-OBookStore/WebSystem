@@ -1,5 +1,6 @@
 <?php
 	require 'php/db_connect.php';
+	require 'php/cls_Mail.php';
 
 	$storeNum = htmlspecialchars($_POST['storeNum'], ENT_QUOTES, 'UTF-8');
 
@@ -69,8 +70,17 @@
 
 						$sql = 'DELETE Cart FROM Cart INNER JOIN User ON Cart.UserNum = User.UserNum WHERE UserID=:UserID';
 						$stmt = $pdo->prepare($sql);
-						$stmt->bindParam(':UserID', $_SESSION['UserID']);
+						$stmt->bindParam(':UserID', $userID);
 						$stmt->execute();
+
+						$stmt = $pdo->query("SELECT Mail FROM User WHERE UserID='$userID'");
+						if ($user = $stmt->fetch()) {
+							$to = $user[Mail];
+							$sub = 'O書店 注文完了のお知らせ';
+							$mes = getMes();
+							$hea = 'From: obookstore@b7-obookstore.azurewebsites.net/'."\r\n";
+							$mail = new cls_Mail($to,$sub,'あいうえお',$hea);
+						}
 
 						echo '<h2>注文完了</h2>';
 						echo '<p>ご注文ありがとうございます。今後ともO書店をよろしくお願いします。</p>';
@@ -94,3 +104,12 @@
 	</body>
 
 </html>
+
+<?php
+function getMes() {
+$mes = '
+【注文完了のお知らせ】
+';
+	return $mes;
+}
+?>

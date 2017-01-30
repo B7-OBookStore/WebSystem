@@ -35,14 +35,7 @@ class cls_ChangeCheck
 		$checkStr = htmlspecialchars($checkStr, ENT_QUOTES, 'UTF-8');
 
 		// Load DB
-		$dbsrc = 'mysql:host=127.0.0.1; dbname=websysb7; charset=utf8';
-		$user = 'root';
-		$pass = 'b7';
-		try {
-			$pdo = new PDO($dbsrc, $user, $pass);
-		} catch (PDOException $e) {
-			echo $e->getMessage();
-		}
+		require 'db_connect.php';
 
 		// Prepare Statement
 		$stmt = $pdo->prepare('SELECT * FROM User');
