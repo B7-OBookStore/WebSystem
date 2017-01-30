@@ -17,22 +17,22 @@ $res = array();
 //	exit();
 //}
 
-$limit = 40;
+$limit = 5;
 require '../php/db_connect.php';
 
-$stmt = $pdo->query("SELECT SUM(StockAmount) AS Amount,BookTitle,GoogleID FROM Stock INNER JOIN Book ON Stock.JANCode = Book.JANCode WHERE GoogleID IS NOT NULL GROUP BY Stock.JANCode ORDER BY AMOUNT DESC LIMIT 40");
+$stmt = $pdo->query("SELECT SUM(StockAmount) AS Amount,BookTitle,GoogleID FROM Stock INNER JOIN Book ON Stock.JANCode = Book.JANCode WHERE GoogleID IS NOT NULL GROUP BY Stock.JANCode ORDER BY AMOUNT DESC LIMIT $limit");
 
 // Bookクラスの配列(Limitの数だけ)
 require '../php/cls_Book.php';
 
-for($i = 0; $i < 40; $i++){
+for($i = 0; $i < $limit; $i++){
     $gid = $stmt->fetch(PDO::FETCH_ASSOC);
     $bookArray[$i] = new Book($gid['GoogleID']);
 }
 
 // JSON形式の出力
 // つらい
-for($i = 0; $i < 40; $i++){
+for($i = 0; $i < $limit; $i++){
     $res[] = array('Title'=>$bookArray[$i]->title,
                         'Author'=>$bookArray[$i]->writer,
                         'Date'=>$bookArray[$i]->publishedDate,
@@ -41,6 +41,6 @@ for($i = 0; $i < 40; $i++){
 }
 
 header('Content-Type: application/json');
-print json_encode($res);
+print json_encode($res, JSON_UNESCAPED_UNICODE);
 
 ?>
