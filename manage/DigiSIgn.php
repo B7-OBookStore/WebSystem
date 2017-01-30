@@ -15,14 +15,7 @@ $returnJSON = '';
 //	exit();
 //}
 
-$dbsrc = 'mysql:host=127.0.0.1; dbname=websysb7; charset=utf8';
-$user = 'root';
-$pass = 'b7';
-try {
-	$pdo = new PDO($dbsrc, $user, $pass);
-} catch (PDOException $e) {
-	echo $e->getMessage();
-}
+require '../php/db_connect.php';
 
 $stmt = $pdo->query("SELECT SUM(StockAmount) AS Amount,BookTitle,GoogleID FROM Stock INNER JOIN Book ON Stock.JANCode = Book.JANCode WHERE GoogleID IS NOT NULL GROUP BY Stock.JANCode ORDER BY AMOUNT DESC LIMIT 40");
 
