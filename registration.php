@@ -1,3 +1,4 @@
+<?php require 'php/tokenManager.php' ?>
 <!DOCTYPE html>
 <html>
 

@@ -1,7 +1,6 @@
 <?php
 
 // セッション変数にデータを保存
-session_start();
 
 require 'php/tokenManager.php';
 
@@ -20,6 +19,13 @@ $_SESSION['regPref'] = htmlspecialchars($_POST['pref'], ENT_QUOTES, 'UTF-8');
 $_SESSION['regCity'] = htmlspecialchars($_POST['city'], ENT_QUOTES, 'UTF-8');
 $_SESSION['regAddress'] = htmlspecialchars($_POST['Address'], ENT_QUOTES, 'UTF-8');
 $_SESSION['regApartment'] = htmlspecialchars($_POST['Apartment'], ENT_QUOTES, 'UTF-8');
+
+echo $_SESSION['Token'];
+echo '<br>';
+echo $_POST['Token'];
+echo '<br>';
+
+
 ?>
 
 <!DOCTYPE html>
