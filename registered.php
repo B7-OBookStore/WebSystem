@@ -81,6 +81,12 @@ $st->bindParam(':apartment', $Apartment, PDO::PARAM_STR);
 				echo '<h2>会員登録が完了しました</h2>';
 				echo '<p>登録ありがとうございます。今後ともO書店をよろしくお願いします。</p>';
 
+				require 'php/mailManager.php';
+				$body = "$LastName $FirstName 様\n\n会員登録が完了しました。\n今後ともO書店をよろしくお願いします。\n\n"
+				."登録に覚えがない場合：\nお手数ですが、support@obookstore.co.jpまでご連絡ください\n\n"
+				."-------------------------------------------------\nI県K市 O書店";
+				sendMail($Mail,'O書店 登録完了のお知らせ',$body);
+
 			} else {
 				// 挿入に失敗したら以下の文を表示
 				echo '<h2>会員登録に失敗しました</h2>';

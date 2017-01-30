@@ -57,7 +57,7 @@ require 'php/header.php';
 				$sql = 'INSERT INTO RequestDetail VALUES(:RequestNum,:RequestDetNum,:JANCode,0)';
 				$stmt = $pdo->prepare($sql);
 				foreach ($items as $i => $item) {
-					$orderList .= "\n($i)\n$item[BookTitle]\n";
+					$orderList .= "\n注文$i)\n$item[BookTitle]\n";
 					$stmt->bindParam(':RequestNum',$requestNum);
 					$stmt->bindParam(':RequestDetNum',$i);
 					$stmt->bindParam(':JANCode',$item[JANCode]);
