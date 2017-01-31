@@ -11,7 +11,7 @@
 		exit;
 	}
 
-	$stmt = $pdo->query("SELECT Other.JANCode,Price,Name,Manufacturer,Genre FROM Item INNER JOIN Other ON Item.JANCode=Other.JANCode WHERE Other.JANCode = :jancode");
+	$stmt = $pdo->prepare("SELECT Other.JANCode,Price,Name,Manufacturer,Genre FROM Item INNER JOIN Other ON Item.JANCode=Other.JANCode WHERE Other.JANCode = :jancode");
 	$stmt->bindParam(':jancode', $janCode, PDO::PARAM_STR);
 	$stmt->execute();
 	
