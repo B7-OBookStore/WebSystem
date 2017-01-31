@@ -39,7 +39,7 @@ $resultZipCode2 = $replaced[0];
 	<link rel="icon" href="img/favicon.ico">
 	<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 	<script src="js/jquery-3.1.1.min.js"></script>
-	<title>O書店</title>
+	<title>会員情報 - O書店</title>
 </head>
 
 <body>

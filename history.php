@@ -12,7 +12,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1">
 		<link rel="stylesheet" href="css/history.css">
 		<link rel="icon" href="img/favicon.ico">
-		<title></title>
+		<title>注文履歴 - O書店</title>
 	</head>
 
 	<body>

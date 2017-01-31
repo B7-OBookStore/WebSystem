@@ -15,7 +15,7 @@ if ($storeNum == NULL) {
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link rel="stylesheet" href="css/ordered.css">
 	<link rel="icon" href="img/favicon.ico">
-	<title>O書店</title>
+	<title>注文 - O書店</title>
 </head>
 
 <body>

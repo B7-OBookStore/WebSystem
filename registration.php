@@ -9,7 +9,7 @@
 	<link rel="icon" href="img/favicon.ico">
 	<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
 	<script src="js/jquery-3.1.1.min.js"></script>
-	<title>O書店</title>
+	<title>会員登録 - O書店</title>
 </head>
 
 <body>

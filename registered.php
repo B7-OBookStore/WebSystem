@@ -59,7 +59,7 @@ $st->bindParam(':apartment', $Apartment, PDO::PARAM_STR);
 	<meta name="viewport" content="widh3=device-widh3,initial-scale=1">
 	<link rel="stylesheet" href="css/registration.css">
 	<link rel="icon" href="img/favicon.ico">
-	<title>O書店</title>
+	<title>会員登録 - O書店</title>
 </head>
 
 <body>

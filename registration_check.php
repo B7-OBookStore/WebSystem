@@ -32,7 +32,7 @@ $_SESSION['regApartment'] = htmlspecialchars($_POST['Apartment'], ENT_QUOTES, 'U
 	<link rel="icon" href="img/favicon.ico">
 	<script src="js/register.js"></script>
 	<script src="js/jquery-3.1.1.min.js"></script>
-	<title>O書店</title>
+	<title>会員登録 - O書店</title>
 </head>
 
 <body>

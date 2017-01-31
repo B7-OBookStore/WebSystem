@@ -27,9 +27,10 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="keywords" content="<?php echo $other[Name] ?>">
 		<link rel="stylesheet" href="css/book.css">
 		<link rel="icon" href="img/favicon.ico">
-		<title>O書店</title>
+		<title><?php echo $other[Name] ?> - O書店</title>
 	</head>
 
 	<body>

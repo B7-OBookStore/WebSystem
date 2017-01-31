@@ -18,7 +18,7 @@ if (!isset($_SESSION['UserID'])) {
 	<link rel="stylesheet" href="css/registration.css">
 	<link rel="icon" href="img/favicon.ico">
 	<script src="js/jquery-3.1.1.min.js"></script>
-	<title>O書店</title>
+	<title>会員情報 - O書店</title>
 </head>
 
 <body>
