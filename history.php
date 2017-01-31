@@ -148,6 +148,13 @@
 				</section>
 				<?php
 					}
+
+					$stmt = $pdo->query("SELECT COUNT(*) FROM Request INNER JOIN User ON Request.UserNum=User.UserNum WHERE UserID='$userID' $where");
+					$count = $stmt->fetchColumn();
+
+					if ($count == 0) {
+						echo '<section>注文履歴がありません</section>';
+					}
 				?>
 			</div>
 		</div>
