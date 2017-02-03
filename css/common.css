@@ -131,6 +131,7 @@ section section {
 	}
 
 	#search input {
+		box-sizing: border-box;
 		border: solid 1px #FFFFFF;
 	
 		padding: 10px;
